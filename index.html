@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>福井ライブカメラ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d5fdc'/%3E%3Crect x='10' y='16' width='44' height='28' rx='3' fill='%23fff'/%3E%3Ccircle cx='46' cy='24' r='4' fill='%23e8302a'/%3E%3Crect x='24' y='48' width='16' height='4' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="manifest" href='data:application/manifest+json,{"name":"福井ライブカメラ","short_name":"ライブカメラ","start_url":".","display":"fullscreen","background_color":"%231d5fdc","theme_color":"%231d5fdc","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%231d5fdc%27/%3E%3Crect x=%2710%27 y=%2716%27 width=%2744%27 height=%2728%27 rx=%273%27 fill=%27%23fff%27/%3E%3Ccircle cx=%2746%27 cy=%2724%27 r=%274%27 fill=%27%23e8302a%27/%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml","purpose":"any"}]}'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0c0f; --panel:#12161b; --bezel:#0d1013;
+    --border:#242b32; --border-soft:#1a2027;
+    --text-1:#eef1f3; --text-2:#8b939c; --text-3:#5a6169;
+    --live:#e8483c; --accent:#3fb6c9; --warn:#e8a13c;
+    --radius-sm:6px; --radius-md:10px;
+    --font-ui:'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+    --font-mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+  :root[data-theme="light"]{
+    --void:#eef1f5; --panel:#ffffff; --bezel:#dfe4ea;
+    --border:#c9d1da; --border-soft:#dde3ea;
+    --text-1:#161b22; --text-2:#4b5563; --text-3:#7a8694;
+  }
+  :root[data-theme="light"] body{background-image:radial-gradient(ellipse 900px 500px at 50% -10%, rgba(63,182,201,0.10), transparent 60%);}
+  :root[data-theme="light"] .tile-thumb img{filter:none;}
+  :root[data-theme="light"] .wx-hourly .hc{background:#f3f6fa;}
+  :root[data-theme="light"] .bgm select,:root[data-theme="light"] .bgm input[type=text]{background:#fff;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--void);
+    background-image:radial-gradient(ellipse 900px 500px at 50% -10%, rgba(63,182,201,0.06), transparent 60%),repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    color:var(--text-1);font-family:var(--font-ui);min-height:100vh;-webkit-font-smoothing:antialiased;}
+  [hidden]{display:none !important;}
+  .app{max-width:1180px;margin:0 auto;padding:18px 16px 40px;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 18px;border-bottom:1px solid var(--border-soft);margin-bottom:18px;gap:10px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-dot{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 8px rgba(232,72,60,0.7);animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-title{font-weight:700;font-size:16px;letter-spacing:0.02em;}
+  .brand-sub{font-family:var(--font-mono);font-size:10px;color:var(--text-3);letter-spacing:0.08em;margin-top:2px;}
+  .topbar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .clock{font-family:var(--font-mono);font-size:13px;color:var(--text-2);letter-spacing:0.03em;padding:6px 10px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-sm);}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+
+  .env-warning{display:none;background:rgba(232,161,60,0.12);border:1px solid rgba(232,161,60,0.45);color:#f0c98a;font-size:12.5px;line-height:1.85;padding:14px 16px;border-radius:var(--radius-md);margin-bottom:16px;}
+  .env-warning.show{display:block;}
+  .env-warning strong{color:#ffd79a;}
+  .env-warning code{font-family:var(--font-mono);background:rgba(0,0,0,0.3);padding:1px 6px;border-radius:3px;font-size:11.5px;}
+  .env-warning ol{margin:6px 0 0;padding-left:20px;}
+
+  .main-monitor{background:var(--bezel);border:1px solid var(--border);border-radius:14px;padding:10px;box-shadow:0 20px 50px -20px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.02);}
+  .screen-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;}
+  .screen-frame:fullscreen{border-radius:0;aspect-ratio:auto;}
+  .screen-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;}
+  .fctv-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#05070a;}
+  .shield{position:absolute;inset:0;z-index:1;background:transparent;}
+  .hud-top{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(180deg, rgba(0,0,0,0.65), transparent);pointer-events:none;z-index:2;}
+  .hud-live{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:0.08em;color:#fff;background:rgba(232,72,60,0.92);padding:4px 8px 4px 6px;border-radius:4px;}
+  .hud-live .rec-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:pulse 1.4s ease-in-out infinite;}
+  .hud-label{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.85);background:rgba(0,0,0,0.4);padding:4px 9px;border-radius:4px;letter-spacing:0.02em;}
+  .hud-bottom{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(0deg, rgba(0,0,0,0.55), transparent);z-index:2;pointer-events:none;gap:8px;}
+  .hud-bottom > *{pointer-events:auto;}
+  .hud-name{font-size:14px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6);white-space:nowrap;}
+  .hud-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
+  .icon-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:rgba(18,22,27,0.75);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);color:#fff;cursor:pointer;font-size:14px;transition:background 0.15s ease;}
+  .icon-btn:hover{background:rgba(63,182,201,0.35);}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.03em;color:rgba(255,255,255,0.92);background:rgba(18,22,27,0.8);border:1px solid rgba(255,255,255,0.14);padding:6px 10px;border-radius:20px;text-decoration:none;cursor:pointer;height:30px;}
+  .pill:hover{background:rgba(63,182,201,0.3);}
+  .pill.active{background:var(--accent);color:#062326;border-color:var(--accent);}
+  .pill select{background:transparent;border:0;color:inherit;font:inherit;outline:none;cursor:pointer;}
+  .pill.active select{color:#062326;}
+  .pill select option{color:#000;}
+
+  .main-meta{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 2px;font-family:var(--font-mono);font-size:11px;color:var(--text-3);letter-spacing:0.04em;}
+  .main-meta .area-tag{color:var(--accent);}
+
+  .rack-header{display:flex;align-items:baseline;justify-content:space-between;margin:26px 4px 10px;}
+  .rack-title{font-size:12px;font-weight:700;color:var(--text-2);letter-spacing:0.14em;font-family:var(--font-mono);}
+  .rack-count{font-family:var(--font-mono);font-size:11px;color:var(--text-3);}
+  .rack{display:grid;grid-template-columns:repeat(4, 1fr);gap:10px;}
+  @media (max-width:860px){.rack{grid-template-columns:repeat(3, 1fr);}}
+  @media (max-width:520px){.rack{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:38%;overflow-x:auto;padding-bottom:6px;}.rack::-webkit-scrollbar{height:0;}}
+  .tile{position:relative;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:0;cursor:pointer;overflow:hidden;text-align:left;color:var(--text-1);font-family:inherit;transition:border-color 0.15s ease, transform 0.15s ease;}
+  .tile:hover{border-color:var(--border);transform:translateY(-1px);}
+  .tile.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), 0 8px 20px -10px rgba(63,182,201,0.5);}
+  .tile-thumb{position:relative;width:100%;aspect-ratio:16/10;background:#05070a;overflow:hidden;}
+  .tile-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.9) brightness(0.92);}
+  .tile-dot{position:absolute;top:6px;left:6px;display:flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:8px;font-weight:600;letter-spacing:0.06em;color:#fff;background:rgba(232,72,60,0.88);padding:2px 5px;border-radius:3px;z-index:1;}
+  .tile-dot .d{width:4px;height:4px;border-radius:50%;background:#fff;animation:pulse 1.4s ease-in-out infinite;}
+  .tile.active .tile-dot{background:var(--accent);}
+  .tile-edit{position:absolute;top:6px;right:6px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:rgba(10,12,15,0.7);border:1px solid rgba(255,255,255,0.15);border-radius:4px;color:rgba(255,255,255,0.8);font-size:10px;cursor:pointer;z-index:1;opacity:0;transition:opacity 0.15s ease;}
+  .tile:hover .tile-edit{opacity:1;}
+  .tile-info{padding:8px 9px 9px;}
+  .tile-name{font-size:12px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tile-area{font-family:var(--font-mono);font-size:9.5px;color:var(--text-3);margin-top:2px;letter-spacing:0.03em;}
+
+  /* ---------- BGM panel ---------- */
+  .bgm{margin-top:26px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:12px 14px;}
+  .bgm-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+  .bgm-title{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:0.14em;color:var(--text-2);}
+  .bgm-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px;}
+  .bgm-row label{font-size:11px;color:var(--text-3);font-family:var(--font-mono);min-width:90px;}
+  .bgm select,.bgm input[type=text]{background:#0d1013;border:1px solid var(--border);color:var(--text-1);font:inherit;font-size:12px;padding:6px 8px;border-radius:var(--radius-sm);}
+  .bgm input[type=text]{flex:1;min-width:200px;}
+  .bgm input[type=range]{width:120px;}
+  .bgm-note{font-size:10.5px;color:var(--text-3);margin-top:8px;line-height:1.6;}
+  .bgm-yt{margin-top:8px;}
+  .bgm-yt iframe{width:280px;height:158px;border:0;border-radius:var(--radius-sm);}
+
+  .footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--border-soft);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;}
+  .footer-note{font-size:11px;color:var(--text-3);line-height:1.6;}
+  .footer-note a{color:var(--accent);text-decoration:none;}
+  .footer-badge{font-family:var(--font-mono);font-size:10px;color:var(--text-3);letter-spacing:0.05em;}
+
+  /* ---------- weather ---------- */
+  .wx{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;color:var(--text-2);background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:6px 10px;min-height:32px;}
+  .wx .wx-now{font-size:14px;font-weight:700;color:var(--text-1);display:flex;align-items:center;gap:6px;}
+  .wx .wx-day{display:flex;flex-direction:column;align-items:center;line-height:1.2;padding:0 6px;border-left:1px solid var(--border-soft);}
+  .wx .wx-day b{color:var(--text-1);font-weight:600;}
+  .wx .wx-loc{color:var(--text-3);}
+  /* 天気カード（通常画面） */
+  .wxcard{margin-top:16px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:12px 14px;}
+  .wxcard .wx-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+  .wxcard .wx-title{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:0.14em;color:var(--text-2);}
+  .wxcard .wx-sub{font-size:11px;color:var(--text-3);}
+  .wx-today{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:8px 0 10px;border-bottom:1px solid var(--border-soft);}
+  .wx-today .ico{font-size:40px;line-height:1;}
+  .wx-today .txt{display:flex;flex-direction:column;}
+  .wx-today .txt b{font-size:18px;}
+  .wx-today .txt span{font-size:13px;color:var(--text-2);}
+  .wx-today .hi{color:#ff7a6b;} .wx-today .lo{color:#6fb7ff;}
+  .wx-pops{display:flex;gap:6px;margin-left:auto;}
+  .wx-pops div{text-align:center;font-size:11px;color:var(--text-2);background:rgba(255,255,255,0.04);border-radius:6px;padding:4px 8px;min-width:52px;}
+  .wx-pops div b{display:block;font-size:14px;color:var(--text-1);}
+  .wx-week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding-top:10px;}
+  .wx-week div{text-align:center;font-size:11px;color:var(--text-2);line-height:1.35;}
+  .wx-week div .d{font-weight:700;color:var(--text-1);} .wx-week div .sat{color:#6fb7ff;} .wx-week div .sun{color:#ff7a6b;}
+  .wx-week div .i{font-size:22px;display:block;margin:2px 0;}
+  .wx-week div .hi{color:#ff7a6b;} .wx-week div .lo{color:#6fb7ff;}
+  .wx-hourly{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;padding:10px 0;border-bottom:1px solid var(--border-soft);}
+  .wx-hourly .hc{text-align:center;background:rgba(255,255,255,0.04);border-radius:8px;padding:6px 2px;line-height:1.3;}
+  .wx-hourly .hc.now{background:rgba(63,182,201,0.18);box-shadow:inset 0 0 0 1px var(--accent);}
+  .wx-hourly .t{display:block;font-size:12px;color:var(--text-2);}
+  .wx-hourly .i{display:block;font-size:26px;margin:2px 0;}
+  .wx-hourly .w{display:block;font-size:11px;color:var(--text-2);}
+  .wx-hourly b{display:block;font-size:17px;color:var(--text-1);}
+  .wx-hourly .p{display:block;font-size:11px;color:#6fb7ff;}
+  .wxcard .wx-title{font-size:16px;} .wxcard .wx-sub{font-size:14px;}
+  .wx-today{border-bottom:0;padding-bottom:4px;} .wx-today .ico{font-size:56px;} .wx-today .txt b{font-size:24px;} .wx-today .txt span{font-size:16px;}
+  .wx-hourly{padding:6px 0 14px;} .wx-hourly .t{font-size:14px;} .wx-hourly .i{font-size:32px;} .wx-hourly .w{font-size:13px;} .wx-hourly b{font-size:20px;} .wx-hourly .p{font-size:13px;}
+  .wx-week div{font-size:15px;} .wx-week div .i{font-size:32px;}
+  /* 天気カード（TVモード） */
+  #tv .tv-wx{flex:0 1 auto;min-height:0;overflow:hidden;background:#fff;border-radius:4px;padding:6px 10px 8px;color:#0d2c73;font-family:var(--font-ui);}
+  #tv .tv-wx .wx-head{display:flex;justify-content:space-between;align-items:baseline;}
+  #tv .tv-wx .wx-title{font-weight:900;font-size:clamp(11px,1vw,14px);letter-spacing:.05em;}
+  #tv .tv-wx .wx-sub{font-size:clamp(9px,.8vw,11px);color:#52659b;}
+  #tv .tv-wx .wx-today{padding:4px 0 6px;border-bottom:2px solid #dfe6f5;gap:10px;}
+  #tv .tv-wx .wx-today .ico{font-size:clamp(26px,2.6vw,40px);}
+  #tv .tv-wx .wx-today .txt b{font-size:clamp(13px,1.3vw,18px);} #tv .tv-wx .wx-today .txt span{font-size:clamp(10px,.95vw,13px);color:#0d2c73;}
+  #tv .tv-wx .wx-pops div{background:#eef2fb;color:#52659b;font-size:clamp(9px,.8vw,11px);min-width:0;padding:3px 6px;}
+  #tv .tv-wx .wx-pops div b{color:#0d2c73;font-size:clamp(11px,1vw,13px);}
+  #tv .tv-wx .wx-week{padding-top:6px;gap:2px;}
+  #tv .tv-wx .wx-week div{font-size:clamp(9px,.8vw,11px);color:#52659b;} #tv .tv-wx .wx-week div .d{color:#0d2c73;}
+  #tv .tv-wx .wx-week div .i{font-size:clamp(16px,1.6vw,22px);}
+  #tv .tv-wx .wx-week div .hi{color:#e8302a;} #tv .tv-wx .wx-week div .lo{color:#1d5fdc;}
+  #tv .tv-wx .wx-hourly{padding:6px 0;gap:3px;border-bottom:2px solid #dfe6f5;}
+  #tv .tv-wx .wx-hourly .hc{background:#eef2fb;padding:4px 1px;border-radius:6px;}
+  #tv .tv-wx .wx-hourly .hc.now{background:#ffe9a8;box-shadow:inset 0 0 0 2px #f2b700;}
+  #tv .tv-wx .wx-hourly .t{font-size:clamp(9px,.85vw,12px);color:#52659b;}
+  #tv .tv-wx .wx-hourly .i{font-size:clamp(16px,1.7vw,24px);}
+  #tv .tv-wx .wx-hourly .w{display:none;}
+  #tv .tv-wx .wx-hourly b{font-size:clamp(11px,1.15vw,16px);color:#0d2c73;}
+  #tv .tv-wx .wx-hourly .p{font-size:clamp(9px,.8vw,11px);color:#1d5fdc;}
+  #tv .tv-wx .wx-today .txt b{font-size:clamp(14px,1.5vw,22px);} #tv .tv-wx .wx-today .txt span{font-size:clamp(11px,1.05vw,15px);}
+  #tv .tv-wx .wx-week div{font-size:clamp(10px,.9vw,13px);} #tv .tv-wx .wx-week div .i{font-size:clamp(18px,1.9vw,26px);}
+  #tv .tv-map{aspect-ratio:auto;height:clamp(90px,16vh,200px);}
+  #tv .tv-wx .wx-title{font-size:clamp(13px,.6vw + .6vh,18px);} #tv .tv-wx .wx-sub{font-size:clamp(11px,.5vw + .5vh,14px);}
+  #tv .tv-wx .wx-today{padding:2px 0;border-bottom:0;} #tv .tv-wx .wx-today .ico{font-size:clamp(28px,1.4vw + 1.4vh,44px);}
+  #tv .tv-wx .wx-today .txt b{font-size:clamp(15px,.8vw + .8vh,24px);} #tv .tv-wx .wx-today .txt span{font-size:clamp(12px,.6vw + .6vh,17px);}
+  #tv .tv-wx .wx-hourly{padding:3px 0 8px;border-bottom:2px solid #dfe6f5;}
+  #tv .tv-wx .wx-hourly .t{font-size:clamp(11px,.55vw + .55vh,15px);} #tv .tv-wx .wx-hourly .i{font-size:clamp(20px,1.1vw + 1.1vh,34px);}
+  #tv .tv-wx .wx-hourly b{font-size:clamp(14px,.75vw + .75vh,22px);} #tv .tv-wx .wx-hourly .p{font-size:clamp(11px,.5vw + .5vh,14px);}
+  #tv .tv-wx .wx-week{padding-top:6px;} #tv .tv-wx .wx-week div{font-size:clamp(12px,.6vw + .6vh,16px);} #tv .tv-wx .wx-week div .i{font-size:clamp(20px,1.1vw + 1.1vh,34px);}
+  #tv .tv-name{font-size:clamp(16px,.9vw + .9vh,26px);padding:7px 10px;}
+
+  /* ---------- TV mode (cable-TV style) ---------- */
+  #tv{position:fixed;inset:0;z-index:50;background:linear-gradient(180deg,#1d5fdc 0%,#2a6fe6 55%,#2f7bf0 100%);font-family:var(--font-ui);color:#0d2c73;
+    display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,34vw,640px);grid-template-rows:minmax(0,1fr);gap:14px;padding:16px 16px 56px;}
+  #tv .tv-left{grid-column:1;grid-row:1;display:flex;flex-direction:column;gap:10px;min-height:0;min-width:0;}
+  #tv .tv-mainwrap{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;}
+  #tv .tv-main{position:relative;background:#000;border:3px solid #fff;overflow:hidden;width:100%;aspect-ratio:16/9;max-height:100%;}
+  #tv .tv-main iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  #tv .tv-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  #tv .tv-main:fullscreen{border:0;background:#000;}
+  #tv .tv-fsname{display:none;position:absolute;left:18px;top:14px;z-index:3;background:rgba(255,255,255,0.92);color:#0d2c73;font-weight:900;font-size:clamp(16px,1.6vw,26px);padding:6px 16px;border-radius:4px;border-left:8px solid #1d5fdc;}
+  #tv .tv-main:fullscreen .tv-fsname{display:block;}
+  #tv .tv-fsexit,#tv .tv-fsnav{display:none;position:absolute;z-index:4;}
+  #tv .tv-fsexit{right:18px;top:14px;background:rgba(13,44,115,0.85);color:#fff;border:1px solid rgba(255,255,255,0.5);font:700 15px var(--font-ui);padding:8px 14px;border-radius:6px;cursor:pointer;}
+  #tv .tv-fsnav{left:50%;transform:translateX(-50%);bottom:16px;gap:10px;}
+  #tv .tv-fsnav button{background:rgba(13,44,115,0.85);color:#fff;border:1px solid rgba(255,255,255,0.5);font:700 15px var(--font-ui);padding:8px 16px;border-radius:6px;cursor:pointer;}
+  #tv .tv-main:fullscreen .tv-fsexit,#tv .tv-main:fullscreen .tv-fsnav{display:flex;opacity:.55;transition:opacity .2s;}
+  #tv .tv-main:fullscreen:hover .tv-fsexit,#tv .tv-main:fullscreen:hover .tv-fsnav{opacity:1;}
+  #tv .tv-side{grid-column:2;grid-row:1;display:flex;flex-direction:column;gap:10px;min-height:0;overflow:hidden;}
+  #tv .tv-info{flex:0 0 auto;background:#fff;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;}
+  #tv .tv-name{background:#fff;color:#0d2c73;font-weight:900;font-size:clamp(16px,1.9vw,26px);text-align:center;padding:10px 12px;letter-spacing:0.02em;border-bottom:3px solid #1d5fdc;}
+  #tv .tv-map{position:relative;width:100%;aspect-ratio:1/0.8;background:#e9eef7;}
+  #tv .tv-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  #tv .tv-area{background:#fff;color:#0d2c73;font-weight:700;font-size:clamp(12px,1.1vw,15px);text-align:right;padding:6px 12px;}
+  #tv .tv-pref{flex:1 1 60px;min-height:60px;background:#2a6fe6;position:relative;}
+  #tv .tv-pref svg{width:100%;height:100%;display:block;}
+  #tv .tv-strip{flex:0 0 auto;display:grid;grid-template-columns:repeat(8,1fr);gap:8px;}
+  #tv .tv-thumb{position:relative;background:#0d2c73;border:2px solid #fff;overflow:hidden;cursor:pointer;aspect-ratio:16/11;}
+  #tv .tv-thumb.active{border-color:#ffd54a;box-shadow:0 0 0 2px #ffd54a;}
+  #tv .tv-thumb span{display:block;background:#1a4fc4;color:#fff;font-weight:700;font-size:clamp(9px,0.85vw,12px);text-align:center;padding:3px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  #tv .tv-thumb img{width:100%;height:calc(100% - 20px);object-fit:cover;display:block;}
+  #tv .tv-bar{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;gap:8px;z-index:60;opacity:.45;transition:opacity .2s;}
+  #tv:hover .tv-bar{opacity:1;}
+  #tv .tv-bar .pill{height:34px;font-size:13px;font-family:var(--font-ui);font-weight:700;background:rgba(13,44,115,0.85);border-color:rgba(255,255,255,0.35);}
+  #tv .tv-bar .pill.active{background:#ffd54a;color:#0d2c73;border-color:#ffd54a;}
+  #tv .tv-bar .pill select{color:#fff;font-weight:700;} #tv .tv-bar .pill.active select{color:#0d2c73;}
+  @media (max-height:820px){ #tv .tv-wx .tomorrow .wx-hourly{display:none;} #tv .tv-map{height:clamp(70px,12vh,120px);} }
+  @media (max-height:680px){ #tv .tv-wx .tomorrow{display:none;} }
+  @media (max-width:980px){
+    #tv{grid-template-columns:1fr;grid-template-rows:auto auto;padding:10px 10px 56px;gap:10px;overflow:auto;}
+    #tv .tv-left{grid-row:1;} #tv .tv-main{max-height:none;}
+    #tv .tv-strip{grid-template-columns:repeat(4,1fr);}
+    #tv .tv-side{grid-column:1;grid-row:2;overflow:visible;}
+    #tv .tv-pref{flex:0 0 120px;}
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <div class="brand-text">
+        <span class="brand-title">福井ライブカメラウォール</span>
+        <span class="brand-sub">FCTV YOUTUBE LIVE MONITOR</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="pill" id="themeBtn" title="明るい／暗い配色を切り替え">☀️ ライト</button>
+      <button class="pill" id="tvModeBtn" title="ケーブルテレビ風の画面に切り替え">📺 TVモード</button>
+      <div class="clock" id="clock">--:--:--</div>
+    </div>
+  </div>
+
+  <div class="env-warning" id="envWarning">
+    <strong>この開き方ではYouTube動画が再生できません（Error 153 の原因）。</strong><br>
+    <span id="envReason"></span><br>
+    同梱の <code>start_viewer.bat</code>（Windows）／<code>start_viewer.command</code>（Mac）から起動するか、<code>http://localhost:8080/fctv_live_wall.html</code> を開いてください。
+  </div>
+
+  <div class="main-monitor">
+    <div class="screen-frame" id="screenFrame">
+      <div class="hud-top">
+        <span class="hud-live"><span class="rec-dot"></span>LIVE</span>
+        <span class="hud-label" id="hudId">--</span>
+      </div>
+      <iframe id="mainPlayer" src="" title="メインライブ映像" referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+      <div class="shield" id="shield"></div>
+      <img class="fctv-shot" id="fctvShot" src="" alt="" hidden>
+      <div class="hud-bottom">
+        <span class="hud-name" id="hudName">読み込み中...</span>
+        <div class="hud-actions">
+          <button class="pill" id="autoBtn" title="自動でカメラを切り替え">⟳ 自動 OFF</button>
+          <span class="pill" title="切替間隔"><select id="autoSec">
+            <option value="5">5秒</option><option value="10" selected>10秒</option><option value="15">15秒</option>
+            <option value="20">20秒</option><option value="30">30秒</option><option value="60">60秒</option><option value="120">2分</option>
+          </select></span>
+          <button class="pill" id="muteBtn" title="音声のON/OFF">🔇 音声OFF</button>
+          <button class="pill" id="modeBtn" title="YouTube動画と静止画を切り替え">静止画モード</button>
+          <a class="pill" id="ytLaunch" href="#" target="_blank" rel="noopener">▶ YouTubeで開く</a>
+          <button class="icon-btn" id="fsBtn" title="全画面（もう一度押すと戻る）" aria-label="全画面">⛶</button>
+        </div>
+      </div>
+    </div>
+    <div class="main-meta">
+      <span>SIGNAL: <span class="area-tag" id="signalTag">YOUTUBE / EMBED</span></span>
+      <span id="mainMetaArea">--</span>
+    </div>
+  </div>
+
+  <div class="rack-header">
+    <span class="rack-title">CAMERA RACK</span>
+    <span class="rack-count" id="rackCount">0 CAMS</span>
+  </div>
+  <div class="rack" id="rack"></div>
+
+  <div class="wxcard" id="wxMain"><span class="wx-sub">天気を取得中…</span></div>
+
+  <div class="bgm">
+    <div class="bgm-head">
+      <span class="bgm-title">BGM</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="pill" title="radikoの局"><select id="radikoSt">
+          <option value="FBC">FBC 福井放送</option><option value="FMFUKUI">FM福井</option>
+          <option value="">radikoトップ（他局を選ぶ）</option>
+        </select></span>
+        <button class="pill" id="radioBtn">📻 radiko（小窓）</button>
+        <button class="pill" id="bgmStop">■ 停止</button>
+      </div>
+    </div>
+    <div class="bgm-row">
+      <label>ネットラジオ</label>
+      <select id="bgmPreset">
+        <option value="">— 選択 —</option>
+        <option value="https://ice1.somafm.com/groovesalad-128-mp3">SomaFM Groove Salad（アンビエント）</option>
+        <option value="https://ice1.somafm.com/dronezone-128-mp3">SomaFM Drone Zone（静かな環境音楽）</option>
+        <option value="https://ice1.somafm.com/lush-128-mp3">SomaFM Lush（やわらかいボーカル）</option>
+        <option value="https://ice1.somafm.com/secretagent-128-mp3">SomaFM Secret Agent（ラウンジ）</option>
+        <option value="https://ice1.somafm.com/sonicuniverse-128-mp3">SomaFM Sonic Universe（ジャズ寄り）</option>
+        <option value="https://ice1.somafm.com/bootliquor-128-mp3">SomaFM Boot Liquor（アメリカーナ）</option>
+      </select>
+      <input type="text" id="bgmUrl" placeholder="または直接ストリームURL（.mp3 / .aac / .m3u8 など）を貼り付け">
+      <button class="pill" id="bgmPlayUrl">▶ 再生</button>
+    </div>
+    <div class="bgm-row">
+      <label>手元の音楽</label>
+      <input type="file" id="bgmFile" accept="audio/*" multiple>
+      <label style="min-width:auto">音量</label><input type="range" id="bgmVol" min="0" max="100" value="60">
+      <span id="bgmNow" style="font-size:11px;color:var(--text-2);"></span>
+    </div>
+    <div class="bgm-row">
+      <label>YouTube BGM</label>
+      <input type="text" id="bgmYtUrl" placeholder="音楽ライブ配信や作業用BGM動画のURLを貼り付け（例：lo-fi、ジャズの24時間配信）">
+      <button class="pill" id="bgmYtPlay">▶ 読み込み</button>
+      <button class="pill" id="bgmYtClear">✕</button>
+    </div>
+    <div class="bgm-yt" id="bgmYt" hidden></div>
+    <audio id="bgmAudio" preload="none"></audio>
+    <div class="bgm-note">
+      ネットラジオは放送局が公開している直接ストリームです（SomaFMはリスナー支援の非営利局）。手元の音楽は複数ファイルを選ぶと順に再生します。
+      YouTube BGMは埋め込み許可された動画のみ再生でき、小さなプレーヤー上で音量を操作できます。radikoは仕様上埋め込めないため別ウィンドウで開きます。
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-note">
+      映像提供：福井ケーブルテレビ（FCTV）YouTubeチャンネルのライブ配信を埋め込み表示しています。<br>
+      配信元：<a href="https://www.fctv.jp/web-came/" target="_blank" rel="noopener">fctv.jp/web-came</a> ／ <a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">youtube.com/@fctv_091</a>
+      ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
+    </div>
+    <div class="footer-badge">v3.8 · 8 CAMERAS</div>
+  </div>
+</div>
+
+<!-- ======== TV MODE ======== -->
+<div id="tv" hidden>
+  <div class="tv-left">
+  <div class="tv-mainwrap" id="tvMainWrap">
+  <div class="tv-main" id="tvMain">
+    <iframe id="tvPlayer" src="" title="TVモード映像" referrerpolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    <div class="shield"></div>
+    <img id="tvShot" src="" alt="" hidden>
+    <div class="tv-fsname" id="tvFsName"></div>
+    <button class="tv-fsexit" id="tvFsExit">⤡ 全画面を戻す</button>
+    <div class="tv-fsnav"><button id="tvFsPrev">◀ 前</button><button id="tvFsNext">次 ▶</button></div>
+  </div>
+  </div>
+  <div class="tv-strip" id="tvStrip"></div>
+  </div>
+  <div class="tv-side">
+    <div class="tv-info">
+      <div class="tv-name" id="tvName">--</div>
+      <div class="tv-map"><iframe id="tvMap" src="" title="現地地図"></iframe></div>
+      <div class="tv-area" id="tvArea">--</div>
+    </div>
+    <div class="tv-wx" id="wxTv"><span class="wx-sub">天気を取得中…</span></div>
+    <div class="tv-pref" id="tvPref"></div>
+  </div>
+  <div class="tv-bar">
+    <button class="pill" id="tvBack">通常画面へ</button>
+    <button class="pill" id="tvPrev">◀ 前</button>
+    <button class="pill" id="tvNext">次 ▶</button>
+    <button class="pill" id="tvAutoBtn">⟳ 自動 OFF</button>
+    <span class="pill" id="tvAutoSecWrap" title="切替間隔"><select id="tvAutoSec">
+      <option value="5">5秒</option><option value="10">10秒</option><option value="15">15秒</option>
+      <option value="20">20秒</option><option value="30">30秒</option><option value="60">60秒</option><option value="120">2分</option>
+    </select></span>
+    <button class="pill" id="tvMuteBtn">🔇 音声OFF</button>
+    <button class="pill" id="tvRadioBtn">📻 ラジコ</button>
+    <button class="pill" id="tvFsBtn">⛶ 全画面</button>
+  </div>
+</div>
+
+<script>
+/* ===================== 設定（ここだけ編集すればOK） ===================== */
+var CONFIG = {
+  homeName: '福井市',          // 天気を表示する場所の名前
+  homeLat: 36.0652,            // 自宅付近の緯度（Googleマップで右クリック→座標コピー）
+  homeLng: 136.2216,           // 自宅付近の経度
+  startInTv: false,            // true にすると最初からTVモードで開く（URLに ?tv=1 でも可）
+  autoSeconds: 0,              // 0=自動切替しない / 10 なら10秒ごと（URLに ?auto=10 でも可）
+  startCamera: 0               // 最初に表示するカメラ（0〜7）
+};
+/* ======================================================================== */
+(function(){
+  var qs = new URLSearchParams(location.search);
+  if (qs.has('tv'))   CONFIG.startInTv = qs.get('tv') !== '0';
+  if (qs.has('auto')) CONFIG.autoSeconds = parseInt(qs.get('auto'),10)||0;
+  if (qs.has('cam'))  CONFIG.startCamera = parseInt(qs.get('cam'),10)||0;
+  var cameras = [
+    { id:'IrXQ8JID0Gs', shot:'fukuistation',     name:'福井駅西口',             area:'福井市',        lat:36.0619, lng:136.2231, q:'福井駅 西口' },
+    { id:'k3lKNrqtSyE', shot:'kidabashi',        name:'足羽川・木田橋',         area:'福井市',        lat:36.0585, lng:136.2150, q:'木田橋 福井市' },
+    { id:'yNgpcqA9X64', shot:'shinkansenbridge', name:'新九頭竜橋',             area:'福井市/坂井市', lat:36.1230, lng:136.2075, q:'新九頭竜橋' },
+    { id:'CIjhFpsN-3k', shot:'sunsetbeach',      name:'三国・サンセットビーチ', area:'坂井市三国町',  lat:36.2335, lng:136.1365, q:'三国サンセットビーチ' },
+    { id:'jLZ_T91paAU', shot:'r8ohwada',         name:'国道8号線 大和田方面',   area:'福井市',        lat:36.0870, lng:136.2440, q:'福井市大和田 国道8号' },
+    { id:'U1fhYEreP4Q', shot:'nanjousa',         name:'北陸自動車道南条SA付近', area:'南越前町',      lat:35.8395, lng:136.1875, q:'南条サービスエリア' },
+    { id:'cG_-7ItG0Mk', shot:'ukonke',           name:'河野・北前船主の館右近家', area:'南越前町河野地区', lat:35.7905, lng:136.0585, q:'北前船主の館 右近家' },
+    { id:'jfiV5lcfBL0', shot:'hirosebashi',      name:'足羽川・池田町 広瀬橋',  area:'池田町',        lat:35.8880, lng:136.3330, q:'広瀬橋 池田町 福井県' }
+  ];
+
+  var $ = function(id){ return document.getElementById(id); };
+  var rack=$('rack'), mainPlayer=$('mainPlayer'), fctvShot=$('fctvShot'), shield=$('shield');
+  var ytLaunch=$('ytLaunch'), modeBtn=$('modeBtn'), signalTag=$('signalTag'), muteBtn=$('muteBtn');
+  var autoBtn=$('autoBtn'), autoSec=$('autoSec');
+  var hudName=$('hudName'), hudId=$('hudId'), mainMetaArea=$('mainMetaArea'), rackCount=$('rackCount');
+  var screenFrame=$('screenFrame'), fsBtn=$('fsBtn'), envWarning=$('envWarning'), envReason=$('envReason');
+  var tv=$('tv'), tvPlayer=$('tvPlayer'), tvShot=$('tvShot'), tvName=$('tvName'), tvMap=$('tvMap'), tvArea=$('tvArea');
+  var tvStrip=$('tvStrip'), tvPref=$('tvPref'), tvModeBtn=$('tvModeBtn'), tvBack=$('tvBack');
+  var tvAutoBtn=$('tvAutoBtn'), tvMuteBtn=$('tvMuteBtn'), tvFsBtn=$('tvFsBtn');
+
+  var activeIndex=0, stillMode=false, muted=true, tvMode=false;
+  var autoOn=false, autoTimer=null;
+  var shotTimer=null, SHOT_REFRESH_MS=120000;
+
+  /* ---- 環境チェック ---- */
+  (function(){
+    var reason=''; var inFrame=false;
+    try{ inFrame=(window.self!==window.top); }catch(e){ inFrame=true; }
+    if(location.protocol==='file:') reason='現在、ファイルを直接ダブルクリックして開いています（file://）。';
+    else if(window.origin==='null'||location.origin==='null') reason='現在、サンドボックス化されたプレビュー枠で開いています。';
+    else if(inFrame) reason='現在、別のページの中に埋め込まれた状態で開いています。';
+    if(reason){ envReason.textContent=reason; envWarning.classList.add('show'); stillMode=true; }
+  })();
+
+  function embedUrl(id){
+    var o=(location.origin&&location.origin!=='null')?'&origin='+encodeURIComponent(location.origin):'';
+    return 'https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&playsinline=1&rel=0&iv_load_policy=3&controls=0&disablekb=1&fs=0&enablejsapi=1'+o;
+  }
+  function thumbUrl(id,bust){ return 'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg'+(bust?'?t='+bust:''); }
+  function shotUrl(slug){ return 'https://files.fctv.jp/cam-img/'+slug+'.jpg?t='+Date.now(); }
+  function watchUrl(id){ return 'https://www.youtube.com/watch?v='+id; }
+  function mapUrl(c){ var q=c.q||(c.lat+','+c.lng); return 'https://www.google.com/maps?q='+encodeURIComponent(q)+'&z=15&hl=ja&output=embed'; }
+  function extractId(input){
+    input=(input||'').trim();
+    var m=input.match(/[?&]v=([A-Za-z0-9_-]{6,})/)||input.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/)||input.match(/embed\/([A-Za-z0-9_-]{6,})/)||input.match(/live\/([A-Za-z0-9_-]{6,})/);
+    if(m) return m[1]; if(/^[A-Za-z0-9_-]{6,}$/.test(input)) return input; return null;
+  }
+  function curPlayer(){ return tvMode?tvPlayer:mainPlayer; }
+  function ytCommand(func){ var p=curPlayer(); if(!p.contentWindow) return; p.contentWindow.postMessage(JSON.stringify({event:'command',func:func,args:[]}),'https://www.youtube.com'); }
+  function renderMute(){ var t=muted?'🔇 音声OFF':'🔊 音声ON'; muteBtn.textContent=t; tvMuteBtn.textContent=t; muteBtn.classList.toggle('active',!muted); tvMuteBtn.classList.toggle('active',!muted); }
+  function toggleMute(){ muted=!muted; ytCommand(muted?'mute':'unMute'); renderMute(); }
+  muteBtn.addEventListener('click',toggleMute); tvMuteBtn.addEventListener('click',toggleMute);
+  mainPlayer.addEventListener('load',function(){ muted=true; renderMute(); });
+  tvPlayer.addEventListener('load',function(){ muted=true; renderMute(); });
+
+  /* ---- メイン表示 ---- */
+  function applyMode(){
+    var cam=cameras[activeIndex];
+    if(shotTimer){ clearInterval(shotTimer); shotTimer=null; }
+    var player=curPlayer(), shot=tvMode?tvShot:fctvShot, other=tvMode?mainPlayer:tvPlayer;
+    other.src='';
+    if(stillMode){
+      player.hidden=true; player.src=''; shot.hidden=false;
+      shot.onerror=function(){ shot.hidden=true; player.hidden=false; player.src=embedUrl(cam.id); };
+      shot.src=shotUrl(cam.shot);
+      shotTimer=setInterval(function(){ if(stillMode&&!shot.hidden) shot.src=shotUrl(cameras[activeIndex].shot); },SHOT_REFRESH_MS);
+      shield.hidden=true; modeBtn.textContent='YouTube動画モード'; modeBtn.classList.add('active'); signalTag.textContent='FCTV STILL / 2min REFRESH';
+    }else{
+      shot.hidden=true; shot.src=''; player.hidden=false; player.src=embedUrl(cam.id);
+      shield.hidden=false; modeBtn.textContent='静止画モード'; modeBtn.classList.remove('active'); signalTag.textContent='YOUTUBE / EMBED';
+    }
+  }
+  function setActive(index,fromAuto){
+    activeIndex=(index+cameras.length)%cameras.length;
+    var cam=cameras[activeIndex];
+    ytLaunch.href=watchUrl(cam.id); hudName.textContent=cam.name; hudId.textContent=cam.id; mainMetaArea.textContent=cam.area;
+    Array.prototype.forEach.call(rack.children,function(t,i){ t.classList.toggle('active',i===activeIndex); });
+    Array.prototype.forEach.call(tvStrip.children,function(t,i){ t.classList.toggle('active',i===activeIndex); });
+    tvName.textContent=cam.name; $('tvFsName').textContent=cam.name; tvArea.textContent=cam.area; tvMap.src=mapUrl(cam);
+    drawPref();
+    applyMode();
+    if(autoOn&&!fromAuto) restartAuto();
+  }
+
+  /* ---- 自動切替 ---- */
+  function renderAuto(){ var t=autoOn?'⟳ 自動 ON':'⟳ 自動 OFF'; autoBtn.textContent=t; tvAutoBtn.textContent=t; autoBtn.classList.toggle('active',autoOn); tvAutoBtn.classList.toggle('active',autoOn); autoSec.parentElement.classList.toggle('active',autoOn); $('tvAutoSecWrap').classList.toggle('active',autoOn); }
+  function restartAuto(){
+    if(autoTimer){ clearTimeout(autoTimer); autoTimer=null; }
+    if(!autoOn) return;
+    var ms=parseInt(autoSec.value,10)*1000;
+    autoTimer=setTimeout(function(){ setActive(activeIndex+1,true); restartAuto(); },ms);
+  }
+  function toggleAuto(){ autoOn=!autoOn; renderAuto(); restartAuto(); }
+  autoBtn.addEventListener('click',toggleAuto); tvAutoBtn.addEventListener('click',toggleAuto);
+  autoSec.addEventListener('change',function(){ $('tvAutoSec').value=autoSec.value; if(autoOn) restartAuto(); });
+  $('tvAutoSec').addEventListener('change',function(){ autoSec.value=$('tvAutoSec').value; if(autoOn) restartAuto(); });
+  $('tvAutoSec').value=autoSec.value;
+
+  /* ---- 全画面（トグル） ---- */
+  function isFs(){ return !!(document.fullscreenElement||document.webkitFullscreenElement); }
+  function enterFs(el){ var f=el.requestFullscreen||el.webkitRequestFullscreen||el.msRequestFullscreen; if(f){ try{ var r=f.call(el); if(r&&r.catch) r.catch(function(){}); }catch(e){} } }
+  function exitFs(){ var f=document.exitFullscreen||document.webkitExitFullscreen||document.msExitFullscreen; if(f){ try{ var r=f.call(document); if(r&&r.catch) r.catch(function(){}); }catch(e){} } }
+  function toggleFs(el){ if(isFs()) exitFs(); else enterFs(el); }
+  fsBtn.addEventListener('click',function(){ toggleFs(screenFrame); });
+  tvFsBtn.addEventListener('click',function(){ toggleFs($('tvMain')); });
+  function fsChanged(){ var on=isFs(); var m=$('tvMain'); if(on){ m.style.width='100%'; m.style.height='100%'; } else setTimeout(fitTv,50); fsBtn.textContent=on?'⤡':'⛶'; tvFsBtn.textContent=on?'⤡ 全画面を戻す':'⛶ 全画面'; }
+  document.addEventListener('fullscreenchange',fsChanged); document.addEventListener('webkitfullscreenchange',fsChanged);
+
+  /* ---- TVモード ---- */
+  function fitTv(){
+    if(!tvMode||isFs()) return;
+    var wrap=$('tvMainWrap'), main=$('tvMain');
+    var W=wrap.clientWidth, H=wrap.clientHeight; if(!W||!H) return;
+    var w=Math.min(W, H*16/9);
+    main.style.width=w+'px'; main.style.height=(w*9/16)+'px'; main.style.maxHeight='none'; main.style.aspectRatio='auto';
+  }
+  window.addEventListener('resize',function(){ fitTv(); });
+  function enterTv(withFs){ tvMode=true; tv.hidden=false; document.body.style.overflow='hidden'; setActive(activeIndex,true); requestAnimationFrame(fitTv); setTimeout(fitTv,300); if(withFs&&!isFs()) enterFs($('tvMain')); }
+  function exitTv(){ if(isFs()) exitFs(); tvMode=false; tv.hidden=true; document.body.style.overflow=''; setActive(activeIndex,true); }
+  tvModeBtn.addEventListener('click',function(){ enterTv(false); }); tvBack.addEventListener('click',exitTv);
+  $('tvPrev').addEventListener('click',function(){ setActive(activeIndex-1); }); $('tvNext').addEventListener('click',function(){ setActive(activeIndex+1); });
+  $('tvFsPrev').addEventListener('click',function(){ setActive(activeIndex-1); }); $('tvFsNext').addEventListener('click',function(){ setActive(activeIndex+1); });
+  $('tvFsExit').addEventListener('click',exitFs);
+  document.addEventListener('keydown',function(e){ if(e.key==='f'||e.key==='F') toggleFs(tvMode?$('tvMain'):screenFrame); if(e.key==='Escape'&&tvMode&&!isFs()) exitTv(); if(e.key==='ArrowRight') setActive(activeIndex+1); if(e.key==='ArrowLeft') setActive(activeIndex-1); });
+
+  /* 県全体の略図（簡略ポリゴン） */
+  var PREF=[[136.2437,36.2956],[136.2578,36.2889],[136.2569,36.2795],[136.2623,36.2797],[136.2661,36.2657],[136.3002,36.2584],[136.3191,36.2337],[136.3318,36.2293],[136.3281,36.2077],[136.3357,36.1846],[136.3595,36.1655],[136.4092,36.1719],[136.4123,36.1599],[136.4317,36.1435],[136.4565,36.1364],[136.4894,36.159],[136.5068,36.1467],[136.5516,36.155],[136.603,36.1278],[136.6172,36.1067],[136.6514,36.0913],[136.6637,36.0676],[136.754,36.0864],[136.7638,36.0677],[136.733,36.0493],[136.7339,36.0219],[136.7264,35.9959],[136.7507,35.9904],[136.7535,35.9563],[136.7915,35.9467],[136.7844,35.9244],[136.8116,35.9125],[136.8221,35.8962],[136.8191,35.8819],[136.832,35.8581],[136.8284,35.8489],[136.8026,35.8439],[136.7891,35.7995],[136.775,35.7993],[136.7645,35.8103],[136.7414,35.8013],[136.7233,35.8082],[136.7102,35.7929],[136.6769,35.793],[136.66,35.7835],[136.6449,35.8069],[136.6382,35.7985],[136.6263,35.797],[136.6218,35.7869],[136.5996,35.7986],[136.5709,35.7776],[136.5233,35.7883],[136.5057,35.7504],[136.4854,35.776],[136.4331,35.7747],[136.3775,35.7952],[136.3467,35.7769],[136.3283,35.7751],[136.3189,35.7491],[136.3245,35.743],[136.3236,35.7169],[136.2916,35.6908],[136.2986,35.6777],[136.2806,35.6587],[136.232,35.6826],[136.2127,35.6822],[136.185,35.7037],[136.15,35.6978],[136.1342,35.6699],[136.1477,35.6625],[136.1767,35.5961],[136.1668,35.5835],[136.1685,35.5655],[136.1133,35.5829],[136.1051,35.5288],[136.0831,35.5404],[136.0699,35.5266],[136.0491,35.5346],[136.0261,35.5296],[136.028,35.5241],[136.0059,35.4916],[135.9815,35.4868],[135.9684,35.5024],[135.9535,35.5057],[135.9465,35.5207],[135.9398,35.5204],[135.9164,35.4696],[135.9101,35.4478],[135.9131,35.4314],[135.8927,35.4199],[135.8904,35.4038],[135.8616,35.3951],[135.8528,35.4115],[135.8151,35.4131],[135.8071,35.3853],[135.7905,35.3867],[135.7907,35.3793],[135.7684,35.3561],[135.7408,35.3583],[135.7362,35.3512],[135.7185,35.3553],[135.7007,35.3437],[135.6419,35.3668],[135.5958,35.3727],[135.5877,35.3683],[135.5656,35.3773],[135.5285,35.3797],[135.5253,35.4207],[135.4958,35.4251],[135.4968,35.4377],[135.4886,35.4387],[135.4857,35.4486],[135.4699,35.4545],[135.4591,35.4675],[135.4754,35.4891],[135.4743,35.507],[135.449,35.5235],[135.4646,35.5509],[135.4865,35.558],[135.4685,35.5299],[135.4832,35.5339],[135.4801,35.5223],[135.4897,35.5303],[135.4935,35.5225],[135.5012,35.5238],[135.5091,35.5347],[135.4955,35.5409],[135.5011,35.5419],[135.4999,35.554],[135.5177,35.5499],[135.5082,35.5032],[135.5342,35.4889],[135.5514,35.4971],[135.5584,35.4903],[135.5756,35.4932],[135.577,35.4992],[135.619,35.5199],[135.631,35.5375],[135.6609,35.5476],[135.659,35.5361],[135.6689,35.5252],[135.657,35.5313],[135.6282,35.5219],[135.6408,35.5197],[135.6367,35.5139],[135.6419,35.5081],[135.6264,35.4892],[135.5937,35.4947],[135.5807,35.4899],[135.6096,35.4809],[135.62,35.486],[135.6317,35.4785],[135.6527,35.4785],[135.6622,35.4938],[135.675,35.4876],[135.7,35.4935],[135.7181,35.4843],[135.72,35.4919],[135.7444,35.4995],[135.7413,35.5046],[135.7506,35.5302],[135.7625,35.5309],[135.7639,35.5361],[135.7363,35.5351],[135.7348,35.5271],[135.7183,35.5202],[135.7169,35.5401],[135.6898,35.5443],[135.6888,35.5496],[135.7132,35.569],[135.7486,35.5665],[135.7574,35.543],[135.771,35.5468],[135.7646,35.5568],[135.7926,35.5417],[135.7854,35.5365],[135.7979,35.5251],[135.8044,35.533],[135.8067,35.5276],[135.8135,35.5294],[135.8123,35.537],[135.8336,35.5363],[135.8252,35.5523],[135.8011,35.5713],[135.8093,35.5715],[135.8104,35.5769],[135.8393,35.5632],[135.8567,35.5819],[135.8557,35.5917],[135.8536,35.603],[135.8445,35.6016],[135.8405,35.6081],[135.8323,35.6031],[135.8268,35.6103],[135.8384,35.621],[135.824,35.6242],[135.8233,35.6316],[135.8326,35.6302],[135.8223,35.6375],[135.8152,35.6325],[135.8143,35.6423],[135.845,35.6357],[135.8431,35.6281],[135.8588,35.6233],[135.8568,35.6167],[135.8658,35.6086],[135.8838,35.6175],[135.8929,35.6117],[135.8981,35.6237],[135.9065,35.6248],[135.9088,35.6135],[135.9212,35.6095],[135.9375,35.6145],[135.9503,35.6278],[135.9484,35.6329],[135.9539,35.6341],[135.9621,35.6223],[135.9801,35.6299],[135.9859,35.6414],[135.9741,35.6551],[135.9636,35.6563],[135.9657,35.6739],[135.9766,35.6847],[135.9757,35.696],[135.9709,35.7118],[135.9633,35.7097],[135.9625,35.6999],[135.9555,35.703],[135.9589,35.7154],[135.9539,35.7205],[135.9682,35.7351],[135.9797,35.7329],[136.0169,35.7639],[136.0374,35.7389],[136.0217,35.7488],[136.0373,35.7278],[136.0375,35.7103],[136.0429,35.7059],[136.0439,35.6921],[136.0373,35.6945],[136.025,35.6806],[136.042,35.6699],[136.0436,35.6587],[136.0737,35.6625],[136.0692,35.6641],[136.0765,35.6665],[136.0774,35.6782],[136.0713,35.6795],[136.0857,35.6851],[136.079,35.7047],[136.0911,35.7101],[136.0973,35.7241],[136.0963,35.7357],[136.0861,35.7383],[136.1011,35.7532],[136.1,35.7771],[136.0694,35.8249],[135.9944,35.8879],[135.9968,35.9355],[135.9575,35.9816],[135.9639,35.9977],[136.0108,36.0341],[136.0106,36.0456],[136.0305,36.0865],[136.0282,36.0958],[136.0468,36.1085],[136.0543,36.1283],[136.095,36.1568],[136.091,36.1602],[136.1141,36.1927],[136.1124,36.2053],[136.1143,36.1928],[136.1293,36.1919],[136.1308,36.2053],[136.1187,36.2003],[136.1342,36.2232],[136.1232,36.2493],[136.1726,36.2532],[136.2437,36.2956]];
+  function proj(lng,lat){ return [ (lng-135.40)/(136.90-135.40)*300, (36.33-lat)/(36.33-35.30)*230*0.95+6 ]; }
+  function drawPref(){
+    var pts=PREF.map(function(p){ var q=proj(p[0],p[1]); return q[0].toFixed(1)+','+q[1].toFixed(1); }).join(' ');
+    var dots=cameras.map(function(c,i){ var q=proj(c.lng,c.lat); var cur=i===activeIndex;
+      return '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(cur?7:5)+'" fill="'+(cur?'#e8302a':'#7a86a6')+'" stroke="#fff" stroke-width="1.5"/>'+(cur?'<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="13" fill="none" stroke="#e8302a" stroke-width="2.5"><animate attributeName="r" values="9;15;9" dur="1.6s" repeatCount="indefinite"/></circle>':''); }).join('');
+    tvPref.innerHTML='<svg viewBox="0 0 300 230" preserveAspectRatio="xMidYMid meet"><polygon points="'+pts+'" fill="#e9eef7" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>'+dots+'</svg>';
+  }
+
+  /* ---- ラック／TVストリップ ---- */
+  function renderRack(){
+    rack.innerHTML=''; tvStrip.innerHTML='';
+    cameras.forEach(function(cam,i){
+      var tile=document.createElement('button'); tile.className='tile'; tile.setAttribute('aria-label',cam.name+' を大画面表示');
+      var thumb=document.createElement('div'); thumb.className='tile-thumb';
+      var img=document.createElement('img'); img.src=thumbUrl(cam.id); img.alt=cam.name; img.loading='lazy'; thumb.appendChild(img);
+      var dot=document.createElement('span'); dot.className='tile-dot'; dot.innerHTML='<span class="d"></span>LIVE'; thumb.appendChild(dot);
+      var edit=document.createElement('span'); edit.className='tile-edit'; edit.textContent='✎'; edit.title='YouTube URLを更新';
+      edit.addEventListener('click',function(ev){ ev.stopPropagation();
+        var input=window.prompt(cam.name+' の新しいYouTube URLまたは動画IDを入力してください',watchUrl(cam.id)); if(!input) return;
+        var nid=extractId(input); if(!nid){ alert('URLまたは動画IDを認識できませんでした。'); return; }
+        cam.id=nid; img.src=thumbUrl(nid); tvImg.src=thumbUrl(nid); if(activeIndex===i) setActive(i); });
+      thumb.appendChild(edit);
+      var info=document.createElement('div'); info.className='tile-info';
+      var name=document.createElement('div'); name.className='tile-name'; name.textContent=cam.name;
+      var area=document.createElement('div'); area.className='tile-area'; area.textContent=cam.area;
+      info.appendChild(name); info.appendChild(area); tile.appendChild(thumb); tile.appendChild(info);
+      tile.addEventListener('click',function(){ setActive(i); }); rack.appendChild(tile);
+
+      var tt=document.createElement('div'); tt.className='tv-thumb';
+      var tl=document.createElement('span'); tl.textContent=cam.name;
+      var tvImg=document.createElement('img'); tvImg.src=thumbUrl(cam.id); tvImg.alt=cam.name;
+      tt.appendChild(tl); tt.appendChild(tvImg); tt.addEventListener('click',function(){ setActive(i); }); tvStrip.appendChild(tt);
+      cam._imgs=[img,tvImg];
+    });
+    rackCount.textContent=cameras.length+' CAMS';
+  }
+  setInterval(function(){ var b=Date.now(); cameras.forEach(function(c){ if(c._imgs) c._imgs.forEach(function(im){ im.src=thumbUrl(c.id,b); }); }); },90000);
+
+  /* ---- BGM ---- */
+  var bgmAudio=$('bgmAudio'), bgmPreset=$('bgmPreset'), bgmUrl=$('bgmUrl'), bgmFile=$('bgmFile'), bgmVol=$('bgmVol'), bgmNow=$('bgmNow'), bgmYt=$('bgmYt'), bgmYtUrl=$('bgmYtUrl');
+  var playlist=[], plIndex=0;
+  bgmAudio.volume=0.6;
+  function bgmPlay(src,label){ bgmAudio.src=src; bgmAudio.play().then(function(){ bgmNow.textContent='再生中: '+label; }).catch(function(){ bgmNow.textContent='再生できませんでした（URLや形式を確認）'; }); }
+  function openRadiko(){
+    var st=$('radikoSt').value, url=st?('https://radiko.jp/#!/live/'+st):'https://radiko.jp/';
+    var w=window.open(url,'radiko_bgm','width=1000,height=560,left='+Math.max(0,screen.width-1020)+',top='+Math.max(0,screen.height-640)+',menubar=no,toolbar=no,location=no,status=no,resizable=yes');
+    if(w) w.focus();
+  }
+  $('radioBtn').addEventListener('click',openRadiko); $('tvRadioBtn').addEventListener('click',openRadiko);
+  bgmPreset.addEventListener('change',function(){ if(bgmPreset.value){ playlist=[]; bgmPlay(bgmPreset.value,bgmPreset.options[bgmPreset.selectedIndex].text); } });
+  $('bgmPlayUrl').addEventListener('click',function(){ var u=bgmUrl.value.trim(); if(u){ playlist=[]; bgmPreset.value=''; bgmPlay(u,u); } });
+  bgmFile.addEventListener('change',function(){ playlist=Array.prototype.slice.call(bgmFile.files); plIndex=0; bgmPreset.value=''; if(playlist.length) bgmPlay(URL.createObjectURL(playlist[0]),playlist[0].name); });
+  bgmAudio.addEventListener('ended',function(){ if(playlist.length){ plIndex=(plIndex+1)%playlist.length; bgmPlay(URL.createObjectURL(playlist[plIndex]),playlist[plIndex].name); } });
+  bgmVol.addEventListener('input',function(){ bgmAudio.volume=bgmVol.value/100; });
+  $('bgmStop').addEventListener('click',function(){ bgmAudio.pause(); bgmAudio.removeAttribute('src'); bgmAudio.load(); bgmPreset.value=''; bgmNow.textContent=''; bgmYt.hidden=true; bgmYt.innerHTML=''; });
+  $('bgmYtPlay').addEventListener('click',function(){ var id=extractId(bgmYtUrl.value); if(!id){ alert('YouTubeのURLを認識できませんでした。'); return; }
+    bgmYt.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>'; bgmYt.hidden=false; });
+  $('bgmYtClear').addEventListener('click',function(){ bgmYt.hidden=true; bgmYt.innerHTML=''; });
+
+  /* ---- 天気（Open-Meteo・自宅固定・今日＋週間） ---- */
+  var wxMain=$('wxMain'), wxTv=$('wxTv');
+  function wxIcon(code){
+    if(code===0) return ['☀️','快晴']; if(code<=2) return ['🌤️','晴れ']; if(code===3) return ['☁️','くもり'];
+    if(code<=48) return ['🌫️','霧']; if(code<=57) return ['🌦️','霧雨']; if(code<=67) return ['🌧️','雨'];
+    if(code<=77) return ['❄️','雪']; if(code<=82) return ['🌧️','にわか雨']; if(code<=86) return ['🌨️','にわか雪']; return ['⛈️','雷雨'];
+  }
+  function wxRender(d){
+    var days=['日','月','火','水','木','金','土'];
+    var today=d.daily.time[0], ic=wxIcon(d.daily.weather_code[0]);
+    // 時間帯別降水確率（0-6 / 6-12 / 12-18 / 18-24）
+    var blocks=[[0,6,'0-6時'],[6,12,'6-12時'],[12,18,'12-18時'],[18,24,'18-24時']], pops='';
+    blocks.forEach(function(b){
+      var mx=null;
+      for(var h=b[0];h<b[1];h++){ var t=today+'T'+String(h).padStart(2,'0')+':00'; var i=d.hourly.time.indexOf(t); if(i>=0){ var v=d.hourly.precipitation_probability[i]; if(v!=null&&(mx==null||v>mx)) mx=v; } }
+      pops+='<div>'+b[2]+'<b>'+(mx==null?'-':mx+'%')+'</b></div>';
+    });
+    var nowIc=wxIcon(d.current.weather_code);
+    var html='<div class="wx-head"><span class="wx-title">'+CONFIG.homeName+'の天気</span><span class="wx-sub">現在 '+nowIc[0]+' '+Math.round(d.current.temperature_2m)+'℃ ／ 更新 '+new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})+'</span></div>';
+    function dayBlock(di,label,withNow){
+      var dd=d.daily.time[di], ic=wxIcon(d.daily.weather_code[di]), nowH=new Date().getHours();
+      var h2='<div class="wx-day'+(di===1?' tomorrow':'')+'"><div class="wx-today"><span class="ico">'+ic[0]+'</span><span class="txt"><b>'+label+' '+ic[1]+'</b><span><span class="hi">最高 '+Math.round(d.daily.temperature_2m_max[di])+'℃</span>　<span class="lo">最低 '+Math.round(d.daily.temperature_2m_min[di])+'℃</span>　降水 '+(d.daily.precipitation_probability_max[di]==null?'-':d.daily.precipitation_probability_max[di])+'%</span></span></div>';
+      h2+='<div class="wx-hourly">';
+      for(var h=0;h<24;h+=3){
+        var t=dd+'T'+String(h).padStart(2,'0')+':00', hi=d.hourly.time.indexOf(t);
+        if(hi<0) continue;
+        var hic=wxIcon(d.hourly.weather_code[hi]), hp=d.hourly.precipitation_probability[hi];
+        var cur=(withNow&&nowH>=h&&nowH<h+3)?' now':'';
+        h2+='<div class="hc'+cur+'"><span class="t">'+h+'時</span><span class="i">'+hic[0]+'</span><span class="w">'+hic[1]+'</span><b>'+Math.round(d.hourly.temperature_2m[hi])+'℃</b><span class="p">☔'+(hp==null?'-':hp)+'%</span></div>';
+      }
+      return h2+'</div></div>';
+    }
+    html+=dayBlock(0,'今日',true)+dayBlock(1,'明日',false);
+    html+='<div class="wx-week">';
+    for(var i=0;i<7;i++){
+      var dt=new Date(d.daily.time[i]+'T00:00:00'), w=dt.getDay(), wi=wxIcon(d.daily.weather_code[i]);
+      var lab=(i===0?'今日':(i===1?'明日':(dt.getMonth()+1)+'/'+dt.getDate()));
+      html+='<div><span class="d '+(w===0?'sun':(w===6?'sat':''))+'">'+lab+'<br>('+days[w]+')</span><span class="i">'+wi[0]+'</span><span class="hi">'+Math.round(d.daily.temperature_2m_max[i])+'</span>/<span class="lo">'+Math.round(d.daily.temperature_2m_min[i])+'</span><br>☔'+(d.daily.precipitation_probability_max[i]==null?'-':d.daily.precipitation_probability_max[i])+'%</div>';
+    }
+    html+='</div>';
+    wxMain.innerHTML=html; wxTv.innerHTML=html;
+  }
+  function loadWeather(){
+    var u='https://api.open-meteo.com/v1/forecast?latitude='+CONFIG.homeLat+'&longitude='+CONFIG.homeLng+'&current=temperature_2m,weather_code&hourly=weather_code,temperature_2m,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=7';
+    fetch(u).then(function(r){ return r.json(); }).then(wxRender)
+      .catch(function(){ wxMain.innerHTML='<span class="wx-sub">天気を取得できませんでした</span>'; wxTv.innerHTML=wxMain.innerHTML; });
+  }
+  loadWeather(); setInterval(loadWeather, 30*60*1000);
+  /* ---- テーマ（明るい／暗い） ---- */
+  var themeBtn=$('themeBtn');
+  function applyTheme(t){ document.documentElement.setAttribute('data-theme',t); themeBtn.textContent=(t==='light')?'🌙 ダーク':'☀️ ライト'; try{ localStorage.setItem('fctv_theme',t); }catch(e){} }
+  (function(){ var t='dark'; try{ t=localStorage.getItem('fctv_theme')||t; }catch(e){} if(qs.get('theme')) t=qs.get('theme'); applyTheme(t==='light'?'light':'dark'); })();
+  themeBtn.addEventListener('click',function(){ applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light'); });
+
+  /* ---- 時計・起動 ---- */
+  function tickClock(){ var d=new Date(),p=function(n){return String(n).padStart(2,'0');}; $('clock').textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()); }
+  tickClock(); setInterval(tickClock,1000);
+  modeBtn.addEventListener('click',function(){ stillMode=!stillMode; applyMode(); });
+  renderRack(); renderMute(); renderAuto();
+  setActive(CONFIG.startCamera||0,true);
+  if(CONFIG.autoSeconds>0){ var opt=Array.prototype.find.call(autoSec.options,function(o){return parseInt(o.value,10)===CONFIG.autoSeconds;}); if(!opt){ opt=document.createElement('option'); opt.value=CONFIG.autoSeconds; opt.textContent=CONFIG.autoSeconds+'秒'; autoSec.appendChild(opt);} autoSec.value=String(CONFIG.autoSeconds); autoOn=true; renderAuto(); restartAuto(); }
+  if(CONFIG.startInTv) enterTv();
+})();
+</script>
+</body>
+</html>
