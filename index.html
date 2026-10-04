@@ -236,21 +236,16 @@
   /* コンパクト表示（1366×768 など。高さ850px未満で自動） */
   #tv.compact{grid-template-columns:minmax(0,1fr) clamp(250px,29vw,420px);gap:8px;padding:8px 8px 50px;}
   #tv.compact .tv-left{gap:6px;}
-  #tv.compact .tv-map{height:clamp(90px,15vh,140px);}
+  #tv.compact .tv-map{display:none;}
   #tv.compact .tv-side{gap:6px;}
   #tv.compact .tv-station{font-size:10px;padding:2px 8px;}
   #tv.compact .tv-name{font-size:clamp(14px,1.4vw,18px);padding:4px 8px;}
-  #tv.compact .tv-area{font-size:11px;padding:3px 8px;}
-  #tv.compact .tv-wx{padding:4px 8px 6px;flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-between;}
-  #tv.compact .tv-wx .wx-title{font-size:12px;} #tv.compact .tv-wx .wx-sub{font-size:10px;}
-  #tv.compact .tv-wx .wx-today{padding:2px 0;gap:8px;} #tv.compact .tv-wx .wx-today .ico{font-size:26px;}
-  #tv.compact .tv-wx .wx-today .txt b{font-size:14px;} #tv.compact .tv-wx .wx-today .txt span{font-size:11px;}
-  #tv.compact .tv-wx .wx-hourly{padding:2px 0 4px;gap:2px;} #tv.compact .tv-wx .wx-hourly .hc{padding:2px 1px;}
-  #tv.compact .tv-wx .wx-hourly .t{font-size:10px;} #tv.compact .tv-wx .wx-hourly .i{font-size:17px;}
-  #tv.compact .tv-wx .wx-hourly b{font-size:12px;} #tv.compact .tv-wx .wx-hourly .p{font-size:9.5px;}
-  #tv.compact .tv-wx .wx-week{padding-top:4px;gap:1px;} #tv.compact .tv-wx .wx-week div{font-size:10px;line-height:1.25;}
-  #tv.compact .tv-wx .wx-week div .i{font-size:17px;margin:0;}
+  #tv.compact .tv-area{font-size:12px;padding:3px 8px;border-top:2px solid #dfe6f5;}
   #tv.compact .tv-pref{display:none;}
+  #tv.compact .tv-wx{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:space-evenly;padding:6px 10px 8px;}
+  #tv.compact .tv-wx .wx-today{padding:3px 0;}
+  #tv.compact .tv-wx .wx-hourly{padding:3px 0 6px;}
+  #tv.compact .tv-wx .wx-week{padding-top:4px;}
   #tv.compact .tv-strip{height:clamp(90px,14vh,130px);gap:6px;} #tv.compact .tv-thumb span{font-size:11px;padding:2px 3px;}
   #tv.compact .tv-bar{bottom:6px;gap:6px;} #tv.compact .tv-bar .pill{height:34px;font-size:13px;padding:6px 11px;}
   #tv.compact .tv-bar .pill select{font-size:13px;}
@@ -378,7 +373,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v4.6 · 15 CAMERAS</div>
+    <div class="footer-badge">v4.7 · 15 CAMERAS</div>
   </div>
 </div>
 
