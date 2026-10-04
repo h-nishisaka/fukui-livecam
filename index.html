@@ -188,9 +188,10 @@
   .bd-title{color:#dfe6f5;font-weight:700;font-size:13px;letter-spacing:.04em;font-family:var(--font-ui);}
   .bd-sub{color:#fff;font-size:17px;font-weight:900;font-family:var(--font-ui);letter-spacing:.04em;}
   .bd-grid{padding:0 10px 4px;}
-  .bd-grid{display:grid;grid-template-columns:auto auto auto auto 1fr;column-gap:10px;align-items:baseline;font-size:16px;line-height:1.2;}
+  .bd-grid{display:grid;grid-template-columns:auto auto auto auto 1fr;column-gap:10px;align-items:stretch;font-size:16px;line-height:1.2;}
   .bd-row{display:contents;}
-  .bd-row > span{padding:4px 0;white-space:nowrap;border-top:1px solid #1e2328;}
+  .bd-row > span{padding:4px 0;white-space:nowrap;border-top:1px solid #1e2328;display:flex;align-items:center;}
+  .bd-row > .bd-no,.bd-row > .bd-rem{justify-content:flex-end;}
   .bd-th > span{font-size:10px;color:#9aa3ad !important;padding:0 0 3px;font-family:var(--font-ui);font-weight:400;text-shadow:none;border-top:0;}
   .bd-row > .bd-name:first-child{}
   .bd-name{font-weight:700;font-family:var(--font-ui);text-shadow:0 0 6px currentColor;}
@@ -233,7 +234,7 @@
   #tv .tv-tabs + .tv-wx{border-top-left-radius:0;}
   /* TVモード：電車パネル */
   #tv .tv-tr .tr-sec{margin-bottom:6px;}
-  #tv .tv-tr{background:#0b0d10 !important;color:#fff;}
+  #tv .tv-tr{background:#0b0d10 !important;color:#fff;justify-content:flex-start !important;}
   #tv .tv-tr .tr-head{display:flex;justify-content:space-between;align-items:baseline;font-weight:900;font-size:clamp(13px,.65vw + .65vh,18px);border-bottom:2px solid #2a2f36;padding-bottom:2px;margin-bottom:6px;color:#fff;}
   #tv .tv-tr .tr-head small{font-weight:400;font-size:.75em;color:#9aa3ad;}
   #tv .tv-tr .tr-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -252,13 +253,19 @@
   #tv .tv-tr .bd-grid{padding:0 6px 3px;}
   #tv .tv-tr .bd-title{font-size:clamp(10px,.45vw + .45vh,13px);} #tv .tv-tr .bd-sub{font-size:clamp(12px,.6vw + .6vh,17px);}
   #tv .tv-tr .bd-th{font-size:clamp(9px,.38vw + .38vh,10px);}
-  #tv .tv-tr .bd-grid{font-size:clamp(11px,.52vw + .52vh,15px);column-gap:6px;}
+  #tv .tv-tr .bd-grid{font-size:clamp(11px,.5vw + .5vh,15px);column-gap:5px;}
   #tv .tv-tr .bd-row > span{padding:3px 0;}
   #tv.compact .tv-tr .bd{padding:0;}
   #tv.compact .tv-tr .bd-head{padding:2px 5px;margin-bottom:2px;}
   #tv.compact .tv-tr .bd-grid{padding:0 5px 2px;}
   #tv.compact .tv-tr .bd-title{font-size:10px;} #tv.compact .tv-tr .bd-sub{font-size:13px;}
-  #tv.compact .tv-tr .bd-grid{font-size:12.5px;column-gap:4px;}
+  /* コンパクト：表を縦1列にして幅を確保（備考まで切れずに表示） */
+  #tv.compact .tv-tr .tr-cols{grid-template-columns:1fr;}
+  #tv.compact .tv-tr .bd-grid{font-size:12.5px;column-gap:6px;}
+  #tv.compact .tv-tr .bd-th{display:none;}
+  #tv.compact .tv-tr .bd-row > span{padding:2px 0;}
+  #tv.compact .tv-tr .bd-head{padding:2px 6px;}
+  #tv.compact .tv-tr .bd-sub{font-size:13px;} #tv.compact .tv-tr .bd-title{font-size:10px;}
   #tv.compact .tv-tr .bd-row > span{padding:2px 0;}
   #tv.compact .tv-tr .tr-cols{gap:5px;margin-bottom:5px;} #tv.compact .tv-tr .bd.pass{margin-bottom:5px !important;} #tv.compact .tv-tr .tr-head{margin-bottom:5px;}
   #tv.compact .tv-tr .tr-head{font-size:13px;margin-bottom:2px;}
@@ -525,7 +532,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">V1.4 · 15 CAMERAS</div>
+    <div class="footer-badge">V1.7 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -1006,8 +1013,9 @@ var CONFIG = {
       return '<div class="bd-row'+(left<=3?' soon':'')+(x.sp==='◆'?' sp':'')+(x.sp==='(平)'?' wd':'')+'"><span class="bd-name k-'+x.k+'">'+nm+'</span><span class="bd-no k-'+x.k+'">'+(x.no?x.no:'')+'</span><span class="bd-time">'+fmtMin(x.m)+'</span><span class="bd-dest">'+x.d+'</span><span class="bd-rem">'+(left<0?'発車':(left<=0?'まもなく':'あと'+left+'分'))+'</span></div>'; }).join('')+html;
   }
   function board(title,sub,arr,now,kind,nrows){
+    var th=tvMode?['列車名','No.','発車','行先','備考']:['列車名 Train','No.','発車 Dep.','行先 For','備考 Remarks'];
     return '<div class="bd"><div class="bd-head"><span class="bd-title">'+title+'</span><span class="bd-sub">'+sub+'</span></div><div class="bd-grid">'
-      +'<div class="bd-row bd-th"><span class="bd-name">列車名 Train</span><span class="bd-no">No.</span><span class="bd-time">発車 Dep.</span><span class="bd-dest">行先 For</span><span class="bd-rem">備考 Remarks</span></div>'
+      +'<div class="bd-row bd-th"><span class="bd-name">'+th[0]+'</span><span class="bd-no">'+th[1]+'</span><span class="bd-time">'+th[2]+'</span><span class="bd-dest">'+th[3]+'</span><span class="bd-rem">'+th[4]+'</span></div>'
       +boardRows(arr,now,kind,nrows||3)+'</div></div>';
   }
   function hapiRows(arr,now,cls){ if(!arr.length) return '<div class="'+cls+'"><span class="k">本日の運転は終了</span></div>';
