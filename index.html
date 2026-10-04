@@ -173,8 +173,28 @@
   .sk-row .k{color:var(--text-2);} .sk-row .left{margin-left:auto;font-family:var(--font-mono);color:var(--accent);font-weight:700;}
   .sk-row.soon .left{color:#ff7a6b;}
   .sk-pass{margin-top:10px;padding:8px 10px;border-radius:8px;background:rgba(63,182,201,0.12);font-size:14px;line-height:1.6;}
-  .sk-pass b{color:var(--accent);}
+  .sk-pass b{color:var(--accent);} .sk-pass .soon{color:#ff7a6b;font-weight:700;} .sk-pass small{color:var(--text-3);}
+  .sk-pass .pass-head{font-weight:700;margin-bottom:4px;}
+  .sk-pass .pass-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;} .sk-pass .pass-row b{font-family:var(--font-mono);font-size:18px;min-width:70px;}
+  .sk-pass .pass-row .left{margin-left:auto;font-family:var(--font-mono);font-weight:700;color:var(--accent);}
+  .sk-pass .pass-row.past{opacity:.75;}
   .sk-sec{margin-top:14px;padding-top:10px;border-top:1px dashed var(--border-soft);}
+  /* 発車標 */
+  .bd{background:#050607;border:2px solid #2a2f36;border-radius:6px;padding:6px 8px 8px;color:#fff;font-family:var(--font-mono);box-shadow:inset 0 0 0 1px #000;}
+  .bd-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3a4048;padding-bottom:4px;margin-bottom:4px;}
+  .bd-title{color:#fff;font-weight:700;font-size:15px;letter-spacing:.06em;font-family:var(--font-ui);}
+  .bd-sub{color:#9aa3ad;font-size:11px;font-family:var(--font-ui);}
+  .bd-row{display:grid;grid-template-columns:5.2em 3.4em 4.2em 5.4em 1fr;gap:6px;align-items:baseline;padding:4px 0;font-size:16px;line-height:1.2;}
+  .bd-th{font-size:10px;color:#8a929b;padding:0 0 2px;font-family:var(--font-ui);}
+  .bd-name{font-weight:700;font-family:var(--font-ui);text-shadow:0 0 6px currentColor;}
+  .k-か{color:#ff9d2e;} .k-は{color:#58d3ff;} .k-つ{color:#8cf26b;} .k-普{color:#f3f6fa;} .k-快{color:#ff9d2e;} .k-区{color:#ffd54a;}
+  .bd-no{color:#f3f6fa;text-align:right;}
+  .bd-time{color:#fff;font-weight:700;text-shadow:0 0 6px rgba(255,255,255,.6);letter-spacing:.04em;}
+  .bd-dest{color:#8cf26b;font-family:var(--font-ui);font-weight:700;text-shadow:0 0 6px rgba(140,242,107,.5);}
+  .bd-rem{color:#ff9d2e;font-size:12px;font-family:var(--font-ui);text-align:right;white-space:nowrap;}
+  .bd-row.soon .bd-rem{color:#ff5a4a;font-weight:700;animation:pulse 1.2s ease-in-out infinite;}
+  .bd-row.sp .bd-dest::after{content:' ◆';color:#ffd54a;}
+  @media (max-width:600px){.bd-row{font-size:14px;grid-template-columns:4.6em 3em 3.8em 4.6em 1fr;}}
   .ttupd{margin-top:8px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:8px 14px;font-size:13px;}
   .ttupd summary{cursor:pointer;color:var(--text-2);font-weight:700;}
   .ttupd-note{color:var(--text-3);font-size:12px;line-height:1.7;}
@@ -211,7 +231,25 @@
   #tv .tv-tr .row .left{margin-left:auto;font-family:var(--font-mono);font-weight:700;color:#1d5fdc;white-space:nowrap;}
   #tv .tv-tr .row.soon .left{color:#e8302a;}
   #tv .tv-tr .pass{background:#eef4ff;border-radius:6px;padding:5px 8px;margin:2px 0 8px;font-size:clamp(11px,.6vw + .6vh,15px);line-height:1.5;}
-  #tv .tv-tr .pass b{color:#1d5fdc;}
+  #tv .tv-tr .pass b{color:#1d5fdc;} #tv .tv-tr .pass .soon{color:#e8302a;font-weight:900;} #tv .tv-tr .pass small{color:#52659b;}
+  #tv .tv-tr .bd{margin-bottom:6px;padding:4px 8px 6px;}
+  #tv .tv-tr .bd-title{font-size:clamp(12px,.6vw + .6vh,16px);} #tv .tv-tr .bd-sub{font-size:clamp(9px,.45vw + .45vh,12px);}
+  #tv .tv-tr .bd-row{font-size:clamp(12px,.65vw + .65vh,18px);padding:3px 0;gap:5px;grid-template-columns:5em 3.2em 4em 5em 1fr;}
+  #tv .tv-tr .bd-th{font-size:clamp(9px,.4vw + .4vh,11px);}
+  #tv .tv-tr .bd-rem{font-size:clamp(10px,.5vw + .5vh,13px);}
+  #tv.compact .tv-tr .bd{padding:3px 6px 4px;margin-bottom:4px;}
+  #tv.compact .tv-tr .bd-th{display:none;}
+  #tv.compact .tv-tr .bd-head{padding-bottom:2px;margin-bottom:2px;}
+  #tv.compact .tv-tr .bd-title{font-size:12px;} #tv.compact .tv-tr .bd-sub{font-size:9px;}
+  #tv.compact .tv-tr .bd-row{padding:2px 0;font-size:13px;gap:4px;grid-template-columns:4.6em 2.8em 3.6em 4.6em 1fr;}
+  #tv.compact .tv-tr .bd-rem{font-size:10px;}
+  #tv.compact .tv-tr .pass{padding:3px 6px;margin:0 0 4px;font-size:12px;}
+  #tv.compact .tv-tr .pass .pass-row b{font-size:1.1em;}
+  #tv.compact .tv-tr .tr-head{font-size:13px;margin-bottom:2px;}
+  #tv .tv-tr .pass .pass-head{font-weight:900;margin-bottom:2px;}
+  #tv .tv-tr .pass .pass-row{display:flex;gap:8px;align-items:baseline;padding:2px 0;} #tv .tv-tr .pass .pass-row b{font-family:var(--font-mono);font-size:1.2em;}
+  #tv .tv-tr .pass .pass-row .left{margin-left:auto;font-family:var(--font-mono);font-weight:700;color:#1d5fdc;}
+  #tv .tv-tr .pass .pass-row.past{opacity:.75;}
   /* 天気カード（TVモード） */
   #tv .tv-wx{flex:0 1 auto;min-height:0;overflow:hidden;background:#fff;border-radius:4px;padding:6px 10px 8px;color:#0d2c73;font-family:var(--font-ui);}
   #tv .tv-wx .wx-head{display:flex;justify-content:space-between;align-items:baseline;}
@@ -470,7 +508,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v5.6 · 15 CAMERAS</div>
+    <div class="footer-badge">v6.2 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -492,7 +530,6 @@
   <div class="tv-side">
     <div class="tv-info">
       <div class="tv-namerow"><div class="tv-name" id="tvName">--</div><div class="tv-area" id="tvArea">--</div></div>
-      <div class="tv-sk" id="skTv"></div>
       <div class="tv-map"><iframe id="tvMap" src="" title="現地地図"></iframe></div>
     </div>
     <div class="tv-tabs"><button class="tv-tab active" data-p="wx">🌤 天気</button><button class="tv-tab" data-p="tr">🚄 電車</button></div>
@@ -537,9 +574,9 @@ var CONFIG = {
   if (qs.has('cam'))  CONFIG.startCamera = parseInt(qs.get('cam'),10)||0;
   var GROUPS = [
     { key:'fctv', label:'FCTV', full:'福井ケーブルテレビ', site:'https://www.youtube.com/@fctv_091/streams', cams:[
-      { id:'IrXQ8JID0Gs', shot:'fukuistation',     name:'福井駅西口',             area:'福井市',        lat:36.0619, lng:136.2231, q:'福井駅 西口' },
-      { id:'k3lKNrqtSyE', shot:'kidabashi',        name:'足羽川・木田橋',         area:'福井市',        lat:36.0585, lng:136.2150, q:'木田橋 福井市' },
-      { id:'yNgpcqA9X64', shot:'shinkansenbridge', name:'新九頭竜橋',             area:'福井市/坂井市', lat:36.1230, lng:136.2075, q:'新九頭竜橋', sk:{up:4,down:-5,label:'九頭竜川橋りょう'} },
+      { id:'IrXQ8JID0Gs', shot:'fukuistation',     name:'福井駅西口',             area:'福井市',        lat:36.0619, lng:136.2231, q:'福井駅 西口', sk:{label:'福井駅',side:'STA'} },
+      { id:'k3lKNrqtSyE', shot:'kidabashi',        name:'足羽川・木田橋',         area:'福井市',        lat:36.0585, lng:136.2150, q:'木田橋 福井市', sk:{label:'足羽川橋りょう',side:'S',out:2,inn:3} },
+      { id:'yNgpcqA9X64', shot:'shinkansenbridge', name:'新九頭竜橋',             area:'福井市/坂井市', lat:36.1230, lng:136.2075, q:'新九頭竜橋', sk:{label:'九頭竜川橋りょう',side:'N',out:3,inn:4} },
       { id:'CIjhFpsN-3k', shot:'sunsetbeach',      name:'三国・サンセットビーチ', area:'坂井市三国町',  lat:36.2335, lng:136.1365, q:'三国サンセットビーチ' },
       { id:'jLZ_T91paAU', shot:'r8ohwada',         name:'国道8号線 大和田方面',   area:'福井市',        lat:36.0870, lng:136.2440, q:'福井市大和田 国道8号' },
       { id:'U1fhYEreP4Q', shot:'nanjousa',         name:'北陸自動車道南条SA付近', area:'南越前町',      lat:35.8395, lng:136.1875, q:'南条サービスエリア' },
@@ -547,37 +584,37 @@ var CONFIG = {
       { id:'jfiV5lcfBL0', shot:'hirosebashi',      name:'足羽川・池田町 広瀬橋',  area:'池田町',        lat:35.8880, lng:136.3330, q:'広瀬橋 池田町 福井県' }
     ]},
     { key:'fbc', label:'FBC・福井テレビ', full:'FBC 福井放送 ／ 福井テレビ', site:'https://www.youtube.com/@FBC/streams', ads:true, cams:[
-      { id:'tHMEnSTnFd4', name:'福井駅付近',           area:'福井市',       lat:36.0625, lng:136.2235, q:'福井駅', sk:{up:0,down:-1,label:'福井駅'} },
+      { id:'tHMEnSTnFd4', name:'福井駅付近',           area:'福井市',       lat:36.0625, lng:136.2235, q:'福井駅', sk:{label:'福井駅',side:'STA'} },
       { id:'kdTzzqRh4LQ', name:'大名町交差点（福井駅西口周辺）', area:'福井市', lat:36.0625, lng:136.2174, q:'大名町交差点 福井市' },
-      { id:'kOKevC8ajFg', name:'福井市大和田（北陸新幹線・トレタス）', area:'福井市', lat:36.0975, lng:136.2480, q:'福井放送 本社', sk:{up:2,down:-3,label:'大和田の高架'} },
+      { id:'kOKevC8ajFg', name:'福井市大和田（北陸新幹線・トレタス）', area:'福井市', lat:36.0975, lng:136.2480, q:'福井放送 本社' },
       { id:'vTtMdsgn49w', name:'大野市',               area:'大野市',       lat:35.9800, lng:136.4870, q:'大野市役所' },
       { id:'ejnUvdMmcbk', name:'越前町（越前漁港）',    area:'越前町',       lat:35.9475, lng:135.9912, q:'越前漁港' },
       { id:'acLJEotPVJc', name:'小浜市',               area:'小浜市',       lat:35.4955, lng:135.7465, q:'小浜港' },
-      { id:'hx_NMdEP9qk', name:'福井テレビ 県内4ヵ所巡回', area:'福井市ほか（福井駅・敦賀駅）', lat:36.0620, lng:136.2225, q:'福井駅', station:'福井テレビ', sk:{up:-1,down:1,label:'福井駅周辺'} }
+      { id:'hx_NMdEP9qk', name:'福井テレビ 県内4ヵ所巡回', area:'福井市ほか（福井駅・敦賀駅）', lat:36.0620, lng:136.2225, q:'福井駅', station:'福井テレビ' }
     ]}
   ];
   /* 北陸新幹線 福井駅 発車時刻（2026年3月14日改正）。◆=特定日・特定曜日のみ運転。
      k: か=かがやき は=はくたか つ=つるぎ ／ d: 行先 */
   var SHINKANSEN = {
-    note:'2026/3/14改正・福井駅発（Yahoo!路線情報・駅探より）',
+    note:'2026/3/14改正・福井駅発',
     up:[ /* 金沢・富山・東京方面 */
-      ['06:33','か','東京'],['07:08','つ','富山'],['07:45','か','東京'],['07:57','つ','金沢','◆'],
-      ['08:24','つ','富山'],['08:32','か','東京','◆'],['08:52','つ','富山'],['09:28','つ','富山','◆'],['09:39','か','東京','◆'],
-      ['10:07','つ','富山'],['10:20','は','東京'],['10:35','つ','富山'],['11:05','つ','金沢','◆'],['11:20','は','東京','◆'],['11:35','つ','金沢','◆'],
-      ['12:00','つ','富山'],['12:20','は','東京','◆'],['12:35','つ','金沢'],['13:03','つ','富山'],['13:20','は','東京','◆'],
-      ['14:02','つ','富山','◆'],['14:09','は','東京','◆'],['14:32','つ','金沢'],['15:03','つ','富山'],['15:23','か','東京'],
-      ['16:02','つ','富山'],['16:23','か','東京'],['17:01','つ','富山'],['17:25','つ','金沢'],['17:31','か','東京'],['17:59','つ','富山'],
-      ['18:26','つ','富山'],['18:54','か','東京'],['19:00','つ','金沢'],['19:27','つ','富山'],['20:00','つ','富山'],['20:33','か','東京'],['20:40','つ','金沢','◆'],
-      ['21:04','つ','富山'],['22:03','つ','富山'],['22:49','つ','富山']
+      ['06:33','か','東京','','502'],['07:08','つ','富山','','62'],['07:45','か','東京','','504'],['07:57','つ','金沢','◆','64'],
+      ['08:24','つ','富山','','2'],['08:32','か','東京','◆','506'],['08:52','つ','富山','','4'],['09:28','つ','富山','◆','6'],['09:39','か','東京','◆','508'],
+      ['10:07','つ','富山','','8'],['10:20','は','東京','','560'],['10:35','つ','富山','','10'],['11:05','つ','金沢','◆','12'],['11:20','は','東京','◆','562'],['11:35','つ','金沢','◆','14'],
+      ['12:00','つ','富山','','16'],['12:20','は','東京','◆','564'],['12:35','つ','金沢','','18'],['13:03','つ','富山','','20'],['13:20','は','東京','◆','566'],
+      ['14:02','つ','富山','◆','22'],['14:09','は','東京','◆','568'],['14:32','つ','金沢','','24'],['15:03','つ','富山','','26'],['15:23','か','東京','','510'],
+      ['16:02','つ','富山','','28'],['16:23','か','東京','','512'],['17:01','つ','富山','','30'],['17:25','つ','金沢','','32'],['17:31','か','東京','','514'],['17:59','つ','富山','','34'],
+      ['18:26','つ','富山','','36'],['18:54','か','東京','','516'],['19:00','つ','金沢','','38'],['19:27','つ','富山','','40'],['20:00','つ','富山','','42'],['20:33','か','東京','','518'],['20:40','つ','金沢','◆','44'],
+      ['21:04','つ','富山','','46'],['22:03','つ','富山','','48'],['22:49','つ','富山','','50']
     ],
     down:[ /* 敦賀方面 */
-      ['06:36','つ','敦賀'],['07:10','つ','敦賀'],['07:38','つ','敦賀'],['08:12','つ','敦賀','◆'],['08:38','つ','敦賀'],
-      ['09:08','つ','敦賀'],['09:13','か','敦賀'],['09:41','つ','敦賀'],['10:10','か','敦賀'],['10:19','つ','敦賀'],['10:41','つ','敦賀'],
-      ['11:10','か','敦賀'],['11:41','つ','敦賀','◆'],['12:26','か','敦賀'],['12:41','つ','敦賀'],['13:23','か','敦賀'],['13:41','つ','敦賀'],
-      ['14:41','つ','敦賀'],['14:55','は','敦賀'],['15:19','つ','敦賀','◆'],['15:40','つ','敦賀','◆'],['15:55','は','敦賀'],
-      ['16:18','つ','敦賀'],['16:41','つ','敦賀'],['16:56','は','敦賀'],['17:19','つ','敦賀'],['17:38','つ','敦賀'],['17:56','は','敦賀'],
-      ['18:19','つ','敦賀'],['18:41','つ','敦賀'],['18:57','は','敦賀'],['19:15','つ','敦賀'],['19:20','か','敦賀'],['19:42','つ','敦賀'],
-      ['20:21','か','敦賀'],['20:39','つ','敦賀','◆'],['21:17','か','敦賀'],['21:32','つ','敦賀'],['22:08','つ','敦賀','◆'],['22:56','か','敦賀'],['23:10','つ','敦賀']
+      ['06:36','つ','敦賀','','1'],['07:10','つ','敦賀','','3'],['07:38','つ','敦賀','','5'],['08:12','つ','敦賀','◆','7'],['08:38','つ','敦賀','','9'],
+      ['09:08','つ','敦賀','','11'],['09:13','か','敦賀','','501'],['09:41','つ','敦賀','','13'],['10:10','か','敦賀','','503'],['10:19','つ','敦賀','','15'],['10:41','つ','敦賀','','17'],
+      ['11:10','か','敦賀','','505'],['11:41','つ','敦賀','◆','19'],['12:26','か','敦賀','','507'],['12:41','つ','敦賀','','21'],['13:23','か','敦賀','','509'],['13:41','つ','敦賀','','23'],
+      ['14:41','つ','敦賀','','25'],['14:55','は','敦賀','','561'],['15:19','つ','敦賀','◆','27'],['15:40','つ','敦賀','◆','29'],['15:55','は','敦賀','','563'],
+      ['16:18','つ','敦賀','','31'],['16:41','つ','敦賀','','33'],['16:56','は','敦賀','','565'],['17:19','つ','敦賀','','35'],['17:38','つ','敦賀','','37'],['17:56','は','敦賀','','567'],
+      ['18:19','つ','敦賀','','39'],['18:41','つ','敦賀','','41'],['18:57','は','敦賀','','569'],['19:15','つ','敦賀','','43'],['19:20','か','敦賀','','511'],['19:42','つ','敦賀','','45'],
+      ['20:21','か','敦賀','','513'],['20:39','つ','敦賀','◆','47'],['21:17','か','敦賀','','515'],['21:32','つ','敦賀','','49'],['22:08','つ','敦賀','◆',''],['22:56','か','敦賀','','517'],['23:10','つ','敦賀','','61']
     ]
   };
   var KIND={'か':'かがやき','は':'はくたか','つ':'つるぎ'};
@@ -630,7 +667,8 @@ var CONFIG = {
   function ttInit(){
     var msg=$('ttMsg'); if(!$('ttParse')) return;
     $('ttParse').addEventListener('click',function(){
-      var su=parseYahoo($('tt_sk_up').value,'sk','富山'), sd=parseYahoo($('tt_sk_dn').value,'sk','敦賀'), hd=parseYahoo($('tt_hp_dn').value,'hp','敦賀'), hu=parseYahoo($('tt_hp_up').value,'hp','金沢');
+      function keepNo(newArr,oldArr){ newArr.forEach(function(e){ var m=oldArr.filter(function(o){ return o[0]===e[0]&&o[1]===e[1]; })[0]; if(m&&m[4]){ while(e.length<4) e.push(''); e[4]=m[4]; } }); return newArr; }
+      var su=keepNo(parseYahoo($('tt_sk_up').value,'sk','富山'),SHINKANSEN.up), sd=keepNo(parseYahoo($('tt_sk_dn').value,'sk','敦賀'),SHINKANSEN.down), hd=parseYahoo($('tt_hp_dn').value,'hp','敦賀'), hu=parseYahoo($('tt_hp_up').value,'hp','金沢');
       if(su.length<5||sd.length<5||hd.length<5||hu.length<5){ msg.textContent='解析できた本数が少なすぎます（新幹線上り'+su.length+'/下り'+sd.length+'、ハピ下り'+hd.length+'/上り'+hu.length+'）。貼り付け内容を確認してください'; return; }
       var note=($('tt_note').value||new Date().toLocaleDateString('ja-JP')+'更新');
       try{ localStorage.setItem(TT_KEY,JSON.stringify({sk:{up:su,down:sd},hp:{down:hd,up:hu},note:note})); }catch(e){}
@@ -638,7 +676,7 @@ var CONFIG = {
       renderShinkansen(); msg.textContent='保存しました：新幹線 上り'+su.length+'本／下り'+sd.length+'本、ハピライン 下り'+hd.length+'本／上り'+hu.length+'本';
     });
     $('ttExport').addEventListener('click',function(){
-      function js(arr){ return arr.map(function(e){ return "      ['"+e[0]+"','"+e[1]+"','"+e[2]+"'"+(e[3]?",'"+e[3]+"'":"")+"]"; }).join(',\n'); }
+      function js(arr){ return arr.map(function(e){ return "      ['"+e[0]+"','"+e[1]+"','"+e[2]+"','"+(e[3]||'')+"','"+(e[4]||'')+"']"; }).join(',\n'); }
       var t="  // ↓ index.html の SHINKANSEN / HAPI の各配列をこの内容で置き換えてください\n"
         +"  SHINKANSEN.note = '"+SHINKANSEN.note.replace('（このブラウザで更新）','')+"';\n  SHINKANSEN.up = [\n"+js(SHINKANSEN.up)+"\n  ];\n  SHINKANSEN.down = [\n"+js(SHINKANSEN.down)+"\n  ];\n"
         +"  HAPI.note = '"+HAPI.note.replace('（このブラウザで更新）','')+"';\n  HAPI.down = [\n"+js(HAPI.down)+"\n  ];\n  HAPI.up = [\n"+js(HAPI.up)+"\n  ];\n";
@@ -771,7 +809,7 @@ var CONFIG = {
   function isPortrait(){ return window.innerHeight>window.innerWidth; }
   function updateCompact(){
     var f=qs.get('compact'); var on = (f!==null) ? (f!=='0') : (window.innerHeight<850);
-    tv.classList.toggle('compact',on);
+    var was=tv.classList.contains('compact'); tv.classList.toggle('compact',on); if(was!==on){ try{ renderShinkansen(); }catch(e){} }
   }
   window.addEventListener('resize',function(){ updateCompact(); fitTv(); });
   function enterTv(withFs){ tvMode=true; tv.hidden=false; updateCompact(); document.body.style.overflow='hidden'; setActive(activeIndex,true); requestAnimationFrame(fitTv); setTimeout(fitTv,300); if(withFs&&!isFs()) enterFs($('tvMain')); }
@@ -935,56 +973,67 @@ var CONFIG = {
   themeBtn.addEventListener('click',function(){ applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light'); });
 
   /* ---- 北陸新幹線（福井駅 次の発車・カメラ通過予想） ---- */
-  var skMain=$('skMain'), skTv=$('skTv');
+  var skMain=$('skMain');
   function toMin(t){ var a=t.split(':'); return parseInt(a[0],10)*60+parseInt(a[1],10); }
   function fmtMin(m){ m=((m%1440)+1440)%1440; return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'); }
-  function upcoming(list,now,n){ var out=[]; for(var i=0;i<list.length&&out.length<n;i++){ var m=toMin(list[i][0]); if(m>=now-1) out.push({m:m,k:list[i][1],d:list[i][2],sp:list[i][3]||''}); } return out; }
+  function upcoming(list,now,n){ var out=[]; for(var i=0;i<list.length&&out.length<n;i++){ var m=toMin(list[i][0]); if(m>=now-1) out.push({m:m,k:list[i][1],d:list[i][2],sp:list[i][3]||'',no:list[i][4]||''}); } return out; }
+  function trainName(x){ return (KIND[x.k]||'')+(x.no?x.no+'号':''); }
   var trainTv=$('trainTv');
+  /* 発車標風の表示 */
+  function boardRows(arr,now,kind){
+    if(!arr.length) return '<div class="bd-row"><span class="bd-name">本日の運転は終了しました</span></div>';
+    return arr.map(function(x){ var left=x.m-now, nm=(kind==='sk'?KIND[x.k]:HKIND[x.k]);
+      return '<div class="bd-row'+(left<=3?' soon':'')+(x.sp==='◆'?' sp':'')+'"><span class="bd-name k-'+x.k+'">'+nm+'</span><span class="bd-no">'+(x.no?x.no+'号':'')+'</span><span class="bd-time">'+fmtMin(x.m)+'</span><span class="bd-dest">'+x.d+'</span><span class="bd-rem">'+(x.sp==='◆'?'特定日運転 ':'')+(x.sp==='(平)'?'平日のみ ':'')+(left<0?'発車':(left<=0?'まもなく発車':'あと'+left+'分'))+'</span></div>'; }).join('');
+  }
+  function board(title,sub,arr,now,kind){
+    return '<div class="bd"><div class="bd-head"><span class="bd-title">'+title+'</span><span class="bd-sub">'+sub+'</span></div>'
+      +'<div class="bd-row bd-th"><span class="bd-name">列車名</span><span class="bd-no">号</span><span class="bd-time">発車</span><span class="bd-dest">行先</span><span class="bd-rem">備考</span></div>'
+      +boardRows(arr,now,kind)+'</div>';
+  }
   function hapiRows(arr,now,cls){ if(!arr.length) return '<div class="'+cls+'"><span class="k">本日の運転は終了</span></div>';
     return arr.map(function(x){ var left=x.m-now; return '<div class="'+cls+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+HKIND[x.k]+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
   function renderShinkansen(){
     var d=new Date(), now=d.getHours()*60+d.getMinutes();
     var cam=cameras[activeIndex];
+    var nTv=(tvMode&&tv.classList.contains('compact'))?2:3;
     var up=upcoming(SHINKANSEN.up,now,3), dn=upcoming(SHINKANSEN.down,now,3);
     var hdn=upcoming(HAPI.down,now,3), hup=upcoming(HAPI.up,now,3);
     function rows(arr){ if(!arr.length) return '<div class="sk-row"><span class="k">本日の運転は終了</span></div>';
       return arr.map(function(x){ var left=x.m-now; return '<div class="sk-row'+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+KIND[x.k]+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
-    var html='<div class="sk-head"><span class="sk-title">🚄 北陸新幹線 福井駅</span><span class="sk-note">'+SHINKANSEN.note+'　◆=特定日のみ</span></div>'
-      +'<div class="sk-cols"><div class="sk-col"><h4>上り（金沢・富山・東京方面）</h4>'+rows(up)+'</div><div class="sk-col"><h4>下り（敦賀方面）</h4>'+rows(dn)+'</div></div>';
-    var passHtml='', tvHtml='';
+    var html='<div class="sk-head"><span class="sk-title">🚉 福井駅 発車標</span><span class="sk-note">現在 '+fmtMin(now)+'　'+SHINKANSEN.note+'　◆=特定日・特定曜日のみ運転</span></div>'
+      +'<div class="sk-cols">'+board('北陸新幹線 上り','金沢・富山・東京方面',up,now,'sk')+board('北陸新幹線 下り','敦賀方面',dn,now,'sk')+'</div>';
+    /* 通過予想：福井駅到着＝発車の1分前。駅の北側(N)は上りが出発側、南側(S)は下りが出発側。 */
+    var passHtml='';
     if(cam.sk){
-      var cands=[];
-      up.forEach(function(x){ cands.push({m:x.m,dir:'上り '+x.d+'行',k:KIND[x.k],sp:x.sp}); });
-      dn.forEach(function(x){ cands.push({m:x.m,dir:'下り 敦賀行',k:KIND[x.k],sp:x.sp}); });
-      cands=cands.filter(function(c){ return c.m>=now; }).sort(function(a,b){ return a.m-b.m; }).slice(0,2);
+      var sk=cam.sk, cands=[];
+      function add(x,dir,isOut){
+        var dep=x.m, t;
+        if(sk.side==='STA') t=dep; else if(isOut) t=dep+sk.out; else t=dep-sk.inn;
+        cands.push({t:t,dir:dir,k:trainName(x)+x.sp,how:(sk.side==='STA'?'':'福井'+fmtMin(dep)+'発')});
+      }
+      upcoming(SHINKANSEN.up,now-10,6).forEach(function(x){ add(x,'上り '+x.d+'行', sk.side==='N'); });
+      upcoming(SHINKANSEN.down,now-10,6).forEach(function(x){ add(x,'下り 敦賀行', sk.side==='S'); });
+      cands=cands.filter(function(c){ return c.t>=now-2; }).sort(function(a,b){ return a.t-b.t; }).slice(0,2);  // 予想時刻を2分過ぎるまでは表示を残す
       if(cands.length){
-        passHtml='<div class="sk-pass">📷 この画面（'+cam.sk.label+'）に次に映る新幹線：'+cands.map(function(c){ var l=c.m-now; return '<b>福井 '+fmtMin(c.m)+'発</b>（'+c.dir+' '+c.k+c.sp+'／'+(l<=0?'まもなく':'あと'+l+'分')+'）'; }).join('　')+'<br><span style="color:var(--text-3);font-size:12px">※福井駅の発車時刻基準。駅から離れた地点では数分前後します</span></div>';
-        var c0=cands[0], l0=c0.m-now;
-        tvHtml='<span class="pass">🚄 次の新幹線 福井 <b>'+fmtMin(c0.m)+'発</b> '+c0.dir+'（'+c0.k+'）<span class="'+(l0<=3?'soon':'')+'">'+(l0<=0?' まもなく':' あと'+l0+'分')+'</span></span>';
+        passHtml='<div class="pass-head">📷 '+cam.name+' に次に映る新幹線</div>'+cands.map(function(c){ var l=c.t-now; return '<div class="pass-row'+(l<0?' past':'')+'"><b>'+fmtMin(c.t)+(sk.side==='STA'?'発':'頃')+'</b><span>'+c.dir+' '+c.k+'</span>'+(c.how?'<small>（'+c.how+'）</small>':'')+'<span class="left'+(l<=3?' soon':'')+'">'+(l<0?'通過中':(l<=0?'まもなく':'あと'+l+'分'))+'</span></div>'; }).join('');
       }
     }
-    if(!tvHtml){
-      var nu=up[0], nd=dn[0];
-      tvHtml='🚄 福井駅 次発：上り '+(nu?'<b>'+fmtMin(nu.m)+'</b> '+nu.d+'行':'終了')+'　下り '+(nd?'<b>'+fmtMin(nd.m)+'</b>':'終了');
-    }
-    html+=passHtml;
-    html+='<div class="sk-sec"><div class="sk-head"><span class="sk-title">🚃 ハピラインふくい 福井駅</span><span class="sk-note">'+HAPI.note+'　(平)=平日のみ　九頭竜湖・越前大野行はJR九頭竜線直通</span></div>'
-      +'<div class="sk-cols"><div class="sk-col"><h4>下り（越前花堂・鯖江・武生・敦賀方面）</h4>'+hapiRows(hdn,now,'sk-row')+'</div><div class="sk-col"><h4>上り（森田・春江・芦原温泉・金沢方面）</h4>'+hapiRows(hup,now,'sk-row')+'</div></div></div>';
-    skMain.innerHTML=html; skTv.innerHTML=tvHtml;
+    if(passHtml) html+='<div class="sk-pass">'+passHtml+'</div>';
+    html+='<div class="sk-sec"><div class="sk-cols">'+board('ハピラインふくい 下り','鯖江・武生・敦賀方面',hdn,now,'hp')+board('ハピラインふくい 上り','芦原温泉・金沢方面',hup,now,'hp')+'</div><div class="sk-note" style="margin-top:6px">(平)=平日のみ　九頭竜湖・越前大野行はJR九頭竜線直通　'+HAPI.note+'</div></div>';
+    skMain.innerHTML=html;
     // TVモード用（コンパクトな2段）
     function rowsTv(arr){ if(!arr.length) return '<div class="row"><span class="k">本日終了</span></div>';
       return arr.map(function(x){ var left=x.m-now; return '<div class="row'+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+(KIND[x.k]||'')+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
-    var tv='<div class="tr-sec"><div class="tr-head">🚄 北陸新幹線 福井駅 <small>'+SHINKANSEN.note.split('・')[0]+'</small></div>'
-      +(passHtml?'<div class="pass">'+passHtml.replace(/<div class="sk-pass">/,'').replace(/<br><span[^>]*>.*?<\/span><\/div>$/,'').replace(/<\/div>$/,'')+'</div>':'')
-      +'<div class="tr-cols"><div><h4>上り 金沢・東京方面</h4>'+rowsTv(up)+'</div><div><h4>下り 敦賀方面</h4>'+rowsTv(dn)+'</div></div></div>'
-      +'<div class="tr-sec"><div class="tr-head">🚃 ハピラインふくい 福井駅 <small>(平)=平日のみ</small></div>'
-      +'<div class="tr-cols"><div><h4>下り 鯖江・武生・敦賀方面</h4>'+hapiRows(hdn,now,'row')+'</div><div><h4>上り 芦原温泉・金沢方面</h4>'+hapiRows(hup,now,'row')+'</div></div></div>';
+    var tv='<div class="tr-sec"><div class="tr-head">🚉 福井駅 発車標 <small>現在 '+fmtMin(now)+'</small></div>'
+      +(passHtml?'<div class="pass">'+passHtml+'</div>':'')
+      +board('北陸新幹線 上り','金沢・東京方面',up.slice(0,nTv),now,'sk')+board('北陸新幹線 下り','敦賀方面',dn.slice(0,nTv),now,'sk')
+      +board('ハピライン 下り','鯖江・武生・敦賀方面',hdn.slice(0,nTv),now,'hp')+board('ハピライン 上り','芦原温泉・金沢方面',hup.slice(0,nTv),now,'hp')+'</div>';
     trainTv.innerHTML=tv;
   }
   /* パネル切替（天気／電車） */
-  function setTvPanel(pn){ var wx=pn!=='tr'; $('wxTv').hidden=!wx; trainTv.hidden=wx; Array.prototype.forEach.call(document.querySelectorAll('.tv-tab'),function(b){ b.classList.toggle('active',b.dataset.p===pn); }); try{ localStorage.setItem('fctv_tvpanel',pn); }catch(e){} }
+  function setTvPanel(pn){ var wx=pn!=='tr'; $('wxTv').hidden=!wx; trainTv.hidden=wx; Array.prototype.forEach.call(document.querySelectorAll('.tv-tab'),function(b){ b.classList.toggle('active',b.dataset.p===pn); }); try{ localStorage.setItem('fctv_tvpanel2',pn); }catch(e){} }
   Array.prototype.forEach.call(document.querySelectorAll('.tv-tab'),function(b){ b.addEventListener('click',function(){ setTvPanel(b.dataset.p); }); });
-  (function(){ var pn='wx'; try{ pn=localStorage.getItem('fctv_tvpanel')||pn; }catch(e){} if(qs.get('panel')) pn=qs.get('panel'); setTvPanel(pn==='tr'?'tr':'wx'); })();
+  (function(){ var pn='tr'; try{ pn=localStorage.getItem('fctv_tvpanel2')||pn; }catch(e){} if(qs.get('panel')) pn=qs.get('panel'); setTvPanel(pn==='wx'?'wx':'tr'); })();
   setInterval(renderShinkansen,15000);
 
   /* ---- 時計・起動 ---- */
