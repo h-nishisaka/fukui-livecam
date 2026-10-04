@@ -231,7 +231,28 @@
   #tv .tv-bar .pill{height:42px;font-size:clamp(14px,.7vw + .7vh,18px);padding:8px 16px;font-family:var(--font-ui);font-weight:700;background:rgba(13,44,115,0.85);border-color:rgba(255,255,255,0.35);}
   #tv .tv-bar .pill.active{background:#ffd54a;color:#0d2c73;border-color:#ffd54a;}
   #tv .tv-bar .pill select{color:#fff;font-weight:700;} #tv .tv-bar .pill.active select{color:#0d2c73;}
-  @media (max-height:820px){ #tv .tv-wx .tomorrow .wx-hourly{display:none;} #tv .tv-map{height:clamp(70px,12vh,120px);} }
+  /* コンパクト表示（1366×768 など。高さ850px未満で自動） */
+  #tv.compact{grid-template-columns:minmax(0,1fr) clamp(250px,29vw,420px);gap:8px;padding:8px 8px 50px;}
+  #tv.compact .tv-left{gap:6px;}
+  #tv.compact .tv-map{height:clamp(56px,10vh,90px);}
+  #tv.compact .tv-side{gap:6px;}
+  #tv.compact .tv-station{font-size:10px;padding:2px 8px;}
+  #tv.compact .tv-name{font-size:clamp(14px,1.4vw,18px);padding:4px 8px;}
+  #tv.compact .tv-area{font-size:11px;padding:3px 8px;}
+  #tv.compact .tv-wx{padding:4px 8px 6px;}
+  #tv.compact .tv-wx .wx-title{font-size:12px;} #tv.compact .tv-wx .wx-sub{font-size:10px;}
+  #tv.compact .tv-wx .wx-today{padding:2px 0;gap:8px;} #tv.compact .tv-wx .wx-today .ico{font-size:26px;}
+  #tv.compact .tv-wx .wx-today .txt b{font-size:14px;} #tv.compact .tv-wx .wx-today .txt span{font-size:11px;}
+  #tv.compact .tv-wx .wx-hourly{padding:2px 0 4px;gap:2px;} #tv.compact .tv-wx .wx-hourly .hc{padding:2px 1px;}
+  #tv.compact .tv-wx .wx-hourly .t{font-size:10px;} #tv.compact .tv-wx .wx-hourly .i{font-size:17px;}
+  #tv.compact .tv-wx .wx-hourly b{font-size:12px;} #tv.compact .tv-wx .wx-hourly .p{font-size:9.5px;}
+  #tv.compact .tv-wx .tomorrow .wx-hourly{display:none;}
+  #tv.compact .tv-wx .wx-week{padding-top:4px;gap:1px;} #tv.compact .tv-wx .wx-week div{font-size:10px;line-height:1.25;}
+  #tv.compact .tv-wx .wx-week div .i{font-size:17px;margin:0;}
+  #tv.compact .tv-pref{display:none;}
+  #tv.compact .tv-thumb{aspect-ratio:16/11;} #tv.compact .tv-thumb span{font-size:11px;padding:3px 3px;}
+  #tv.compact .tv-bar{bottom:6px;gap:6px;} #tv.compact .tv-bar .pill{height:34px;font-size:13px;padding:6px 11px;}
+  #tv.compact .tv-bar .pill select{font-size:13px;}
   @media (max-height:680px){ #tv .tv-wx .tomorrow{display:none;} }
   @media (max-aspect-ratio: 1/1){
     #tv{grid-template-columns:1fr;grid-template-rows:auto auto;padding:10px 10px 56px;gap:10px;overflow:auto;}
@@ -283,7 +304,6 @@
             <option value="5">5秒</option><option value="10">10秒</option><option value="15" selected>15秒</option>
             <option value="20">20秒</option><option value="30">30秒</option><option value="60">60秒</option><option value="120">2分</option>
           </select></span>
-          <button class="pill" id="muteBtn" title="音声のON/OFF">🔇 音声OFF</button>
           <button class="pill" id="modeBtn" title="YouTube動画と静止画を切り替え">静止画モード</button>
           <a class="pill" id="ytLaunch" href="#" target="_blank" rel="noopener">▶ YouTubeで開く</a>
           <button class="icon-btn" id="fsBtn" title="全画面（もう一度押すと戻る）" aria-label="全画面">⛶</button>
@@ -356,7 +376,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v4.2 · 15 CAMERAS</div>
+    <div class="footer-badge">v4.3 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -397,7 +417,6 @@
       <option value="5">5秒</option><option value="10">10秒</option><option value="15">15秒</option>
       <option value="20">20秒</option><option value="30">30秒</option><option value="60">60秒</option><option value="120">2分</option>
     </select></span>
-    <button class="pill" id="tvMuteBtn">🔇 音声OFF</button>
     <button class="pill" id="tvRadioBtn">📻 ラジコ</button>
     <button class="pill" id="tvFsBtn">⛶ 全画面</button>
     <span class="tv-bar-sep"></span>
@@ -447,15 +466,15 @@ var CONFIG = {
 
   var $ = function(id){ return document.getElementById(id); };
   var rack=$('rack'), mainPlayer=$('mainPlayer'), fctvShot=$('fctvShot'), shield=$('shield');
-  var ytLaunch=$('ytLaunch'), modeBtn=$('modeBtn'), signalTag=$('signalTag'), muteBtn=$('muteBtn');
+  var ytLaunch=$('ytLaunch'), modeBtn=$('modeBtn'), signalTag=$('signalTag');
   var autoBtn=$('autoBtn'), autoSec=$('autoSec');
   var hudName=$('hudName'), hudId=$('hudId'), mainMetaArea=$('mainMetaArea'), rackCount=$('rackCount');
   var screenFrame=$('screenFrame'), fsBtn=$('fsBtn'), envWarning=$('envWarning'), envReason=$('envReason');
   var tv=$('tv'), tvPlayer=$('tvPlayer'), tvShot=$('tvShot'), tvName=$('tvName'), tvMap=$('tvMap'), tvArea=$('tvArea');
   var tvStrip=$('tvStrip'), tvPref=$('tvPref'), tvModeBtn=$('tvModeBtn'), tvBack=$('tvBack');
-  var tvAutoBtn=$('tvAutoBtn'), tvMuteBtn=$('tvMuteBtn'), tvFsBtn=$('tvFsBtn');
+  var tvAutoBtn=$('tvAutoBtn'), tvFsBtn=$('tvFsBtn');
 
-  var activeIndex=0, stillMode=false, muted=true, tvMode=false;
+  var activeIndex=0, stillMode=false, tvMode=false;
   var autoOn=false, autoTimer=null;
   var shotTimer=null, SHOT_REFRESH_MS=120000;
 
@@ -483,12 +502,7 @@ var CONFIG = {
     if(m) return m[1]; if(/^[A-Za-z0-9_-]{6,}$/.test(input)) return input; return null;
   }
   function curPlayer(){ return tvMode?tvPlayer:mainPlayer; }
-  function ytCommand(func){ var p=curPlayer(); if(!p.contentWindow) return; p.contentWindow.postMessage(JSON.stringify({event:'command',func:func,args:[]}),'https://www.youtube.com'); }
-  function renderMute(){ var t=muted?'🔇 音声OFF':'🔊 音声ON'; muteBtn.textContent=t; tvMuteBtn.textContent=t; muteBtn.classList.toggle('active',!muted); tvMuteBtn.classList.toggle('active',!muted); }
-  function toggleMute(){ muted=!muted; ytCommand(muted?'mute':'unMute'); renderMute(); }
-  muteBtn.addEventListener('click',toggleMute); tvMuteBtn.addEventListener('click',toggleMute);
-  mainPlayer.addEventListener('load',function(){ muted=true; renderMute(); });
-  tvPlayer.addEventListener('load',function(){ muted=true; renderMute(); });
+
 
   /* ---- メイン表示 ---- */
   function applyMode(){
@@ -557,8 +571,12 @@ var CONFIG = {
     var w=Math.min(W, H*16/9);
     main.style.width=w+'px'; main.style.height=(w*9/16)+'px'; main.style.maxHeight='none'; main.style.aspectRatio='auto';
   }
-  window.addEventListener('resize',function(){ fitTv(); });
-  function enterTv(withFs){ tvMode=true; tv.hidden=false; document.body.style.overflow='hidden'; setActive(activeIndex,true); requestAnimationFrame(fitTv); setTimeout(fitTv,300); if(withFs&&!isFs()) enterFs($('tvMain')); }
+  function updateCompact(){
+    var f=qs.get('compact'); var on = (f!==null) ? (f!=='0') : (window.innerHeight<850);
+    tv.classList.toggle('compact',on);
+  }
+  window.addEventListener('resize',function(){ updateCompact(); fitTv(); });
+  function enterTv(withFs){ tvMode=true; tv.hidden=false; updateCompact(); document.body.style.overflow='hidden'; setActive(activeIndex,true); requestAnimationFrame(fitTv); setTimeout(fitTv,300); if(withFs&&!isFs()) enterFs($('tvMain')); }
   function exitTv(){ if(isFs()) exitFs(); tvMode=false; tv.hidden=true; document.body.style.overflow=''; setActive(activeIndex,true); }
   tvModeBtn.addEventListener('click',function(){ enterTv(false); }); tvBack.addEventListener('click',exitTv);
   Array.prototype.forEach.call(document.querySelectorAll('.grp-btn'),function(b){ b.addEventListener('click',function(){ selectGroup(b.dataset.key); }); });
@@ -699,7 +717,7 @@ var CONFIG = {
   function tickClock(){ var d=new Date(),p=function(n){return String(n).padStart(2,'0');}; $('clock').textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()); }
   tickClock(); setInterval(tickClock,1000);
   modeBtn.addEventListener('click',function(){ stillMode=!stillMode; applyMode(); });
-  renderRack(); renderMute(); renderAuto();
+  renderRack(); renderAuto();
   setActive(CONFIG.startCamera||0,true);
   if(CONFIG.autoSeconds>0){ var opt=Array.prototype.find.call(autoSec.options,function(o){return parseInt(o.value,10)===CONFIG.autoSeconds;}); if(!opt){ opt=document.createElement('option'); opt.value=CONFIG.autoSeconds; opt.textContent=CONFIG.autoSeconds+'秒'; autoSec.appendChild(opt);} autoSec.value=String(CONFIG.autoSeconds); var o2=Array.prototype.find.call($('tvAutoSec').options,function(o){return o.value===autoSec.value;}); if(!o2){ o2=document.createElement('option'); o2.value=autoSec.value; o2.textContent=autoSec.value+'秒'; $('tvAutoSec').appendChild(o2);} $('tvAutoSec').value=autoSec.value; autoOn=true; renderAuto(); restartAuto(); }
   if(CONFIG.startInTv) enterTv();
