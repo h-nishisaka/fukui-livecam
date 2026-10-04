@@ -30,6 +30,13 @@
   :root[data-theme="light"] .tile-thumb img{filter:none;}
   :root[data-theme="light"] .wx-hourly .hc{background:#f3f6fa;}
   :root[data-theme="light"] .bgm select,:root[data-theme="light"] .bgm input[type=text]{background:#fff;}
+  :root[data-theme="light"] .pill{background:#fff;color:#161b22;border-color:#c9d1da;}
+  :root[data-theme="light"] .pill:hover{background:#e6f4f7;}
+  :root[data-theme="light"] .pill.active{background:var(--accent);color:#062326;border-color:var(--accent);}
+  :root[data-theme="light"] .pill select{color:#161b22;}
+  :root[data-theme="light"] .icon-btn{background:#fff;color:#161b22;border-color:#c9d1da;}
+  :root[data-theme="light"] .hud-bottom .pill,:root[data-theme="light"] .hud-bottom .icon-btn{background:rgba(255,255,255,.92);}
+  :root[data-theme="light"] .ttupd button.pill{background:#fff;}
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{background:var(--void);
@@ -172,29 +179,34 @@
   .sk-row .t{font-family:var(--font-mono);font-weight:700;color:var(--text-1);font-size:18px;min-width:62px;}
   .sk-row .k{color:var(--text-2);} .sk-row .left{margin-left:auto;font-family:var(--font-mono);color:var(--accent);font-weight:700;}
   .sk-row.soon .left{color:#ff7a6b;}
-  .sk-pass{margin-top:10px;padding:8px 10px;border-radius:0;background:#050607;border:2px solid #2a2f36;color:#fff;font-size:14px;line-height:1.6;font-family:var(--font-mono);box-shadow:inset 0 0 0 1px #000;}
+  .sk-pass{margin:8px 0 12px;padding:8px 10px;border-radius:0;background:#050607;border:2px solid #2a2f36;color:#fff;font-size:14px;line-height:1.6;font-family:var(--font-mono);box-shadow:inset 0 0 0 1px #000;}
   .sk-pass b{color:#fff;text-shadow:0 0 6px rgba(255,255,255,.6);} .sk-pass .soon{color:#ff5a4a;font-weight:700;animation:pulse 1.2s ease-in-out infinite;} .sk-pass small{color:#9aa3ad;font-family:var(--font-ui);}
-  .sk-pass .pass-row span:not(.left){color:#8cf26b;font-family:var(--font-ui);font-weight:700;text-shadow:0 0 6px rgba(140,242,107,.5);}
+  .sk-pass .pass-row span:not(.left){color:#fff;font-family:var(--font-ui);font-weight:700;text-shadow:0 0 6px rgba(255,255,255,.4);}
+  .sk-pass .pass-row span.tn{text-shadow:0 0 6px currentColor;} .sk-pass .pass-row .spm{color:#ffd54a;font-style:normal;}
   .sk-pass .pass-head{font-weight:700;margin-bottom:4px;font-family:var(--font-ui);border-bottom:1px solid #3a4048;padding-bottom:3px;}
   .sk-pass .pass-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;} .sk-pass .pass-row b{font-family:var(--font-mono);font-size:18px;min-width:70px;}
   .sk-pass .pass-row .left{margin-left:auto;font-family:var(--font-ui);font-weight:700;color:#ff9d2e !important;text-shadow:none;}
+  .sk-pass .pass-row .left.soon{color:#ff5a4a !important;animation:pulse 1.2s ease-in-out infinite;}
   .sk-pass .pass-row.past{opacity:.75;}
   .sk-sec{margin-top:14px;padding-top:10px;border-top:1px dashed var(--border-soft);}
   /* 発車標 */
   .bd{background:#050607;border:2px solid #2a2f36;border-radius:0;padding:6px 8px 8px;color:#fff;font-family:var(--font-mono);box-shadow:inset 0 0 0 1px #000;}
-  .bd-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #3a4048;padding-bottom:4px;margin-bottom:4px;}
-  .bd-title{color:#fff;font-weight:700;font-size:15px;letter-spacing:.06em;font-family:var(--font-ui);}
-  .bd-sub{color:#9aa3ad;font-size:11px;font-family:var(--font-ui);}
+  .bd{padding:0 0 6px;}
+  .bd-head{display:flex;justify-content:flex-start;align-items:baseline;gap:12px;background:#0d2c73;color:#fff;padding:5px 10px;margin:0 0 4px;border-bottom:2px solid #1d5fdc;}
+  .bd-title{color:#dfe6f5;font-weight:700;font-size:13px;letter-spacing:.04em;font-family:var(--font-ui);}
+  .bd-sub{color:#fff;font-size:17px;font-weight:900;font-family:var(--font-ui);letter-spacing:.04em;}
+  .bd-grid{padding:0 10px;}
   .bd-grid{display:grid;grid-template-columns:auto auto auto auto 1fr;column-gap:10px;align-items:baseline;font-size:16px;line-height:1.2;}
   .bd-row{display:contents;}
   .bd-row > span{padding:4px 0;white-space:nowrap;border-top:1px solid #1e2328;}
-  .bd-th > span{font-size:10px;color:#8a929b !important;padding:0 0 3px;font-family:var(--font-ui);font-weight:400;text-shadow:none;border-top:0;}
+  .bd-th > span{font-size:10px;color:#9aa3ad !important;padding:0 0 3px;font-family:var(--font-ui);font-weight:400;text-shadow:none;border-top:0;}
   .bd-row > .bd-name:first-child{}
   .bd-name{font-weight:700;font-family:var(--font-ui);text-shadow:0 0 6px currentColor;}
   .k-か{color:#ff9d2e;} .k-は{color:#58d3ff;} .k-つ{color:#8cf26b;} .k-普{color:#f3f6fa;} .k-快{color:#ff9d2e;} .k-区{color:#ffd54a;}
-  .bd-no{color:#f3f6fa;text-align:right;}
+  .pass-row span.tn.k-か,#tv .tv-tr .pass .pass-row span.tn.k-か{color:#ff9d2e;} .pass-row span.tn.k-は,#tv .tv-tr .pass .pass-row span.tn.k-は{color:#58d3ff;} .pass-row span.tn.k-つ,#tv .tv-tr .pass .pass-row span.tn.k-つ{color:#8cf26b;}
+  .bd-no{text-align:right;font-weight:700;text-shadow:0 0 6px currentColor;}
   .bd-time{color:#fff;font-weight:700;text-shadow:0 0 6px rgba(255,255,255,.6);letter-spacing:.04em;}
-  .bd-dest{color:#8cf26b;font-family:var(--font-ui);font-weight:700;text-shadow:0 0 6px rgba(140,242,107,.5);white-space:nowrap;}
+  .bd-dest{color:#fff;font-family:var(--font-ui);font-weight:700;font-size:1.1em;text-shadow:0 0 6px rgba(255,255,255,.5);white-space:nowrap;}
   .bd-rem{color:#ff9d2e;font-size:12px;font-family:var(--font-ui);text-align:right;}
   .bd-row.soon .bd-rem{color:#ff5a4a;font-weight:700;animation:pulse 1.2s ease-in-out infinite;}
   .bd-row.sp .bd-dest::after{content:' ◆';color:#ffd54a;}
@@ -237,19 +249,23 @@
   #tv .tv-tr .row.soon .left{color:#e8302a;}
   #tv .tv-tr .pass{background:#050607;border:2px solid #2a2f36;border-radius:0;padding:5px 8px 6px;margin:2px 0 6px;font-size:clamp(11px,.55vw + .55vh,15px);line-height:1.5;color:#fff;font-family:var(--font-mono);box-shadow:inset 0 0 0 1px #000;}
   #tv .tv-tr .pass b{color:#fff;text-shadow:0 0 6px rgba(255,255,255,.6);} #tv .tv-tr .pass small{color:#9aa3ad;font-family:var(--font-ui);}
-  #tv .tv-tr .pass .pass-row span:not(.left){color:#8cf26b;font-family:var(--font-ui);font-weight:700;text-shadow:0 0 6px rgba(140,242,107,.5);}
+  #tv .tv-tr .pass .pass-row span:not(.left){color:#fff;font-family:var(--font-ui);font-weight:700;text-shadow:0 0 6px rgba(255,255,255,.4);}
+  #tv .tv-tr .pass .pass-row span.tn{text-shadow:0 0 6px currentColor;} #tv .tv-tr .pass .pass-row .spm{color:#ffd54a;font-style:normal;}
   #tv .tv-tr .pass .soon{color:#ff5a4a;font-weight:900;animation:pulse 1.2s ease-in-out infinite;}
   #tv .tv-tr .tr-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;}
-  #tv .tv-tr .bd{margin:0;padding:4px 6px 6px;min-width:0;overflow:hidden;}
-  #tv .tv-tr .bd-head{flex-direction:column;align-items:flex-start;gap:0;}
-  #tv .tv-tr .bd-title{font-size:clamp(12px,.55vw + .55vh,15px);} #tv .tv-tr .bd-sub{font-size:clamp(9px,.4vw + .4vh,11px);}
+  #tv .tv-tr .bd{margin:0;padding:0 0 4px;min-width:0;overflow:hidden;}
+  #tv .tv-tr .bd-head{flex-direction:row;align-items:baseline;gap:8px;padding:3px 6px;white-space:nowrap;overflow:hidden;}
+  #tv .tv-tr .bd-sub{overflow:hidden;text-overflow:ellipsis;}
+  #tv .tv-tr .bd-grid{padding:0 6px;}
+  #tv .tv-tr .bd-title{font-size:clamp(10px,.45vw + .45vh,13px);} #tv .tv-tr .bd-sub{font-size:clamp(12px,.6vw + .6vh,17px);}
   #tv .tv-tr .bd-th{font-size:clamp(9px,.38vw + .38vh,10px);}
   #tv .tv-tr .bd-grid{font-size:clamp(11px,.52vw + .52vh,15px);column-gap:6px;}
   #tv .tv-tr .bd-row > span{padding:3px 0;}
   #tv .tv-tr .bd-rem{font-size:.78em;}
-  #tv.compact .tv-tr .bd{padding:3px 6px 4px;}
-  #tv.compact .tv-tr .bd-head{padding-bottom:2px;margin-bottom:2px;}
-  #tv.compact .tv-tr .bd-title{font-size:12px;} #tv.compact .tv-tr .bd-sub{font-size:9px;}
+  #tv.compact .tv-tr .bd{padding:0 0 3px;}
+  #tv.compact .tv-tr .bd-head{padding:2px 5px;margin-bottom:2px;}
+  #tv.compact .tv-tr .bd-grid{padding:0 5px;}
+  #tv.compact .tv-tr .bd-title{font-size:10px;} #tv.compact .tv-tr .bd-sub{font-size:13px;}
   #tv.compact .tv-tr .bd-th{display:none;}
   #tv.compact .tv-tr .bd-grid{font-size:12px;column-gap:4px;}
   #tv.compact .tv-tr .bd-row > span{padding:2px 0;}
@@ -261,6 +277,7 @@
   #tv .tv-tr .pass .pass-head{font-weight:700;margin-bottom:2px;font-family:var(--font-ui);color:#fff;border-bottom:1px solid #3a4048;padding-bottom:2px;}
   #tv .tv-tr .pass .pass-row{display:flex;gap:8px;align-items:baseline;padding:2px 0;} #tv .tv-tr .pass .pass-row b{font-family:var(--font-mono);font-size:1.2em;}
   #tv .tv-tr .pass .pass-row .left{margin-left:auto;font-family:var(--font-ui);font-weight:700;color:#ff9d2e !important;text-shadow:none;}
+  #tv .tv-tr .pass .pass-row .left.soon{color:#ff5a4a !important;animation:pulse 1.2s ease-in-out infinite;}
   #tv .tv-tr .pass .pass-row.past{opacity:.75;}
   /* 天気カード（TVモード） */
   #tv .tv-wx{flex:0 1 auto;min-height:0;overflow:hidden;background:#fff;border-radius:4px;padding:6px 10px 8px;color:#0d2c73;font-family:var(--font-ui);}
@@ -337,6 +354,11 @@
   #tv:hover .tv-bar{opacity:1;}
   #tv .tv-bar .pill{height:42px;font-size:clamp(14px,.7vw + .7vh,18px);padding:8px 16px;font-family:var(--font-ui);font-weight:700;background:rgba(13,44,115,0.85);border-color:rgba(255,255,255,0.35);}
   #tv .tv-bar .pill.active{background:#ffd54a;color:#0d2c73;border-color:#ffd54a;}
+  :root[data-theme="light"] #tv .tv-bar .pill{background:rgba(13,44,115,0.85);color:#fff;border-color:rgba(255,255,255,0.35);}
+  :root[data-theme="light"] #tv .tv-bar .pill.active{background:#ffd54a;color:#0d2c73;}
+  :root[data-theme="light"] #tv .tv-bar .grp-btn{background:rgba(255,255,255,0.18);color:#fff;}
+  :root[data-theme="light"] #tv .tv-bar .grp-btn.active{background:#fff;color:#0d2c73;}
+  :root[data-theme="light"] #tv .tv-bar .pill select{color:#fff;} :root[data-theme="light"] #tv .tv-bar .pill.active select{color:#0d2c73;}
   #tv .tv-bar .pill select{color:#fff;font-weight:700;} #tv .tv-bar .pill.active select{color:#0d2c73;}
   /* コンパクト表示（1366×768 など。高さ850px未満で自動） */
   #tv.compact{grid-template-columns:minmax(0,1fr) clamp(250px,29vw,420px);gap:8px;padding:8px 8px 50px;}
@@ -520,7 +542,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v7.0 · 15 CAMERAS</div>
+    <div class="footer-badge">v7.6 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -626,7 +648,7 @@ var CONFIG = {
       ['14:41','つ','敦賀','','25'],['14:55','は','敦賀','','561'],['15:19','つ','敦賀','◆','27'],['15:40','つ','敦賀','◆','29'],['15:55','は','敦賀','','563'],
       ['16:18','つ','敦賀','','31'],['16:41','つ','敦賀','','33'],['16:56','は','敦賀','','565'],['17:19','つ','敦賀','','35'],['17:38','つ','敦賀','','37'],['17:56','は','敦賀','','567'],
       ['18:19','つ','敦賀','','39'],['18:41','つ','敦賀','','41'],['18:57','は','敦賀','','569'],['19:15','つ','敦賀','','43'],['19:20','か','敦賀','','511'],['19:42','つ','敦賀','','45'],
-      ['20:21','か','敦賀','','513'],['20:39','つ','敦賀','◆','47'],['21:17','か','敦賀','','515'],['21:32','つ','敦賀','','49'],['22:08','つ','敦賀','◆',''],['22:56','か','敦賀','','517'],['23:10','つ','敦賀','','61']
+      ['20:21','か','敦賀','','513'],['20:39','つ','敦賀','◆','47'],['21:17','か','敦賀','','515'],['21:32','つ','敦賀','','49'],['22:08','つ','敦賀','◆','91'],['22:56','か','敦賀','','517'],['23:10','つ','敦賀','','61']
     ]
   };
   var KIND={'か':'かがやき','は':'はくたか','つ':'つるぎ'};
@@ -989,17 +1011,17 @@ var CONFIG = {
   function toMin(t){ var a=t.split(':'); return parseInt(a[0],10)*60+parseInt(a[1],10); }
   function fmtMin(m){ m=((m%1440)+1440)%1440; return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'); }
   function upcoming(list,now,n){ var out=[]; for(var i=0;i<list.length&&out.length<n;i++){ var m=toMin(list[i][0]); if(m>=now-1) out.push({m:m,k:list[i][1],d:list[i][2],sp:list[i][3]||'',no:list[i][4]||''}); } return out; }
-  function trainName(x){ return (KIND[x.k]||'')+(x.no?x.no+'号':''); }
+  function trainName(x){ return (KIND[x.k]||'')+(x.no?' '+x.no:''); }
   var trainTv=$('trainTv');
   /* 発車標風の表示 */
   function boardRows(arr,now,kind){
     if(!arr.length) return '<div class="bd-row"><span class="bd-name">本日の運転は終了しました</span></div>';
     return arr.map(function(x){ var left=x.m-now, nm=(kind==='sk'?KIND[x.k]:HKIND[x.k]);
-      return '<div class="bd-row'+(left<=3?' soon':'')+(x.sp==='◆'?' sp':'')+(x.sp==='(平)'?' wd':'')+'"><span class="bd-name k-'+x.k+'">'+nm+'</span><span class="bd-no">'+(x.no?x.no+'号':'')+'</span><span class="bd-time">'+fmtMin(x.m)+'</span><span class="bd-dest">'+x.d+'</span><span class="bd-rem">'+(left<0?'発車':(left<=0?'まもなく':'あと'+left+'分'))+'</span></div>'; }).join('');
+      return '<div class="bd-row'+(left<=3?' soon':'')+(x.sp==='◆'?' sp':'')+(x.sp==='(平)'?' wd':'')+'"><span class="bd-name k-'+x.k+'">'+nm+'</span><span class="bd-no k-'+x.k+'">'+(x.no?x.no:'')+'</span><span class="bd-time">'+fmtMin(x.m)+'</span><span class="bd-dest">'+x.d+'</span><span class="bd-rem">'+(left<0?'発車':(left<=0?'まもなく':'あと'+left+'分'))+'</span></div>'; }).join('');
   }
   function board(title,sub,arr,now,kind){
     return '<div class="bd"><div class="bd-head"><span class="bd-title">'+title+'</span><span class="bd-sub">'+sub+'</span></div><div class="bd-grid">'
-      +'<div class="bd-row bd-th"><span class="bd-name">列車名</span><span class="bd-no">号</span><span class="bd-time">発車</span><span class="bd-dest">行先</span><span class="bd-rem">備考</span></div>'
+      +'<div class="bd-row bd-th"><span class="bd-name">列車名 Train</span><span class="bd-no">No.</span><span class="bd-time">発車 Dep.</span><span class="bd-dest">行先 For</span><span class="bd-rem">備考 Remarks</span></div>'
       +boardRows(arr,now,kind)+'</div></div>';
   }
   function hapiRows(arr,now,cls){ if(!arr.length) return '<div class="'+cls+'"><span class="k">本日の運転は終了</span></div>';
@@ -1012,8 +1034,7 @@ var CONFIG = {
     var hdn=upcoming(HAPI.down,now,3), hup=upcoming(HAPI.up,now,3);
     function rows(arr){ if(!arr.length) return '<div class="sk-row"><span class="k">本日の運転は終了</span></div>';
       return arr.map(function(x){ var left=x.m-now; return '<div class="sk-row'+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+KIND[x.k]+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
-    var html='<div class="sk-head"><span class="sk-title">🚉 福井駅 時刻表</span><span class="sk-note">現在 '+fmtMin(now)+'　'+SHINKANSEN.note+'　◆=特定日・特定曜日のみ運転</span></div>'
-      +'<div class="sk-cols">'+board('北陸新幹線 上り','金沢・富山・東京方面',up,now,'sk')+board('北陸新幹線 下り','敦賀方面',dn,now,'sk')+'</div>';
+    var html='<div class="sk-head"><span class="sk-title">🚉 福井駅 時刻表</span><span class="sk-note">現在 '+fmtMin(now)+'　'+SHINKANSEN.note+'　◆=特定日・特定曜日のみ運転</span></div>';
     /* 通過予想：福井駅到着＝発車の1分前。駅の北側(N)は上りが出発側、南側(S)は下りが出発側。 */
     var passHtml='';
     if(cam.sk){
@@ -1021,26 +1042,24 @@ var CONFIG = {
       function add(x,dir,isOut){
         var dep=x.m, t;
         if(sk.side==='STA') t=dep; else if(isOut) t=dep+sk.out; else t=dep-sk.inn;
-        cands.push({t:t,dir:dir,k:trainName(x)+x.sp,how:(sk.side==='STA'?'':'福井'+fmtMin(dep)+'発')});
+        cands.push({t:t,dir:dir,k:trainName(x),kc:x.k,sp:x.sp,how:(sk.side==='STA'?'':'福井'+fmtMin(dep)+'発')});
       }
-      upcoming(SHINKANSEN.up,now-10,6).forEach(function(x){ add(x,'上り '+x.d+'行', sk.side==='N'); });
-      upcoming(SHINKANSEN.down,now-10,6).forEach(function(x){ add(x,'下り 敦賀行', sk.side==='S'); });
+      upcoming(SHINKANSEN.up,now-10,6).forEach(function(x){ add(x,x.d+'行', sk.side==='N'); });
+      upcoming(SHINKANSEN.down,now-10,6).forEach(function(x){ add(x,'敦賀行', sk.side==='S'); });
       cands=cands.filter(function(c){ return c.t>=now-2; }).sort(function(a,b){ return a.t-b.t; }).slice(0,2);  // 予想時刻を2分過ぎるまでは表示を残す
       if(cands.length){
-        passHtml='<div class="pass-head">📷 '+cam.name+' に次に映る新幹線</div>'+cands.map(function(c){ var l=c.t-now; return '<div class="pass-row'+(l<0?' past':'')+'"><b>'+fmtMin(c.t)+(sk.side==='STA'?'発':'頃')+'</b><span>'+c.dir+' '+c.k+'</span>'+(c.how?'<small>（'+c.how+'）</small>':'')+'<span class="left'+(l<=3?' soon':'')+'">'+(l<0?'通過中':(l<=0?'まもなく':'あと'+l+'分'))+'</span></div>'; }).join('');
+        passHtml='<div class="pass-head">📷 '+cam.name+' に次に映る新幹線</div>'+cands.map(function(c){ var l=c.t-now; return '<div class="pass-row'+(l<0?' past':'')+'"><b>'+fmtMin(c.t)+(sk.side==='STA'?'発':'頃')+'</b><span class="tn k-'+c.kc+'">'+c.k+'</span><span>'+c.dir+(c.sp==='◆'?' <i class="spm">◆</i>':'')+'</span>'+(c.how?'<small>（'+c.how+'）</small>':'')+'<span class="left'+(l<=3?' soon':'')+'">'+(l<0?'通過中':(l<=0?'まもなく':'あと'+l+'分'))+'</span></div>'; }).join('');
       }
     }
     if(passHtml) html+='<div class="sk-pass">'+passHtml+'</div>';
-    html+='<div class="sk-sec"><div class="sk-cols">'+board('ハピラインふくい 下り','鯖江・武生・敦賀方面',hdn,now,'hp')+board('ハピラインふくい 上り','芦原温泉・金沢方面',hup,now,'hp')+'</div><div class="sk-note" style="margin-top:6px">(平)=平日のみ　九頭竜湖・越前大野行はJR九頭竜線直通　'+HAPI.note+'</div></div>';
+    html+='<div class="sk-cols">'+board('北陸新幹線','金沢・富山・東京方面',up,now,'sk')+board('北陸新幹線','敦賀方面',dn,now,'sk')+'</div>';
+    html+='<div class="sk-sec"><div class="sk-cols">'+board('ハピラインふくい','鯖江・武生・敦賀方面',hdn,now,'hp')+board('ハピラインふくい','芦原温泉・金沢方面',hup,now,'hp')+'</div><div class="sk-note" style="margin-top:6px">(平)=平日のみ　九頭竜湖・越前大野行はJR九頭竜線直通　'+HAPI.note+'</div></div>';
     skMain.innerHTML=html;
-    // TVモード用（コンパクトな2段）
-    function rowsTv(arr){ if(!arr.length) return '<div class="row"><span class="k">本日終了</span></div>';
-      return arr.map(function(x){ var left=x.m-now; return '<div class="row'+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+(KIND[x.k]||'')+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
-    var tv='<div class="tr-sec"><div class="tr-head">🚉 福井駅 時刻表 <small>現在 '+fmtMin(now)+'　◆=特定日運転　平=平日のみ</small></div>'
+    var tvPanelHtml='<div class="tr-sec"><div class="tr-head">🚉 福井駅 時刻表 <small>現在 '+fmtMin(now)+'　◆=特定日運転　平=平日のみ</small></div>'
       +(passHtml?'<div class="pass">'+passHtml+'</div>':'')
-      +'<div class="tr-cols">'+board('北陸新幹線 上り','金沢・東京方面',up.slice(0,nTv),now,'sk')+board('北陸新幹線 下り','敦賀方面',dn.slice(0,nTv),now,'sk')+'</div>'
-      +'<div class="tr-cols">'+board('ハピライン 下り','鯖江・武生・敦賀方面',hdn.slice(0,nTv),now,'hp')+board('ハピライン 上り','芦原温泉・金沢方面',hup.slice(0,nTv),now,'hp')+'</div></div>';
-    trainTv.innerHTML=tv;
+      +'<div class="tr-cols">'+board('北陸新幹線','金沢・東京方面',up.slice(0,nTv),now,'sk')+board('北陸新幹線','敦賀方面',dn.slice(0,nTv),now,'sk')+'</div>'
+      +'<div class="tr-cols">'+board('ハピライン','鯖江・武生・敦賀方面',hdn.slice(0,nTv),now,'hp')+board('ハピライン','芦原温泉・金沢方面',hup.slice(0,nTv),now,'hp')+'</div></div>';
+    trainTv.innerHTML=tvPanelHtml;
   }
   /* パネル切替（天気／電車） */
   function setTvPanel(pn){ var wx=pn!=='tr'; $('wxTv').hidden=!wx; trainTv.hidden=wx; Array.prototype.forEach.call(document.querySelectorAll('.tv-tab'),function(b){ b.classList.toggle('active',b.dataset.p===pn); }); try{ localStorage.setItem('fctv_tvpanel2',pn); }catch(e){} }
