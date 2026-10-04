@@ -261,6 +261,9 @@
   #tv.compact .tv-tr .bd-title{font-size:10px;} #tv.compact .tv-tr .bd-sub{font-size:13px;}
   /* コンパクト：表を縦1列にして幅を確保（備考まで切れずに表示） */
   #tv.compact .tv-tr .tr-cols{grid-template-columns:1fr;}
+  #tv.compact .tv-tr .tr-cols.tr-hp{grid-template-columns:1fr 1fr;}
+  #tv.compact .tv-tr .tr-hp .bd-rem{display:none;}
+  #tv.compact .tv-tr .tr-hp .bd-grid{grid-template-columns:auto auto auto 1fr;}
   #tv.compact .tv-tr .bd-grid{font-size:12.5px;column-gap:6px;}
   #tv.compact .tv-tr .bd-th{display:none;}
   #tv.compact .tv-tr .bd-row > span{padding:2px 0;}
@@ -532,7 +535,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">V1.7 · 15 CAMERAS</div>
+    <div class="footer-badge">V1.8 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -1054,7 +1057,7 @@ var CONFIG = {
     var tvPanelHtml='<div class="tr-sec"><div class="tr-head">🚉 福井駅 時刻表 <small>現在 '+fmtMin(now)+'　◆=特定日運転　平=平日のみ</small></div>'
       +(passHtml?'<div class="bd pass">'+passHtml+'</div>':'')
       +'<div class="tr-cols">'+board('北陸新幹線','金沢・東京方面',up.slice(0,nTv),now,'sk')+board('北陸新幹線','敦賀方面',dn.slice(0,nTv),now,'sk')+'</div>'
-      +'<div class="tr-cols">'+board('ハピライン','鯖江・武生・敦賀方面',hdn.slice(0,nTv),now,'hp')+board('ハピライン','芦原温泉・金沢方面',hup.slice(0,nTv),now,'hp')+'</div></div>';
+      +'<div class="tr-cols tr-hp">'+board('ハピライン','鯖江・武生・敦賀方面',hdn.slice(0,nTv),now,'hp')+board('ハピライン','芦原温泉・金沢方面',hup.slice(0,nTv),now,'hp')+'</div></div>';
     trainTv.innerHTML=tvPanelHtml;
   }
   /* パネル切替（天気／電車） */
