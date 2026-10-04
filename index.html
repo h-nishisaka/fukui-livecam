@@ -41,10 +41,10 @@
   .brand{display:flex;align-items:center;gap:10px;}
   .brand-dot{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 8px rgba(232,72,60,0.7);animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
   .brand-text{display:flex;flex-direction:column;line-height:1.15;}
-  .brand-title{font-weight:700;font-size:16px;letter-spacing:0.02em;}
+  .brand-title{font-weight:700;font-size:18px;letter-spacing:0.02em;}
   .brand-sub{font-family:var(--font-mono);font-size:10px;color:var(--text-3);letter-spacing:0.08em;margin-top:2px;}
   .topbar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  .clock{font-family:var(--font-mono);font-size:13px;color:var(--text-2);letter-spacing:0.03em;padding:6px 10px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-sm);}
+  .clock{font-family:var(--font-mono);font-size:15px;color:var(--text-2);letter-spacing:0.03em;padding:6px 10px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-sm);}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
 
   .env-warning{display:none;background:rgba(232,161,60,0.12);border:1px solid rgba(232,161,60,0.45);color:#f0c98a;font-size:12.5px;line-height:1.85;padding:14px 16px;border-radius:var(--radius-md);margin-bottom:16px;}
@@ -59,17 +59,17 @@
   .screen-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;}
   .fctv-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#05070a;}
   .shield{position:absolute;inset:0;z-index:1;background:transparent;}
-  .hud-top{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(180deg, rgba(0,0,0,0.65), transparent);pointer-events:none;z-index:2;}
+  .hud-top{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:flex-end;padding:10px 12px;background:linear-gradient(180deg, rgba(0,0,0,0.65), transparent);pointer-events:none;z-index:2;}
   .hud-live{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:0.08em;color:#fff;background:rgba(232,72,60,0.92);padding:4px 8px 4px 6px;border-radius:4px;}
   .hud-live .rec-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:pulse 1.4s ease-in-out infinite;}
   .hud-label{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.85);background:rgba(0,0,0,0.4);padding:4px 9px;border-radius:4px;letter-spacing:0.02em;}
   .hud-bottom{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(0deg, rgba(0,0,0,0.55), transparent);z-index:2;pointer-events:none;gap:8px;}
   .hud-bottom > *{pointer-events:auto;}
-  .hud-name{font-size:14px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6);white-space:nowrap;}
+  .hud-name{font-size:17px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6);white-space:nowrap;}
   .hud-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
-  .icon-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:rgba(18,22,27,0.75);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);color:#fff;cursor:pointer;font-size:14px;transition:background 0.15s ease;}
+  .icon-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(18,22,27,0.75);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);color:#fff;cursor:pointer;font-size:17px;transition:background 0.15s ease;}
   .icon-btn:hover{background:rgba(63,182,201,0.35);}
-  .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.03em;color:rgba(255,255,255,0.92);background:rgba(18,22,27,0.8);border:1px solid rgba(255,255,255,0.14);padding:6px 10px;border-radius:20px;text-decoration:none;cursor:pointer;height:30px;}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-weight:700;font-size:13.5px;letter-spacing:0.02em;color:rgba(255,255,255,0.95);background:rgba(18,22,27,0.82);border:1px solid rgba(255,255,255,0.18);padding:7px 13px;border-radius:22px;text-decoration:none;cursor:pointer;height:36px;}
   .pill:hover{background:rgba(63,182,201,0.3);}
   .pill.active{background:var(--accent);color:#062326;border-color:var(--accent);}
   .pill select{background:transparent;border:0;color:inherit;font:inherit;outline:none;cursor:pointer;}
@@ -82,9 +82,13 @@
   .rack-header{display:flex;align-items:baseline;justify-content:space-between;margin:26px 4px 10px;}
   .rack-title{font-size:12px;font-weight:700;color:var(--text-2);letter-spacing:0.14em;font-family:var(--font-mono);}
   .rack-count{font-family:var(--font-mono);font-size:11px;color:var(--text-3);}
-  .rack{display:grid;grid-template-columns:repeat(4, 1fr);gap:10px;}
-  @media (max-width:860px){.rack{grid-template-columns:repeat(3, 1fr);}}
-  @media (max-width:520px){.rack{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:38%;overflow-x:auto;padding-bottom:6px;}.rack::-webkit-scrollbar{height:0;}}
+  .rack-group{display:flex;align-items:baseline;justify-content:space-between;margin:14px 4px 8px;padding-top:10px;border-top:1px solid var(--border-soft);}
+  .rack-group:first-child{border-top:0;padding-top:0;margin-top:0;}
+  .rack-group-name{font-size:15px;font-weight:700;color:var(--text-1);}
+  .rack-group-count{font-family:var(--font-mono);font-size:10px;color:var(--text-3);}
+  .rack-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:10px;}
+  @media (max-width:860px){.rack-grid{grid-template-columns:repeat(3, 1fr);}}
+  @media (max-width:520px){.rack-grid{grid-template-columns:repeat(2, 1fr);}}
   .tile{position:relative;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:0;cursor:pointer;overflow:hidden;text-align:left;color:var(--text-1);font-family:inherit;transition:border-color 0.15s ease, transform 0.15s ease;}
   .tile:hover{border-color:var(--border);transform:translateY(-1px);}
   .tile.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), 0 8px 20px -10px rgba(63,182,201,0.5);}
@@ -95,9 +99,9 @@
   .tile.active .tile-dot{background:var(--accent);}
   .tile-edit{position:absolute;top:6px;right:6px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:rgba(10,12,15,0.7);border:1px solid rgba(255,255,255,0.15);border-radius:4px;color:rgba(255,255,255,0.8);font-size:10px;cursor:pointer;z-index:1;opacity:0;transition:opacity 0.15s ease;}
   .tile:hover .tile-edit{opacity:1;}
-  .tile-info{padding:8px 9px 9px;}
-  .tile-name{font-size:12px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .tile-area{font-family:var(--font-mono);font-size:9.5px;color:var(--text-3);margin-top:2px;letter-spacing:0.03em;}
+  .tile-info{padding:9px 10px 10px;}
+  .tile-name{font-size:14.5px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tile-area{font-family:var(--font-mono);font-size:11.5px;color:var(--text-3);margin-top:2px;letter-spacing:0.03em;}
 
   /* ---------- BGM panel ---------- */
   .bgm{margin-top:26px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:12px 14px;}
@@ -190,7 +194,7 @@
 
   /* ---------- TV mode (cable-TV style) ---------- */
   #tv{position:fixed;inset:0;z-index:50;background:linear-gradient(180deg,#1d5fdc 0%,#2a6fe6 55%,#2f7bf0 100%);font-family:var(--font-ui);color:#0d2c73;
-    display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,34vw,640px);grid-template-rows:minmax(0,1fr);gap:14px;padding:16px 16px 56px;}
+    display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,34vw,640px);grid-template-rows:minmax(0,1fr);gap:14px;padding:16px 16px 62px;}
   #tv .tv-left{grid-column:1;grid-row:1;display:flex;flex-direction:column;gap:10px;min-height:0;min-width:0;}
   #tv .tv-mainwrap{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;}
   #tv .tv-main{position:relative;background:#000;border:3px solid #fff;overflow:hidden;width:100%;aspect-ratio:16/9;max-height:100%;}
@@ -200,32 +204,36 @@
   #tv .tv-fsname{display:none;position:absolute;left:18px;top:14px;z-index:3;background:rgba(255,255,255,0.92);color:#0d2c73;font-weight:900;font-size:clamp(16px,1.6vw,26px);padding:6px 16px;border-radius:4px;border-left:8px solid #1d5fdc;}
   #tv .tv-main:fullscreen .tv-fsname{display:block;}
   #tv .tv-fsexit,#tv .tv-fsnav{display:none;position:absolute;z-index:4;}
-  #tv .tv-fsexit{right:18px;top:14px;background:rgba(13,44,115,0.85);color:#fff;border:1px solid rgba(255,255,255,0.5);font:700 15px var(--font-ui);padding:8px 14px;border-radius:6px;cursor:pointer;}
+  #tv .tv-fsexit{right:18px;top:14px;background:rgba(13,44,115,0.85);color:#fff;border:1px solid rgba(255,255,255,0.5);font:700 18px var(--font-ui);padding:8px 14px;border-radius:6px;cursor:pointer;}
   #tv .tv-fsnav{left:50%;transform:translateX(-50%);bottom:16px;gap:10px;}
-  #tv .tv-fsnav button{background:rgba(13,44,115,0.85);color:#fff;border:1px solid rgba(255,255,255,0.5);font:700 15px var(--font-ui);padding:8px 16px;border-radius:6px;cursor:pointer;}
+  #tv .tv-fsnav button{background:rgba(13,44,115,0.85);color:#fff;border:1px solid rgba(255,255,255,0.5);font:700 18px var(--font-ui);padding:8px 16px;border-radius:6px;cursor:pointer;}
   #tv .tv-main:fullscreen .tv-fsexit,#tv .tv-main:fullscreen .tv-fsnav{display:flex;opacity:.55;transition:opacity .2s;}
   #tv .tv-main:fullscreen:hover .tv-fsexit,#tv .tv-main:fullscreen:hover .tv-fsnav{opacity:1;}
   #tv .tv-side{grid-column:2;grid-row:1;display:flex;flex-direction:column;gap:10px;min-height:0;overflow:hidden;}
   #tv .tv-info{flex:0 0 auto;background:#fff;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;}
+  #tv .tv-station{background:#1d5fdc;color:#fff;font-weight:700;font-size:clamp(11px,.5vw + .5vh,14px);text-align:center;padding:3px 10px;letter-spacing:.08em;}
   #tv .tv-name{background:#fff;color:#0d2c73;font-weight:900;font-size:clamp(16px,1.9vw,26px);text-align:center;padding:10px 12px;letter-spacing:0.02em;border-bottom:3px solid #1d5fdc;}
   #tv .tv-map{position:relative;width:100%;aspect-ratio:1/0.8;background:#e9eef7;}
   #tv .tv-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
-  #tv .tv-area{background:#fff;color:#0d2c73;font-weight:700;font-size:clamp(12px,1.1vw,15px);text-align:right;padding:6px 12px;}
+  #tv .tv-area{background:#fff;color:#0d2c73;font-weight:700;font-size:clamp(13px,.6vw + .6vh,17px);text-align:right;padding:6px 12px;}
   #tv .tv-pref{flex:1 1 60px;min-height:60px;background:#2a6fe6;position:relative;}
   #tv .tv-pref svg{width:100%;height:100%;display:block;}
   #tv .tv-strip{flex:0 0 auto;display:grid;grid-template-columns:repeat(8,1fr);gap:8px;}
-  #tv .tv-thumb{position:relative;background:#0d2c73;border:2px solid #fff;overflow:hidden;cursor:pointer;aspect-ratio:16/11;}
+  #tv .tv-thumb{position:relative;background:#0d2c73;border:2px solid #fff;overflow:hidden;cursor:pointer;aspect-ratio:16/11.5;}
   #tv .tv-thumb.active{border-color:#ffd54a;box-shadow:0 0 0 2px #ffd54a;}
-  #tv .tv-thumb span{display:block;background:#1a4fc4;color:#fff;font-weight:700;font-size:clamp(9px,0.85vw,12px);text-align:center;padding:3px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  #tv .tv-thumb img{width:100%;height:calc(100% - 20px);object-fit:cover;display:block;}
-  #tv .tv-bar{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;gap:8px;z-index:60;opacity:.45;transition:opacity .2s;}
+  #tv .tv-thumb span{display:block;background:#1a4fc4;color:#fff;font-weight:700;font-size:clamp(11px,.55vw + .55vh,16px);line-height:1.25;text-align:center;padding:4px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  #tv .tv-thumb img{width:100%;height:calc(100% - 1.25em - 8px);object-fit:cover;display:block;}
+  #tv .tv-bar{position:fixed;left:16px;right:16px;bottom:8px;display:flex;gap:8px;z-index:60;opacity:.55;transition:opacity .2s;align-items:center;}
+  #tv .tv-bar-sep{flex:1;}
+  #tv .tv-bar .grp-btn{background:rgba(255,255,255,0.18);}
+  #tv .tv-bar .grp-btn.active{background:#fff;color:#0d2c73;border-color:#fff;}
   #tv:hover .tv-bar{opacity:1;}
-  #tv .tv-bar .pill{height:34px;font-size:13px;font-family:var(--font-ui);font-weight:700;background:rgba(13,44,115,0.85);border-color:rgba(255,255,255,0.35);}
+  #tv .tv-bar .pill{height:42px;font-size:clamp(14px,.7vw + .7vh,18px);padding:8px 16px;font-family:var(--font-ui);font-weight:700;background:rgba(13,44,115,0.85);border-color:rgba(255,255,255,0.35);}
   #tv .tv-bar .pill.active{background:#ffd54a;color:#0d2c73;border-color:#ffd54a;}
   #tv .tv-bar .pill select{color:#fff;font-weight:700;} #tv .tv-bar .pill.active select{color:#0d2c73;}
   @media (max-height:820px){ #tv .tv-wx .tomorrow .wx-hourly{display:none;} #tv .tv-map{height:clamp(70px,12vh,120px);} }
   @media (max-height:680px){ #tv .tv-wx .tomorrow{display:none;} }
-  @media (max-width:980px){
+  @media (max-aspect-ratio: 1/1){
     #tv{grid-template-columns:1fr;grid-template-rows:auto auto;padding:10px 10px 56px;gap:10px;overflow:auto;}
     #tv .tv-left{grid-row:1;} #tv .tv-main{max-height:none;}
     #tv .tv-strip{grid-template-columns:repeat(4,1fr);}
@@ -261,7 +269,6 @@
   <div class="main-monitor">
     <div class="screen-frame" id="screenFrame">
       <div class="hud-top">
-        <span class="hud-live"><span class="rec-dot"></span>LIVE</span>
         <span class="hud-label" id="hudId">--</span>
       </div>
       <iframe id="mainPlayer" src="" title="メインライブ映像" referrerpolicy="strict-origin-when-cross-origin"
@@ -273,7 +280,7 @@
         <div class="hud-actions">
           <button class="pill" id="autoBtn" title="自動でカメラを切り替え">⟳ 自動 OFF</button>
           <span class="pill" title="切替間隔"><select id="autoSec">
-            <option value="5">5秒</option><option value="10" selected>10秒</option><option value="15">15秒</option>
+            <option value="5">5秒</option><option value="10">10秒</option><option value="15" selected>15秒</option>
             <option value="20">20秒</option><option value="30">30秒</option><option value="60">60秒</option><option value="120">2分</option>
           </select></span>
           <button class="pill" id="muteBtn" title="音声のON/OFF">🔇 音声OFF</button>
@@ -345,11 +352,11 @@
 
   <div class="footer">
     <div class="footer-note">
-      映像提供：福井ケーブルテレビ（FCTV）YouTubeチャンネルのライブ配信を埋め込み表示しています。<br>
-      配信元：<a href="https://www.fctv.jp/web-came/" target="_blank" rel="noopener">fctv.jp/web-came</a> ／ <a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">youtube.com/@fctv_091</a>
+      映像提供：福井ケーブルテレビ（FCTV）・FBC福井放送・福井テレビ の各YouTubeチャンネルのライブ配信を埋め込み表示しています。<br>
+      配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v3.8 · 8 CAMERAS</div>
+    <div class="footer-badge">v4.2 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -371,6 +378,7 @@
   </div>
   <div class="tv-side">
     <div class="tv-info">
+      <div class="tv-station" id="tvStation">--</div>
       <div class="tv-name" id="tvName">--</div>
       <div class="tv-map"><iframe id="tvMap" src="" title="現地地図"></iframe></div>
       <div class="tv-area" id="tvArea">--</div>
@@ -379,7 +387,9 @@
     <div class="tv-pref" id="tvPref"></div>
   </div>
   <div class="tv-bar">
-    <button class="pill" id="tvBack">通常画面へ</button>
+    <button class="pill grp-btn" data-key="fctv">FCTV</button>
+    <button class="pill grp-btn" data-key="fbc">FBC・福井テレビ</button>
+    <span class="tv-bar-sep"></span>
     <button class="pill" id="tvPrev">◀ 前</button>
     <button class="pill" id="tvNext">次 ▶</button>
     <button class="pill" id="tvAutoBtn">⟳ 自動 OFF</button>
@@ -390,6 +400,8 @@
     <button class="pill" id="tvMuteBtn">🔇 音声OFF</button>
     <button class="pill" id="tvRadioBtn">📻 ラジコ</button>
     <button class="pill" id="tvFsBtn">⛶ 全画面</button>
+    <span class="tv-bar-sep"></span>
+    <button class="pill" id="tvBack">通常画面へ</button>
   </div>
 </div>
 
@@ -400,7 +412,7 @@ var CONFIG = {
   homeLat: 36.0652,            // 自宅付近の緯度（Googleマップで右クリック→座標コピー）
   homeLng: 136.2216,           // 自宅付近の経度
   startInTv: false,            // true にすると最初からTVモードで開く（URLに ?tv=1 でも可）
-  autoSeconds: 0,              // 0=自動切替しない / 10 なら10秒ごと（URLに ?auto=10 でも可）
+  autoSeconds: 0,              // 0=自動切替しない / 15 なら15秒ごと（URLに ?auto=15 でも可）
   startCamera: 0               // 最初に表示するカメラ（0〜7）
 };
 /* ======================================================================== */
@@ -409,16 +421,29 @@ var CONFIG = {
   if (qs.has('tv'))   CONFIG.startInTv = qs.get('tv') !== '0';
   if (qs.has('auto')) CONFIG.autoSeconds = parseInt(qs.get('auto'),10)||0;
   if (qs.has('cam'))  CONFIG.startCamera = parseInt(qs.get('cam'),10)||0;
-  var cameras = [
-    { id:'IrXQ8JID0Gs', shot:'fukuistation',     name:'福井駅西口',             area:'福井市',        lat:36.0619, lng:136.2231, q:'福井駅 西口' },
-    { id:'k3lKNrqtSyE', shot:'kidabashi',        name:'足羽川・木田橋',         area:'福井市',        lat:36.0585, lng:136.2150, q:'木田橋 福井市' },
-    { id:'yNgpcqA9X64', shot:'shinkansenbridge', name:'新九頭竜橋',             area:'福井市/坂井市', lat:36.1230, lng:136.2075, q:'新九頭竜橋' },
-    { id:'CIjhFpsN-3k', shot:'sunsetbeach',      name:'三国・サンセットビーチ', area:'坂井市三国町',  lat:36.2335, lng:136.1365, q:'三国サンセットビーチ' },
-    { id:'jLZ_T91paAU', shot:'r8ohwada',         name:'国道8号線 大和田方面',   area:'福井市',        lat:36.0870, lng:136.2440, q:'福井市大和田 国道8号' },
-    { id:'U1fhYEreP4Q', shot:'nanjousa',         name:'北陸自動車道南条SA付近', area:'南越前町',      lat:35.8395, lng:136.1875, q:'南条サービスエリア' },
-    { id:'cG_-7ItG0Mk', shot:'ukonke',           name:'河野・北前船主の館右近家', area:'南越前町河野地区', lat:35.7905, lng:136.0585, q:'北前船主の館 右近家' },
-    { id:'jfiV5lcfBL0', shot:'hirosebashi',      name:'足羽川・池田町 広瀬橋',  area:'池田町',        lat:35.8880, lng:136.3330, q:'広瀬橋 池田町 福井県' }
+  var GROUPS = [
+    { key:'fctv', label:'FCTV', full:'福井ケーブルテレビ', site:'https://www.youtube.com/@fctv_091/streams', cams:[
+      { id:'IrXQ8JID0Gs', shot:'fukuistation',     name:'福井駅西口',             area:'福井市',        lat:36.0619, lng:136.2231, q:'福井駅 西口' },
+      { id:'k3lKNrqtSyE', shot:'kidabashi',        name:'足羽川・木田橋',         area:'福井市',        lat:36.0585, lng:136.2150, q:'木田橋 福井市' },
+      { id:'yNgpcqA9X64', shot:'shinkansenbridge', name:'新九頭竜橋',             area:'福井市/坂井市', lat:36.1230, lng:136.2075, q:'新九頭竜橋' },
+      { id:'CIjhFpsN-3k', shot:'sunsetbeach',      name:'三国・サンセットビーチ', area:'坂井市三国町',  lat:36.2335, lng:136.1365, q:'三国サンセットビーチ' },
+      { id:'jLZ_T91paAU', shot:'r8ohwada',         name:'国道8号線 大和田方面',   area:'福井市',        lat:36.0870, lng:136.2440, q:'福井市大和田 国道8号' },
+      { id:'U1fhYEreP4Q', shot:'nanjousa',         name:'北陸自動車道南条SA付近', area:'南越前町',      lat:35.8395, lng:136.1875, q:'南条サービスエリア' },
+      { id:'cG_-7ItG0Mk', shot:'ukonke',           name:'河野・北前船主の館右近家', area:'南越前町河野地区', lat:35.7905, lng:136.0585, q:'北前船主の館 右近家' },
+      { id:'jfiV5lcfBL0', shot:'hirosebashi',      name:'足羽川・池田町 広瀬橋',  area:'池田町',        lat:35.8880, lng:136.3330, q:'広瀬橋 池田町 福井県' }
+    ]},
+    { key:'fbc', label:'FBC・福井テレビ', full:'FBC 福井放送 ／ 福井テレビ', site:'https://www.youtube.com/@FBC/streams', cams:[
+      { id:'tHMEnSTnFd4', name:'福井駅付近',           area:'福井市',       lat:36.0625, lng:136.2235, q:'福井駅' },
+      { id:'kdTzzqRh4LQ', name:'大名町交差点（福井駅西口周辺）', area:'福井市', lat:36.0625, lng:136.2174, q:'大名町交差点 福井市' },
+      { id:'kOKevC8ajFg', name:'福井市大和田（北陸新幹線・トレタス）', area:'福井市', lat:36.0975, lng:136.2480, q:'福井放送 本社' },
+      { id:'vTtMdsgn49w', name:'大野市',               area:'大野市',       lat:35.9800, lng:136.4870, q:'大野市役所' },
+      { id:'ejnUvdMmcbk', name:'越前町（越前漁港）',    area:'越前町',       lat:35.9475, lng:135.9912, q:'越前漁港' },
+      { id:'acLJEotPVJc', name:'小浜市',               area:'小浜市',       lat:35.4955, lng:135.7465, q:'小浜港' },
+      { id:'hx_NMdEP9qk', name:'福井テレビ 県内4ヵ所巡回', area:'福井市ほか（福井駅・敦賀駅）', lat:36.0620, lng:136.2225, q:'福井駅', station:'福井テレビ' }
+    ]}
   ];
+  var cameras=[]; GROUPS.forEach(function(g){ g.cams.forEach(function(c){ c.group=g.key; c.gi=cameras.length; cameras.push(c); }); });
+  if(qs.has('group')){ var gq=qs.get('group'); if(gq==='ftb') gq='fbc'; var g0=GROUPS.filter(function(g){return g.key===gq;})[0]; if(g0&&!qs.has('cam')) CONFIG.startCamera=g0.cams[0].gi; }
 
   var $ = function(id){ return document.getElementById(id); };
   var rack=$('rack'), mainPlayer=$('mainPlayer'), fctvShot=$('fctvShot'), shield=$('shield');
@@ -471,7 +496,7 @@ var CONFIG = {
     if(shotTimer){ clearInterval(shotTimer); shotTimer=null; }
     var player=curPlayer(), shot=tvMode?tvShot:fctvShot, other=tvMode?mainPlayer:tvPlayer;
     other.src='';
-    if(stillMode){
+    if(stillMode&&cam.shot){
       player.hidden=true; player.src=''; shot.hidden=false;
       shot.onerror=function(){ shot.hidden=true; player.hidden=false; player.src=embedUrl(cam.id); };
       shot.src=shotUrl(cam.shot);
@@ -482,17 +507,23 @@ var CONFIG = {
       shield.hidden=false; modeBtn.textContent='静止画モード'; modeBtn.classList.remove('active'); signalTag.textContent='YOUTUBE / EMBED';
     }
   }
+  function listFor(i){ var c=cameras[i]; return tvMode?GROUPS.filter(function(g){return g.key===c.group;})[0].cams:cameras; }
+  function stepActive(dir){ var lst=listFor(activeIndex), pos=lst.indexOf(cameras[activeIndex]); setActive(lst[(pos+dir+lst.length)%lst.length].gi); }
+  var curGroup=null;
   function setActive(index,fromAuto){
     activeIndex=(index+cameras.length)%cameras.length;
     var cam=cameras[activeIndex];
+    if(cam.group!==curGroup){ curGroup=cam.group; renderStrip(); renderGroupBtns(); }
     ytLaunch.href=watchUrl(cam.id); hudName.textContent=cam.name; hudId.textContent=cam.id; mainMetaArea.textContent=cam.area;
-    Array.prototype.forEach.call(rack.children,function(t,i){ t.classList.toggle('active',i===activeIndex); });
-    Array.prototype.forEach.call(tvStrip.children,function(t,i){ t.classList.toggle('active',i===activeIndex); });
-    tvName.textContent=cam.name; $('tvFsName').textContent=cam.name; tvArea.textContent=cam.area; tvMap.src=mapUrl(cam);
+    Array.prototype.forEach.call(rack.querySelectorAll('.tile'),function(t){ t.classList.toggle('active',parseInt(t.dataset.gi,10)===activeIndex); });
+    Array.prototype.forEach.call(tvStrip.children,function(t){ t.classList.toggle('active',parseInt(t.dataset.gi,10)===activeIndex); });
+    tvName.textContent=cam.name; $('tvFsName').textContent=cam.name; $('tvStation').textContent=cam.station||GROUPS.filter(function(g){return g.key===cam.group;})[0].full; tvArea.textContent=cam.area; tvMap.src=mapUrl(cam);
     drawPref();
     applyMode();
     if(autoOn&&!fromAuto) restartAuto();
   }
+  function renderGroupBtns(){ Array.prototype.forEach.call(document.querySelectorAll('.grp-btn'),function(b){ b.classList.toggle('active',b.dataset.key===curGroup); }); }
+  function selectGroup(key){ var g=GROUPS.filter(function(x){return x.key===key;})[0]; if(g) setActive(g.cams[0].gi); }
 
   /* ---- 自動切替 ---- */
   function renderAuto(){ var t=autoOn?'⟳ 自動 ON':'⟳ 自動 OFF'; autoBtn.textContent=t; tvAutoBtn.textContent=t; autoBtn.classList.toggle('active',autoOn); tvAutoBtn.classList.toggle('active',autoOn); autoSec.parentElement.classList.toggle('active',autoOn); $('tvAutoSecWrap').classList.toggle('active',autoOn); }
@@ -500,7 +531,7 @@ var CONFIG = {
     if(autoTimer){ clearTimeout(autoTimer); autoTimer=null; }
     if(!autoOn) return;
     var ms=parseInt(autoSec.value,10)*1000;
-    autoTimer=setTimeout(function(){ setActive(activeIndex+1,true); restartAuto(); },ms);
+    autoTimer=setTimeout(function(){ var lst=listFor(activeIndex), pos=lst.indexOf(cameras[activeIndex]); setActive(lst[(pos+1)%lst.length].gi,true); restartAuto(); },ms);
   }
   function toggleAuto(){ autoOn=!autoOn; renderAuto(); restartAuto(); }
   autoBtn.addEventListener('click',toggleAuto); tvAutoBtn.addEventListener('click',toggleAuto);
@@ -530,48 +561,62 @@ var CONFIG = {
   function enterTv(withFs){ tvMode=true; tv.hidden=false; document.body.style.overflow='hidden'; setActive(activeIndex,true); requestAnimationFrame(fitTv); setTimeout(fitTv,300); if(withFs&&!isFs()) enterFs($('tvMain')); }
   function exitTv(){ if(isFs()) exitFs(); tvMode=false; tv.hidden=true; document.body.style.overflow=''; setActive(activeIndex,true); }
   tvModeBtn.addEventListener('click',function(){ enterTv(false); }); tvBack.addEventListener('click',exitTv);
-  $('tvPrev').addEventListener('click',function(){ setActive(activeIndex-1); }); $('tvNext').addEventListener('click',function(){ setActive(activeIndex+1); });
-  $('tvFsPrev').addEventListener('click',function(){ setActive(activeIndex-1); }); $('tvFsNext').addEventListener('click',function(){ setActive(activeIndex+1); });
+  Array.prototype.forEach.call(document.querySelectorAll('.grp-btn'),function(b){ b.addEventListener('click',function(){ selectGroup(b.dataset.key); }); });
+  $('tvPrev').addEventListener('click',function(){ stepActive(-1); }); $('tvNext').addEventListener('click',function(){ stepActive(1); });
+  $('tvFsPrev').addEventListener('click',function(){ stepActive(-1); }); $('tvFsNext').addEventListener('click',function(){ stepActive(1); });
   $('tvFsExit').addEventListener('click',exitFs);
-  document.addEventListener('keydown',function(e){ if(e.key==='f'||e.key==='F') toggleFs(tvMode?$('tvMain'):screenFrame); if(e.key==='Escape'&&tvMode&&!isFs()) exitTv(); if(e.key==='ArrowRight') setActive(activeIndex+1); if(e.key==='ArrowLeft') setActive(activeIndex-1); });
+  document.addEventListener('keydown',function(e){ if(e.key==='f'||e.key==='F') toggleFs(tvMode?$('tvMain'):screenFrame); if(e.key==='Escape'&&tvMode&&!isFs()) exitTv(); if(e.key==='ArrowRight') stepActive(1); if(e.key==='ArrowLeft') stepActive(-1); });
 
   /* 県全体の略図（簡略ポリゴン） */
   var PREF=[[136.2437,36.2956],[136.2578,36.2889],[136.2569,36.2795],[136.2623,36.2797],[136.2661,36.2657],[136.3002,36.2584],[136.3191,36.2337],[136.3318,36.2293],[136.3281,36.2077],[136.3357,36.1846],[136.3595,36.1655],[136.4092,36.1719],[136.4123,36.1599],[136.4317,36.1435],[136.4565,36.1364],[136.4894,36.159],[136.5068,36.1467],[136.5516,36.155],[136.603,36.1278],[136.6172,36.1067],[136.6514,36.0913],[136.6637,36.0676],[136.754,36.0864],[136.7638,36.0677],[136.733,36.0493],[136.7339,36.0219],[136.7264,35.9959],[136.7507,35.9904],[136.7535,35.9563],[136.7915,35.9467],[136.7844,35.9244],[136.8116,35.9125],[136.8221,35.8962],[136.8191,35.8819],[136.832,35.8581],[136.8284,35.8489],[136.8026,35.8439],[136.7891,35.7995],[136.775,35.7993],[136.7645,35.8103],[136.7414,35.8013],[136.7233,35.8082],[136.7102,35.7929],[136.6769,35.793],[136.66,35.7835],[136.6449,35.8069],[136.6382,35.7985],[136.6263,35.797],[136.6218,35.7869],[136.5996,35.7986],[136.5709,35.7776],[136.5233,35.7883],[136.5057,35.7504],[136.4854,35.776],[136.4331,35.7747],[136.3775,35.7952],[136.3467,35.7769],[136.3283,35.7751],[136.3189,35.7491],[136.3245,35.743],[136.3236,35.7169],[136.2916,35.6908],[136.2986,35.6777],[136.2806,35.6587],[136.232,35.6826],[136.2127,35.6822],[136.185,35.7037],[136.15,35.6978],[136.1342,35.6699],[136.1477,35.6625],[136.1767,35.5961],[136.1668,35.5835],[136.1685,35.5655],[136.1133,35.5829],[136.1051,35.5288],[136.0831,35.5404],[136.0699,35.5266],[136.0491,35.5346],[136.0261,35.5296],[136.028,35.5241],[136.0059,35.4916],[135.9815,35.4868],[135.9684,35.5024],[135.9535,35.5057],[135.9465,35.5207],[135.9398,35.5204],[135.9164,35.4696],[135.9101,35.4478],[135.9131,35.4314],[135.8927,35.4199],[135.8904,35.4038],[135.8616,35.3951],[135.8528,35.4115],[135.8151,35.4131],[135.8071,35.3853],[135.7905,35.3867],[135.7907,35.3793],[135.7684,35.3561],[135.7408,35.3583],[135.7362,35.3512],[135.7185,35.3553],[135.7007,35.3437],[135.6419,35.3668],[135.5958,35.3727],[135.5877,35.3683],[135.5656,35.3773],[135.5285,35.3797],[135.5253,35.4207],[135.4958,35.4251],[135.4968,35.4377],[135.4886,35.4387],[135.4857,35.4486],[135.4699,35.4545],[135.4591,35.4675],[135.4754,35.4891],[135.4743,35.507],[135.449,35.5235],[135.4646,35.5509],[135.4865,35.558],[135.4685,35.5299],[135.4832,35.5339],[135.4801,35.5223],[135.4897,35.5303],[135.4935,35.5225],[135.5012,35.5238],[135.5091,35.5347],[135.4955,35.5409],[135.5011,35.5419],[135.4999,35.554],[135.5177,35.5499],[135.5082,35.5032],[135.5342,35.4889],[135.5514,35.4971],[135.5584,35.4903],[135.5756,35.4932],[135.577,35.4992],[135.619,35.5199],[135.631,35.5375],[135.6609,35.5476],[135.659,35.5361],[135.6689,35.5252],[135.657,35.5313],[135.6282,35.5219],[135.6408,35.5197],[135.6367,35.5139],[135.6419,35.5081],[135.6264,35.4892],[135.5937,35.4947],[135.5807,35.4899],[135.6096,35.4809],[135.62,35.486],[135.6317,35.4785],[135.6527,35.4785],[135.6622,35.4938],[135.675,35.4876],[135.7,35.4935],[135.7181,35.4843],[135.72,35.4919],[135.7444,35.4995],[135.7413,35.5046],[135.7506,35.5302],[135.7625,35.5309],[135.7639,35.5361],[135.7363,35.5351],[135.7348,35.5271],[135.7183,35.5202],[135.7169,35.5401],[135.6898,35.5443],[135.6888,35.5496],[135.7132,35.569],[135.7486,35.5665],[135.7574,35.543],[135.771,35.5468],[135.7646,35.5568],[135.7926,35.5417],[135.7854,35.5365],[135.7979,35.5251],[135.8044,35.533],[135.8067,35.5276],[135.8135,35.5294],[135.8123,35.537],[135.8336,35.5363],[135.8252,35.5523],[135.8011,35.5713],[135.8093,35.5715],[135.8104,35.5769],[135.8393,35.5632],[135.8567,35.5819],[135.8557,35.5917],[135.8536,35.603],[135.8445,35.6016],[135.8405,35.6081],[135.8323,35.6031],[135.8268,35.6103],[135.8384,35.621],[135.824,35.6242],[135.8233,35.6316],[135.8326,35.6302],[135.8223,35.6375],[135.8152,35.6325],[135.8143,35.6423],[135.845,35.6357],[135.8431,35.6281],[135.8588,35.6233],[135.8568,35.6167],[135.8658,35.6086],[135.8838,35.6175],[135.8929,35.6117],[135.8981,35.6237],[135.9065,35.6248],[135.9088,35.6135],[135.9212,35.6095],[135.9375,35.6145],[135.9503,35.6278],[135.9484,35.6329],[135.9539,35.6341],[135.9621,35.6223],[135.9801,35.6299],[135.9859,35.6414],[135.9741,35.6551],[135.9636,35.6563],[135.9657,35.6739],[135.9766,35.6847],[135.9757,35.696],[135.9709,35.7118],[135.9633,35.7097],[135.9625,35.6999],[135.9555,35.703],[135.9589,35.7154],[135.9539,35.7205],[135.9682,35.7351],[135.9797,35.7329],[136.0169,35.7639],[136.0374,35.7389],[136.0217,35.7488],[136.0373,35.7278],[136.0375,35.7103],[136.0429,35.7059],[136.0439,35.6921],[136.0373,35.6945],[136.025,35.6806],[136.042,35.6699],[136.0436,35.6587],[136.0737,35.6625],[136.0692,35.6641],[136.0765,35.6665],[136.0774,35.6782],[136.0713,35.6795],[136.0857,35.6851],[136.079,35.7047],[136.0911,35.7101],[136.0973,35.7241],[136.0963,35.7357],[136.0861,35.7383],[136.1011,35.7532],[136.1,35.7771],[136.0694,35.8249],[135.9944,35.8879],[135.9968,35.9355],[135.9575,35.9816],[135.9639,35.9977],[136.0108,36.0341],[136.0106,36.0456],[136.0305,36.0865],[136.0282,36.0958],[136.0468,36.1085],[136.0543,36.1283],[136.095,36.1568],[136.091,36.1602],[136.1141,36.1927],[136.1124,36.2053],[136.1143,36.1928],[136.1293,36.1919],[136.1308,36.2053],[136.1187,36.2003],[136.1342,36.2232],[136.1232,36.2493],[136.1726,36.2532],[136.2437,36.2956]];
   function proj(lng,lat){ return [ (lng-135.40)/(136.90-135.40)*300, (36.33-lat)/(36.33-35.30)*230*0.95+6 ]; }
   function drawPref(){
     var pts=PREF.map(function(p){ var q=proj(p[0],p[1]); return q[0].toFixed(1)+','+q[1].toFixed(1); }).join(' ');
-    var dots=cameras.map(function(c,i){ var q=proj(c.lng,c.lat); var cur=i===activeIndex;
+    var dots=cameras.filter(function(c){return c.group===curGroup;}).map(function(c){ var q=proj(c.lng,c.lat); var cur=c.gi===activeIndex;
       return '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(cur?7:5)+'" fill="'+(cur?'#e8302a':'#7a86a6')+'" stroke="#fff" stroke-width="1.5"/>'+(cur?'<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="13" fill="none" stroke="#e8302a" stroke-width="2.5"><animate attributeName="r" values="9;15;9" dur="1.6s" repeatCount="indefinite"/></circle>':''); }).join('');
     tvPref.innerHTML='<svg viewBox="0 0 300 230" preserveAspectRatio="xMidYMid meet"><polygon points="'+pts+'" fill="#e9eef7" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>'+dots+'</svg>';
   }
 
   /* ---- ラック／TVストリップ ---- */
   function renderRack(){
-    rack.innerHTML=''; tvStrip.innerHTML='';
-    cameras.forEach(function(cam,i){
-      var tile=document.createElement('button'); tile.className='tile'; tile.setAttribute('aria-label',cam.name+' を大画面表示');
-      var thumb=document.createElement('div'); thumb.className='tile-thumb';
-      var img=document.createElement('img'); img.src=thumbUrl(cam.id); img.alt=cam.name; img.loading='lazy'; thumb.appendChild(img);
-      var dot=document.createElement('span'); dot.className='tile-dot'; dot.innerHTML='<span class="d"></span>LIVE'; thumb.appendChild(dot);
-      var edit=document.createElement('span'); edit.className='tile-edit'; edit.textContent='✎'; edit.title='YouTube URLを更新';
-      edit.addEventListener('click',function(ev){ ev.stopPropagation();
-        var input=window.prompt(cam.name+' の新しいYouTube URLまたは動画IDを入力してください',watchUrl(cam.id)); if(!input) return;
-        var nid=extractId(input); if(!nid){ alert('URLまたは動画IDを認識できませんでした。'); return; }
-        cam.id=nid; img.src=thumbUrl(nid); tvImg.src=thumbUrl(nid); if(activeIndex===i) setActive(i); });
-      thumb.appendChild(edit);
-      var info=document.createElement('div'); info.className='tile-info';
-      var name=document.createElement('div'); name.className='tile-name'; name.textContent=cam.name;
-      var area=document.createElement('div'); area.className='tile-area'; area.textContent=cam.area;
-      info.appendChild(name); info.appendChild(area); tile.appendChild(thumb); tile.appendChild(info);
-      tile.addEventListener('click',function(){ setActive(i); }); rack.appendChild(tile);
-
-      var tt=document.createElement('div'); tt.className='tv-thumb';
-      var tl=document.createElement('span'); tl.textContent=cam.name;
-      var tvImg=document.createElement('img'); tvImg.src=thumbUrl(cam.id); tvImg.alt=cam.name;
-      tt.appendChild(tl); tt.appendChild(tvImg); tt.addEventListener('click',function(){ setActive(i); }); tvStrip.appendChild(tt);
-      cam._imgs=[img,tvImg];
+    rack.innerHTML='';
+    GROUPS.forEach(function(g){
+      var head=document.createElement('div'); head.className='rack-group';
+      head.innerHTML='<span class="rack-group-name">'+g.full+'</span><span class="rack-group-count">'+g.cams.length+' CAMS</span>';
+      var grid=document.createElement('div'); grid.className='rack-grid';
+      g.cams.forEach(function(cam){
+        var tile=document.createElement('button'); tile.className='tile'; tile.dataset.gi=cam.gi; tile.setAttribute('aria-label',cam.name+' を大画面表示');
+        var thumb=document.createElement('div'); thumb.className='tile-thumb';
+        var img=document.createElement('img'); img.src=thumbUrl(cam.id); img.alt=cam.name; img.loading='lazy'; thumb.appendChild(img);
+        var edit=document.createElement('span'); edit.className='tile-edit'; edit.textContent='✎'; edit.title='YouTube URLを更新';
+        edit.addEventListener('click',function(ev){ ev.stopPropagation();
+          var input=window.prompt(cam.name+' の新しいYouTube URLまたは動画IDを入力してください',watchUrl(cam.id)); if(!input) return;
+          var nid=extractId(input); if(!nid){ alert('URLまたは動画IDを認識できませんでした。'); return; }
+          cam.id=nid; cam._imgs.forEach(function(im){ im.src=thumbUrl(nid); }); if(activeIndex===cam.gi) setActive(cam.gi); });
+        thumb.appendChild(edit);
+        var info=document.createElement('div'); info.className='tile-info';
+        var name=document.createElement('div'); name.className='tile-name'; name.textContent=cam.name;
+        var area=document.createElement('div'); area.className='tile-area'; area.textContent=cam.area;
+        info.appendChild(name); info.appendChild(area); tile.appendChild(thumb); tile.appendChild(info);
+        tile.addEventListener('click',function(){ setActive(cam.gi); }); grid.appendChild(tile);
+        cam._imgs=[img];
+      });
+      rack.appendChild(head); rack.appendChild(grid);
     });
     rackCount.textContent=cameras.length+' CAMS';
+  }
+  function renderStrip(){
+    tvStrip.innerHTML='';
+    var g=GROUPS.filter(function(x){return x.key===curGroup;})[0]; if(!g) return;
+    cameras.forEach(function(c){ if(c._imgs) c._imgs=c._imgs.slice(0,1); });
+    g.cams.forEach(function(cam){
+      var tt=document.createElement('div'); tt.className='tv-thumb'; tt.dataset.gi=cam.gi;
+      var tl=document.createElement('span'); tl.textContent=cam.name;
+      var tvImg=document.createElement('img'); tvImg.src=thumbUrl(cam.id); tvImg.alt=cam.name;
+      tt.appendChild(tl); tt.appendChild(tvImg); tt.addEventListener('click',function(){ setActive(cam.gi); }); tvStrip.appendChild(tt);
+      cam._imgs.push(tvImg);
+    });
+    tvStrip.style.gridTemplateColumns='repeat(8,1fr)';
   }
   setInterval(function(){ var b=Date.now(); cameras.forEach(function(c){ if(c._imgs) c._imgs.forEach(function(im){ im.src=thumbUrl(c.id,b); }); }); },90000);
 
@@ -656,7 +701,7 @@ var CONFIG = {
   modeBtn.addEventListener('click',function(){ stillMode=!stillMode; applyMode(); });
   renderRack(); renderMute(); renderAuto();
   setActive(CONFIG.startCamera||0,true);
-  if(CONFIG.autoSeconds>0){ var opt=Array.prototype.find.call(autoSec.options,function(o){return parseInt(o.value,10)===CONFIG.autoSeconds;}); if(!opt){ opt=document.createElement('option'); opt.value=CONFIG.autoSeconds; opt.textContent=CONFIG.autoSeconds+'秒'; autoSec.appendChild(opt);} autoSec.value=String(CONFIG.autoSeconds); autoOn=true; renderAuto(); restartAuto(); }
+  if(CONFIG.autoSeconds>0){ var opt=Array.prototype.find.call(autoSec.options,function(o){return parseInt(o.value,10)===CONFIG.autoSeconds;}); if(!opt){ opt=document.createElement('option'); opt.value=CONFIG.autoSeconds; opt.textContent=CONFIG.autoSeconds+'秒'; autoSec.appendChild(opt);} autoSec.value=String(CONFIG.autoSeconds); var o2=Array.prototype.find.call($('tvAutoSec').options,function(o){return o.value===autoSec.value;}); if(!o2){ o2=document.createElement('option'); o2.value=autoSec.value; o2.textContent=autoSec.value+'秒'; $('tvAutoSec').appendChild(o2);} $('tvAutoSec').value=autoSec.value; autoOn=true; renderAuto(); restartAuto(); }
   if(CONFIG.startInTv) enterTv();
 })();
 </script>
