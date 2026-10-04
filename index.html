@@ -161,6 +161,57 @@
   .wx-today{border-bottom:0;padding-bottom:4px;} .wx-today .ico{font-size:56px;} .wx-today .txt b{font-size:24px;} .wx-today .txt span{font-size:16px;}
   .wx-hourly{padding:6px 0 14px;} .wx-hourly .t{font-size:14px;} .wx-hourly .i{font-size:32px;} .wx-hourly .w{font-size:13px;} .wx-hourly b{font-size:20px;} .wx-hourly .p{font-size:13px;}
   .wx-week div{font-size:15px;} .wx-week div .i{font-size:32px;}
+  /* 新幹線カード */
+  .skcard{margin-top:16px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:12px 14px;}
+  .sk-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;}
+  .sk-title{font-family:var(--font-mono);font-size:16px;font-weight:700;letter-spacing:0.14em;color:var(--text-2);}
+  .sk-note{font-size:11px;color:var(--text-3);}
+  .sk-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+  .sk-col h4{margin:0 0 6px;font-size:13px;color:var(--text-2);font-weight:700;}
+  .sk-row{display:flex;align-items:baseline;gap:10px;padding:5px 0;border-top:1px solid var(--border-soft);font-size:15px;}
+  .sk-row .t{font-family:var(--font-mono);font-weight:700;color:var(--text-1);font-size:18px;min-width:62px;}
+  .sk-row .k{color:var(--text-2);} .sk-row .left{margin-left:auto;font-family:var(--font-mono);color:var(--accent);font-weight:700;}
+  .sk-row.soon .left{color:#ff7a6b;}
+  .sk-pass{margin-top:10px;padding:8px 10px;border-radius:8px;background:rgba(63,182,201,0.12);font-size:14px;line-height:1.6;}
+  .sk-pass b{color:var(--accent);}
+  .sk-sec{margin-top:14px;padding-top:10px;border-top:1px dashed var(--border-soft);}
+  .ttupd{margin-top:8px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:8px 14px;font-size:13px;}
+  .ttupd summary{cursor:pointer;color:var(--text-2);font-weight:700;}
+  .ttupd-note{color:var(--text-3);font-size:12px;line-height:1.7;}
+  .ttupd-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .ttupd-grid label{font-size:12px;color:var(--text-2);}
+  .ttupd-grid a{color:var(--accent);}
+  .ttupd textarea{width:100%;height:110px;margin-top:4px;background:#0d1013;border:1px solid var(--border);color:var(--text-1);font:12px var(--font-mono);padding:6px;border-radius:var(--radius-sm);}
+  :root[data-theme="light"] .ttupd textarea{background:#fff;}
+  .ttupd-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;}
+  .ttupd-row input{background:#0d1013;border:1px solid var(--border);color:var(--text-1);font:inherit;padding:5px 8px;border-radius:var(--radius-sm);}
+  :root[data-theme="light"] .ttupd-row input{background:#fff;}
+  .ttupd-msg{color:var(--accent);font-weight:700;}
+  .ttupd-out{height:200px !important;}
+  @media (max-width:700px){.ttupd-grid{grid-template-columns:1fr;}}
+  @media (max-width:600px){.sk-cols{grid-template-columns:1fr;}}
+  #tv .tv-sk{background:#fff;color:#0d2c73;padding:5px 10px;font-size:clamp(12px,.6vw + .6vh,16px);line-height:1.5;border-top:2px solid #dfe6f5;}
+  #tv .tv-sk:empty{display:none;}
+  #tv .tv-sk b{color:#1d5fdc;} #tv .tv-sk .soon{color:#e8302a;font-weight:900;}
+  #tv .tv-sk .pass{display:block;color:#0d2c73;}
+  /* TVモード：パネル切替タブ */
+  #tv .tv-tabs{display:flex;gap:4px;flex:0 0 auto;}
+  #tv .tv-tab{flex:1;background:rgba(255,255,255,0.18);color:#fff;border:0;border-radius:4px 4px 0 0;font:700 clamp(12px,.6vw + .6vh,16px) var(--font-ui);padding:5px 0;cursor:pointer;}
+  #tv .tv-tab.active{background:#fff;color:#0d2c73;}
+  #tv .tv-tabs + .tv-wx{border-top-left-radius:0;}
+  /* TVモード：電車パネル */
+  #tv .tv-tr .tr-sec{margin-bottom:6px;}
+  #tv .tv-tr .tr-head{display:flex;justify-content:space-between;align-items:baseline;font-weight:900;font-size:clamp(13px,.65vw + .65vh,18px);border-bottom:2px solid #dfe6f5;padding-bottom:2px;margin-bottom:4px;}
+  #tv .tv-tr .tr-head small{font-weight:400;font-size:.75em;color:#52659b;}
+  #tv .tv-tr .tr-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  #tv .tv-tr h4{margin:0 0 2px;font-size:clamp(11px,.55vw + .55vh,14px);color:#52659b;font-weight:700;}
+  #tv .tv-tr .row{display:flex;gap:6px;align-items:baseline;font-size:clamp(11px,.55vw + .55vh,15px);padding:2px 0;border-top:1px solid #eef2fb;}
+  #tv .tv-tr .row .t{font-family:var(--font-mono);font-weight:700;font-size:1.15em;color:#0d2c73;}
+  #tv .tv-tr .row .k{color:#52659b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  #tv .tv-tr .row .left{margin-left:auto;font-family:var(--font-mono);font-weight:700;color:#1d5fdc;white-space:nowrap;}
+  #tv .tv-tr .row.soon .left{color:#e8302a;}
+  #tv .tv-tr .pass{background:#eef4ff;border-radius:6px;padding:5px 8px;margin:2px 0 8px;font-size:clamp(11px,.6vw + .6vh,15px);line-height:1.5;}
+  #tv .tv-tr .pass b{color:#1d5fdc;}
   /* 天気カード（TVモード） */
   #tv .tv-wx{flex:0 1 auto;min-height:0;overflow:hidden;background:#fff;border-radius:4px;padding:6px 10px 8px;color:#0d2c73;font-family:var(--font-ui);}
   #tv .tv-wx .wx-head{display:flex;justify-content:space-between;align-items:baseline;}
@@ -328,6 +379,28 @@
   </div>
   <div class="rack" id="rack"></div>
 
+  <div class="skcard" id="skMain"></div>
+  <details class="ttupd" id="ttUpd">
+    <summary>🛠 時刻表を更新する（ダイヤ改正時）</summary>
+    <div class="ttupd-body">
+      <p class="ttupd-note">Yahoo!路線情報の「福井(福井県)駅」時刻表ページを開き、時刻の表（「6 | 33 [か] 東 …」の部分）をマウスで選択してコピーし、下の欄に貼り付けてください。4つとも貼ったら「解析して保存」。このブラウザに保存され、以後はそのダイヤで表示します。「書き出し」でindex.htmlに貼るテキストも作れます（全PCに反映したい場合）。</p>
+      <div class="ttupd-grid">
+        <label>北陸新幹線 上り（東京・富山方面）<br><a href="https://transit.yahoo.co.jp/timetable/23855/260" target="_blank" rel="noopener">Yahoo!の該当ページ</a><textarea id="tt_sk_up" placeholder="6 | 33 [か] 東&#10;7 | 8 45 [か] 東 57◆ 金 …"></textarea></label>
+        <label>北陸新幹線 下り（敦賀方面）<br><a href="https://transit.yahoo.co.jp/timetable/23855/261" target="_blank" rel="noopener">Yahoo!の該当ページ</a><textarea id="tt_sk_dn" placeholder="6 | 36&#10;7 | 10 38 …"></textarea></label>
+        <label>ハピライン 下り（敦賀・越前大野方面）<br><a href="https://transit.yahoo.co.jp/timetable/23855/8660" target="_blank" rel="noopener">Yahoo!の該当ページ</a><textarea id="tt_hp_dn" placeholder="5 | 21● 50●&#10;6 | 25 55● 武 …"></textarea></label>
+        <label>ハピライン 上り（芦原温泉・金沢方面）<br><a href="https://transit.yahoo.co.jp/timetable/23855/8661" target="_blank" rel="noopener">Yahoo!の該当ページ</a><textarea id="tt_hp_up" placeholder="5 | 24 金 …"></textarea></label>
+      </div>
+      <div class="ttupd-row">
+        <label>改正日メモ <input type="text" id="tt_note" placeholder="例：2027/3/13改正"></label>
+        <button class="pill" id="ttParse">解析して保存</button>
+        <button class="pill" id="ttExport">書き出し（index.html用）</button>
+        <button class="pill" id="ttReset">初期値に戻す</button>
+        <span id="ttMsg" class="ttupd-msg"></span>
+      </div>
+      <textarea id="ttOut" class="ttupd-out" hidden readonly></textarea>
+    </div>
+  </details>
+
   <div class="wxcard" id="wxMain"><span class="wx-sub">天気を取得中…</span></div>
 
   <div class="bgm">
@@ -397,7 +470,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v5.3 · 15 CAMERAS</div>
+    <div class="footer-badge">v5.6 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -419,9 +492,12 @@
   <div class="tv-side">
     <div class="tv-info">
       <div class="tv-namerow"><div class="tv-name" id="tvName">--</div><div class="tv-area" id="tvArea">--</div></div>
+      <div class="tv-sk" id="skTv"></div>
       <div class="tv-map"><iframe id="tvMap" src="" title="現地地図"></iframe></div>
     </div>
+    <div class="tv-tabs"><button class="tv-tab active" data-p="wx">🌤 天気</button><button class="tv-tab" data-p="tr">🚄 電車</button></div>
     <div class="tv-wx" id="wxTv"><span class="wx-sub">天気を取得中…</span></div>
+    <div class="tv-wx tv-tr" id="trainTv" hidden></div>
     <div class="tv-pref" id="tvPref"></div>
   </div>
   <div class="tv-strip" id="tvStrip"></div>
@@ -463,7 +539,7 @@ var CONFIG = {
     { key:'fctv', label:'FCTV', full:'福井ケーブルテレビ', site:'https://www.youtube.com/@fctv_091/streams', cams:[
       { id:'IrXQ8JID0Gs', shot:'fukuistation',     name:'福井駅西口',             area:'福井市',        lat:36.0619, lng:136.2231, q:'福井駅 西口' },
       { id:'k3lKNrqtSyE', shot:'kidabashi',        name:'足羽川・木田橋',         area:'福井市',        lat:36.0585, lng:136.2150, q:'木田橋 福井市' },
-      { id:'yNgpcqA9X64', shot:'shinkansenbridge', name:'新九頭竜橋',             area:'福井市/坂井市', lat:36.1230, lng:136.2075, q:'新九頭竜橋' },
+      { id:'yNgpcqA9X64', shot:'shinkansenbridge', name:'新九頭竜橋',             area:'福井市/坂井市', lat:36.1230, lng:136.2075, q:'新九頭竜橋', sk:{up:4,down:-5,label:'九頭竜川橋りょう'} },
       { id:'CIjhFpsN-3k', shot:'sunsetbeach',      name:'三国・サンセットビーチ', area:'坂井市三国町',  lat:36.2335, lng:136.1365, q:'三国サンセットビーチ' },
       { id:'jLZ_T91paAU', shot:'r8ohwada',         name:'国道8号線 大和田方面',   area:'福井市',        lat:36.0870, lng:136.2440, q:'福井市大和田 国道8号' },
       { id:'U1fhYEreP4Q', shot:'nanjousa',         name:'北陸自動車道南条SA付近', area:'南越前町',      lat:35.8395, lng:136.1875, q:'南条サービスエリア' },
@@ -471,15 +547,105 @@ var CONFIG = {
       { id:'jfiV5lcfBL0', shot:'hirosebashi',      name:'足羽川・池田町 広瀬橋',  area:'池田町',        lat:35.8880, lng:136.3330, q:'広瀬橋 池田町 福井県' }
     ]},
     { key:'fbc', label:'FBC・福井テレビ', full:'FBC 福井放送 ／ 福井テレビ', site:'https://www.youtube.com/@FBC/streams', ads:true, cams:[
-      { id:'tHMEnSTnFd4', name:'福井駅付近',           area:'福井市',       lat:36.0625, lng:136.2235, q:'福井駅' },
+      { id:'tHMEnSTnFd4', name:'福井駅付近',           area:'福井市',       lat:36.0625, lng:136.2235, q:'福井駅', sk:{up:0,down:-1,label:'福井駅'} },
       { id:'kdTzzqRh4LQ', name:'大名町交差点（福井駅西口周辺）', area:'福井市', lat:36.0625, lng:136.2174, q:'大名町交差点 福井市' },
-      { id:'kOKevC8ajFg', name:'福井市大和田（北陸新幹線・トレタス）', area:'福井市', lat:36.0975, lng:136.2480, q:'福井放送 本社' },
+      { id:'kOKevC8ajFg', name:'福井市大和田（北陸新幹線・トレタス）', area:'福井市', lat:36.0975, lng:136.2480, q:'福井放送 本社', sk:{up:2,down:-3,label:'大和田の高架'} },
       { id:'vTtMdsgn49w', name:'大野市',               area:'大野市',       lat:35.9800, lng:136.4870, q:'大野市役所' },
       { id:'ejnUvdMmcbk', name:'越前町（越前漁港）',    area:'越前町',       lat:35.9475, lng:135.9912, q:'越前漁港' },
       { id:'acLJEotPVJc', name:'小浜市',               area:'小浜市',       lat:35.4955, lng:135.7465, q:'小浜港' },
-      { id:'hx_NMdEP9qk', name:'福井テレビ 県内4ヵ所巡回', area:'福井市ほか（福井駅・敦賀駅）', lat:36.0620, lng:136.2225, q:'福井駅', station:'福井テレビ' }
+      { id:'hx_NMdEP9qk', name:'福井テレビ 県内4ヵ所巡回', area:'福井市ほか（福井駅・敦賀駅）', lat:36.0620, lng:136.2225, q:'福井駅', station:'福井テレビ', sk:{up:-1,down:1,label:'福井駅周辺'} }
     ]}
   ];
+  /* 北陸新幹線 福井駅 発車時刻（2026年3月14日改正）。◆=特定日・特定曜日のみ運転。
+     k: か=かがやき は=はくたか つ=つるぎ ／ d: 行先 */
+  var SHINKANSEN = {
+    note:'2026/3/14改正・福井駅発（Yahoo!路線情報・駅探より）',
+    up:[ /* 金沢・富山・東京方面 */
+      ['06:33','か','東京'],['07:08','つ','富山'],['07:45','か','東京'],['07:57','つ','金沢','◆'],
+      ['08:24','つ','富山'],['08:32','か','東京','◆'],['08:52','つ','富山'],['09:28','つ','富山','◆'],['09:39','か','東京','◆'],
+      ['10:07','つ','富山'],['10:20','は','東京'],['10:35','つ','富山'],['11:05','つ','金沢','◆'],['11:20','は','東京','◆'],['11:35','つ','金沢','◆'],
+      ['12:00','つ','富山'],['12:20','は','東京','◆'],['12:35','つ','金沢'],['13:03','つ','富山'],['13:20','は','東京','◆'],
+      ['14:02','つ','富山','◆'],['14:09','は','東京','◆'],['14:32','つ','金沢'],['15:03','つ','富山'],['15:23','か','東京'],
+      ['16:02','つ','富山'],['16:23','か','東京'],['17:01','つ','富山'],['17:25','つ','金沢'],['17:31','か','東京'],['17:59','つ','富山'],
+      ['18:26','つ','富山'],['18:54','か','東京'],['19:00','つ','金沢'],['19:27','つ','富山'],['20:00','つ','富山'],['20:33','か','東京'],['20:40','つ','金沢','◆'],
+      ['21:04','つ','富山'],['22:03','つ','富山'],['22:49','つ','富山']
+    ],
+    down:[ /* 敦賀方面 */
+      ['06:36','つ','敦賀'],['07:10','つ','敦賀'],['07:38','つ','敦賀'],['08:12','つ','敦賀','◆'],['08:38','つ','敦賀'],
+      ['09:08','つ','敦賀'],['09:13','か','敦賀'],['09:41','つ','敦賀'],['10:10','か','敦賀'],['10:19','つ','敦賀'],['10:41','つ','敦賀'],
+      ['11:10','か','敦賀'],['11:41','つ','敦賀','◆'],['12:26','か','敦賀'],['12:41','つ','敦賀'],['13:23','か','敦賀'],['13:41','つ','敦賀'],
+      ['14:41','つ','敦賀'],['14:55','は','敦賀'],['15:19','つ','敦賀','◆'],['15:40','つ','敦賀','◆'],['15:55','は','敦賀'],
+      ['16:18','つ','敦賀'],['16:41','つ','敦賀'],['16:56','は','敦賀'],['17:19','つ','敦賀'],['17:38','つ','敦賀'],['17:56','は','敦賀'],
+      ['18:19','つ','敦賀'],['18:41','つ','敦賀'],['18:57','は','敦賀'],['19:15','つ','敦賀'],['19:20','か','敦賀'],['19:42','つ','敦賀'],
+      ['20:21','か','敦賀'],['20:39','つ','敦賀','◆'],['21:17','か','敦賀'],['21:32','つ','敦賀'],['22:08','つ','敦賀','◆'],['22:56','か','敦賀'],['23:10','つ','敦賀']
+    ]
+  };
+  var KIND={'か':'かがやき','は':'はくたか','つ':'つるぎ'};
+  /* ハピラインふくい 福井駅 発車時刻（2026年3月14日改正）。k: 普=普通 快=快速 区=区間快速 ／ (平)=平日のみ ／ 九頭竜湖・越前大野行はJR九頭竜線直通 */
+  var HAPI = {
+    note:'2026/3/14改正・福井駅発（駅探より）',
+    down:[ /* 敦賀方面（越前花堂・鯖江・武生） */
+      ['05:21','普','敦賀'],['05:50','普','敦賀'],['06:25','普','敦賀'],['06:55','普','武生','(平)'],['07:16','快','敦賀'],['07:33','普','敦賀'],['07:50','普','武生','(平)'],
+      ['08:03','普','敦賀'],['08:30','普','敦賀'],['09:05','普','敦賀'],['09:22','普','九頭竜湖'],['09:35','普','敦賀'],['10:05','普','敦賀'],['10:35','普','敦賀'],
+      ['11:05','普','敦賀'],['12:05','普','敦賀'],['12:35','普','敦賀'],['12:48','普','九頭竜湖'],['13:05','普','敦賀'],['14:05','普','敦賀'],['14:35','普','敦賀'],['14:54','普','越前大野'],
+      ['15:05','普','敦賀'],['15:35','普','敦賀'],['16:05','普','敦賀'],['16:35','普','敦賀'],['16:48','普','九頭竜湖'],['17:05','普','敦賀'],['17:35','普','敦賀'],['17:50','普','武生','(平)'],
+      ['18:05','普','敦賀'],['18:21','普','九頭竜湖'],['18:25','普','敦賀'],['18:40','区','敦賀'],['19:04','普','越前大野'],['19:07','普','敦賀'],['19:27','区','敦賀'],['19:58','普','敦賀'],
+      ['20:28','普','敦賀'],['20:30','普','越前大野'],['20:58','普','敦賀'],['21:42','普','敦賀'],['21:48','普','越前大野'],['22:30','普','敦賀'],['23:20','普','敦賀']
+    ],
+    up:[ /* 金沢・芦原温泉方面（森田・春江・丸岡） */
+      ['05:24','普','金沢'],['06:13','普','金沢'],['06:27','普','金沢'],['06:48','普','金沢'],['07:00','普','金沢'],['07:07','普','芦原温泉','(平)'],['07:19','普','芦原温泉'],['07:38','普','芦原温泉'],['07:58','普','金沢'],
+      ['08:31','普','金沢'],['09:31','普','金沢'],['10:20','普','金沢'],['11:20','普','金沢'],['12:20','普','金沢'],['13:20','普','金沢'],['14:20','普','金沢'],['15:20','普','金沢'],
+      ['16:20','普','金沢'],['16:37','普','芦原温泉'],['17:20','普','富山'],['17:37','普','芦原温泉'],['17:51','普','芦原温泉'],['18:07','普','金沢'],['18:41','普','芦原温泉'],
+      ['19:12','普','金沢'],['19:41','普','芦原温泉'],['20:18','普','金沢'],['21:10','普','金沢'],['22:10','普','金沢'],['23:02','普','芦原温泉']
+    ]
+  };
+  var HKIND={'普':'普通','快':'快速','区':'区間快速'};
+  /* --- 時刻表の上書き（ブラウザ保存） --- */
+  var TT_KEY='fctv_timetable_v1';
+  (function(){ try{ var o=JSON.parse(localStorage.getItem(TT_KEY)||'null'); if(o&&o.sk&&o.hp){ SHINKANSEN.up=o.sk.up; SHINKANSEN.down=o.sk.down; HAPI.down=o.hp.down; HAPI.up=o.hp.up; if(o.note){ SHINKANSEN.note=o.note+'（このブラウザで更新）'; HAPI.note=o.note+'（このブラウザで更新）'; } } }catch(e){} })();
+  var DEST={'東':'東京','金':'金沢','富':'富山','山':'富山','敦':'敦賀','芦':'芦原温泉','武':'武生','九':'九頭竜湖','越':'越前大野','金沢':'金沢','東京':'東京','富山':'富山','敦賀':'敦賀','芦原':'芦原温泉','芦原温泉':'芦原温泉','武生':'武生','九頭':'九頭竜湖','越大':'越前大野','九頭竜湖':'九頭竜湖','越前大野':'越前大野'};
+  function parseYahoo(text,mode,defDest){
+    // mode: 'sk' or 'hp'
+    var out=[]; var lines=text.split(/\r?\n/);
+    lines.forEach(function(line){
+      line=line.replace(/[|｜\t]/g,' ').trim(); if(!line) return;
+      var toks=line.split(/\s+/); var hour=parseInt(toks[0],10); if(isNaN(hour)||hour>24) return;
+      var cur=null;
+      function push(){ if(cur) out.push([String(cur.h).padStart(2,'0')+':'+String(cur.m).padStart(2,'0'),cur.k,cur.d,cur.sp]); cur=null; }
+      for(var i=1;i<toks.length;i++){
+        var t=toks[i]; var mm=t.match(/^(\d{1,2})([◆●▲△※]*)$/);
+        if(mm){ push(); cur={h:hour,m:parseInt(mm[1],10),k:(mode==='sk'?'つ':'普'),d:defDest,sp:(mm[2].indexOf('◆')>=0?'◆':'')}; continue; }
+        if(!cur) continue;
+        var km=t.match(/^\[(.+?)\]$/);
+        if(km){ var k=km[1]; if(mode==='sk'){ cur.k=(k==='か'||k==='かがやき')?'か':(k==='は'||k==='はくたか')?'は':'つ'; } else { cur.k=(k==='快'||k==='快速')?'快':(k==='区'||k==='区快'||k==='区間快速')?'区':'普'; } continue; }
+        if(t==='◆'){ cur.sp='◆'; continue; }
+        var dd=t.replace(/[◆●]/g,''); if(DEST[dd]){ cur.d=DEST[dd]; continue; }
+      }
+      push();
+    });
+    out=out.filter(function(e){ return e[3]!=='' || true; }).map(function(e){ return e[3]?e:[e[0],e[1],e[2]]; });
+    out.sort(function(a,b){ return toMin(a[0])-toMin(b[0]); });
+    return out;
+  }
+  function ttInit(){
+    var msg=$('ttMsg'); if(!$('ttParse')) return;
+    $('ttParse').addEventListener('click',function(){
+      var su=parseYahoo($('tt_sk_up').value,'sk','富山'), sd=parseYahoo($('tt_sk_dn').value,'sk','敦賀'), hd=parseYahoo($('tt_hp_dn').value,'hp','敦賀'), hu=parseYahoo($('tt_hp_up').value,'hp','金沢');
+      if(su.length<5||sd.length<5||hd.length<5||hu.length<5){ msg.textContent='解析できた本数が少なすぎます（新幹線上り'+su.length+'/下り'+sd.length+'、ハピ下り'+hd.length+'/上り'+hu.length+'）。貼り付け内容を確認してください'; return; }
+      var note=($('tt_note').value||new Date().toLocaleDateString('ja-JP')+'更新');
+      try{ localStorage.setItem(TT_KEY,JSON.stringify({sk:{up:su,down:sd},hp:{down:hd,up:hu},note:note})); }catch(e){}
+      SHINKANSEN.up=su; SHINKANSEN.down=sd; HAPI.down=hd; HAPI.up=hu; SHINKANSEN.note=note+'（このブラウザで更新）'; HAPI.note=SHINKANSEN.note;
+      renderShinkansen(); msg.textContent='保存しました：新幹線 上り'+su.length+'本／下り'+sd.length+'本、ハピライン 下り'+hd.length+'本／上り'+hu.length+'本';
+    });
+    $('ttExport').addEventListener('click',function(){
+      function js(arr){ return arr.map(function(e){ return "      ['"+e[0]+"','"+e[1]+"','"+e[2]+"'"+(e[3]?",'"+e[3]+"'":"")+"]"; }).join(',\n'); }
+      var t="  // ↓ index.html の SHINKANSEN / HAPI の各配列をこの内容で置き換えてください\n"
+        +"  SHINKANSEN.note = '"+SHINKANSEN.note.replace('（このブラウザで更新）','')+"';\n  SHINKANSEN.up = [\n"+js(SHINKANSEN.up)+"\n  ];\n  SHINKANSEN.down = [\n"+js(SHINKANSEN.down)+"\n  ];\n"
+        +"  HAPI.note = '"+HAPI.note.replace('（このブラウザで更新）','')+"';\n  HAPI.down = [\n"+js(HAPI.down)+"\n  ];\n  HAPI.up = [\n"+js(HAPI.up)+"\n  ];\n";
+      var ta=$('ttOut'); ta.hidden=false; ta.value=t; ta.select(); try{ navigator.clipboard.writeText(t); msg.textContent='クリップボードにコピーしました'; }catch(e){ msg.textContent='下の欄をコピーしてください'; }
+    });
+    $('ttReset').addEventListener('click',function(){ if(confirm('このブラウザに保存した時刻表を消して、index.html内蔵の時刻表に戻しますか？')){ try{ localStorage.removeItem(TT_KEY); }catch(e){} location.reload(); } });
+  }
   var cameras=[]; GROUPS.forEach(function(g){ g.cams.forEach(function(c){ c.group=g.key; c.ads=!!g.ads; c.gi=cameras.length; cameras.push(c); }); });
   if(qs.has('group')){ var gq=qs.get('group'); if(gq==='ftb') gq='fbc'; var g0=GROUPS.filter(function(g){return g.key===gq;})[0]; if(g0&&!qs.has('cam')) CONFIG.startCamera=g0.cams[0].gi; }
 
@@ -554,6 +720,7 @@ var CONFIG = {
     tvName.textContent=cam.name; $('tvFsName').textContent=cam.name; tvArea.textContent=cam.area; tvMap.src=mapUrl(cam);
     drawPref();
     applyMode();
+    try{ renderShinkansen(); }catch(e){}
     if(autoOn&&!fromAuto) restartAuto();
   }
   function renderGroupBtns(){ Array.prototype.forEach.call(document.querySelectorAll('.grp-btn'),function(b){ b.classList.toggle('active',b.dataset.key===curGroup); }); }
@@ -767,11 +934,64 @@ var CONFIG = {
   (function(){ var t='dark'; try{ t=localStorage.getItem('fctv_theme')||t; }catch(e){} if(qs.get('theme')) t=qs.get('theme'); applyTheme(t==='light'?'light':'dark'); })();
   themeBtn.addEventListener('click',function(){ applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light'); });
 
+  /* ---- 北陸新幹線（福井駅 次の発車・カメラ通過予想） ---- */
+  var skMain=$('skMain'), skTv=$('skTv');
+  function toMin(t){ var a=t.split(':'); return parseInt(a[0],10)*60+parseInt(a[1],10); }
+  function fmtMin(m){ m=((m%1440)+1440)%1440; return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'); }
+  function upcoming(list,now,n){ var out=[]; for(var i=0;i<list.length&&out.length<n;i++){ var m=toMin(list[i][0]); if(m>=now-1) out.push({m:m,k:list[i][1],d:list[i][2],sp:list[i][3]||''}); } return out; }
+  var trainTv=$('trainTv');
+  function hapiRows(arr,now,cls){ if(!arr.length) return '<div class="'+cls+'"><span class="k">本日の運転は終了</span></div>';
+    return arr.map(function(x){ var left=x.m-now; return '<div class="'+cls+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+HKIND[x.k]+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
+  function renderShinkansen(){
+    var d=new Date(), now=d.getHours()*60+d.getMinutes();
+    var cam=cameras[activeIndex];
+    var up=upcoming(SHINKANSEN.up,now,3), dn=upcoming(SHINKANSEN.down,now,3);
+    var hdn=upcoming(HAPI.down,now,3), hup=upcoming(HAPI.up,now,3);
+    function rows(arr){ if(!arr.length) return '<div class="sk-row"><span class="k">本日の運転は終了</span></div>';
+      return arr.map(function(x){ var left=x.m-now; return '<div class="sk-row'+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+KIND[x.k]+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
+    var html='<div class="sk-head"><span class="sk-title">🚄 北陸新幹線 福井駅</span><span class="sk-note">'+SHINKANSEN.note+'　◆=特定日のみ</span></div>'
+      +'<div class="sk-cols"><div class="sk-col"><h4>上り（金沢・富山・東京方面）</h4>'+rows(up)+'</div><div class="sk-col"><h4>下り（敦賀方面）</h4>'+rows(dn)+'</div></div>';
+    var passHtml='', tvHtml='';
+    if(cam.sk){
+      var cands=[];
+      up.forEach(function(x){ cands.push({m:x.m,dir:'上り '+x.d+'行',k:KIND[x.k],sp:x.sp}); });
+      dn.forEach(function(x){ cands.push({m:x.m,dir:'下り 敦賀行',k:KIND[x.k],sp:x.sp}); });
+      cands=cands.filter(function(c){ return c.m>=now; }).sort(function(a,b){ return a.m-b.m; }).slice(0,2);
+      if(cands.length){
+        passHtml='<div class="sk-pass">📷 この画面（'+cam.sk.label+'）に次に映る新幹線：'+cands.map(function(c){ var l=c.m-now; return '<b>福井 '+fmtMin(c.m)+'発</b>（'+c.dir+' '+c.k+c.sp+'／'+(l<=0?'まもなく':'あと'+l+'分')+'）'; }).join('　')+'<br><span style="color:var(--text-3);font-size:12px">※福井駅の発車時刻基準。駅から離れた地点では数分前後します</span></div>';
+        var c0=cands[0], l0=c0.m-now;
+        tvHtml='<span class="pass">🚄 次の新幹線 福井 <b>'+fmtMin(c0.m)+'発</b> '+c0.dir+'（'+c0.k+'）<span class="'+(l0<=3?'soon':'')+'">'+(l0<=0?' まもなく':' あと'+l0+'分')+'</span></span>';
+      }
+    }
+    if(!tvHtml){
+      var nu=up[0], nd=dn[0];
+      tvHtml='🚄 福井駅 次発：上り '+(nu?'<b>'+fmtMin(nu.m)+'</b> '+nu.d+'行':'終了')+'　下り '+(nd?'<b>'+fmtMin(nd.m)+'</b>':'終了');
+    }
+    html+=passHtml;
+    html+='<div class="sk-sec"><div class="sk-head"><span class="sk-title">🚃 ハピラインふくい 福井駅</span><span class="sk-note">'+HAPI.note+'　(平)=平日のみ　九頭竜湖・越前大野行はJR九頭竜線直通</span></div>'
+      +'<div class="sk-cols"><div class="sk-col"><h4>下り（越前花堂・鯖江・武生・敦賀方面）</h4>'+hapiRows(hdn,now,'sk-row')+'</div><div class="sk-col"><h4>上り（森田・春江・芦原温泉・金沢方面）</h4>'+hapiRows(hup,now,'sk-row')+'</div></div></div>';
+    skMain.innerHTML=html; skTv.innerHTML=tvHtml;
+    // TVモード用（コンパクトな2段）
+    function rowsTv(arr){ if(!arr.length) return '<div class="row"><span class="k">本日終了</span></div>';
+      return arr.map(function(x){ var left=x.m-now; return '<div class="row'+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+(KIND[x.k]||'')+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
+    var tv='<div class="tr-sec"><div class="tr-head">🚄 北陸新幹線 福井駅 <small>'+SHINKANSEN.note.split('・')[0]+'</small></div>'
+      +(passHtml?'<div class="pass">'+passHtml.replace(/<div class="sk-pass">/,'').replace(/<br><span[^>]*>.*?<\/span><\/div>$/,'').replace(/<\/div>$/,'')+'</div>':'')
+      +'<div class="tr-cols"><div><h4>上り 金沢・東京方面</h4>'+rowsTv(up)+'</div><div><h4>下り 敦賀方面</h4>'+rowsTv(dn)+'</div></div></div>'
+      +'<div class="tr-sec"><div class="tr-head">🚃 ハピラインふくい 福井駅 <small>(平)=平日のみ</small></div>'
+      +'<div class="tr-cols"><div><h4>下り 鯖江・武生・敦賀方面</h4>'+hapiRows(hdn,now,'row')+'</div><div><h4>上り 芦原温泉・金沢方面</h4>'+hapiRows(hup,now,'row')+'</div></div></div>';
+    trainTv.innerHTML=tv;
+  }
+  /* パネル切替（天気／電車） */
+  function setTvPanel(pn){ var wx=pn!=='tr'; $('wxTv').hidden=!wx; trainTv.hidden=wx; Array.prototype.forEach.call(document.querySelectorAll('.tv-tab'),function(b){ b.classList.toggle('active',b.dataset.p===pn); }); try{ localStorage.setItem('fctv_tvpanel',pn); }catch(e){} }
+  Array.prototype.forEach.call(document.querySelectorAll('.tv-tab'),function(b){ b.addEventListener('click',function(){ setTvPanel(b.dataset.p); }); });
+  (function(){ var pn='wx'; try{ pn=localStorage.getItem('fctv_tvpanel')||pn; }catch(e){} if(qs.get('panel')) pn=qs.get('panel'); setTvPanel(pn==='tr'?'tr':'wx'); })();
+  setInterval(renderShinkansen,15000);
+
   /* ---- 時計・起動 ---- */
   function tickClock(){ var d=new Date(),p=function(n){return String(n).padStart(2,'0');}; $('clock').textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()); }
   tickClock(); setInterval(tickClock,1000);
   modeBtn.addEventListener('click',function(){ stillMode=!stillMode; applyMode(); });
-  renderRack(); renderAuto();
+  renderRack(); renderAuto(); ttInit();
   setActive(CONFIG.startCamera||0,true);
   if(CONFIG.autoSeconds>0){ var opt=Array.prototype.find.call(autoSec.options,function(o){return parseInt(o.value,10)===CONFIG.autoSeconds;}); if(!opt){ opt=document.createElement('option'); opt.value=CONFIG.autoSeconds; opt.textContent=CONFIG.autoSeconds+'秒'; autoSec.appendChild(opt);} autoSec.value=String(CONFIG.autoSeconds); var o2=Array.prototype.find.call($('tvAutoSec').options,function(o){return o.value===autoSec.value;}); if(!o2){ o2=document.createElement('option'); o2.value=autoSec.value; o2.textContent=autoSec.value+'秒'; $('tvAutoSec').appendChild(o2);} $('tvAutoSec').value=autoSec.value; autoOn=true; renderAuto(); restartAuto(); }
   if(CONFIG.startInTv) enterTv();
