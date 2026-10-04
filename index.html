@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>福井ケーブルテレビ ライブカメラ</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d5fdc'/%3E%3Crect x='10' y='16' width='44' height='28' rx='3' fill='%23fff'/%3E%3Ccircle cx='46' cy='24' r='4' fill='%23e8302a'/%3E%3Crect x='24' y='48' width='16' height='4' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d5fdc'/%3E%3Crect x='10' y='16' width='44' height='28' rx='3' fill='%23fff'/%3E%3Ccircle cx='46' cy='24' r='4' fill='%23e8302a'/%3E%3Crect x='24' y='48' width='16' height='4' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="manifest" href='data:application/manifest+json,{"name":"福井ケーブルテレビ ライブカメラ","short_name":"ライブカメラ","start_url":".","display":"fullscreen","background_color":"%231d5fdc","theme_color":"%231d5fdc","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%231d5fdc%27/%3E%3Crect x=%2710%27 y=%2716%27 width=%2744%27 height=%2728%27 rx=%273%27 fill=%27%23fff%27/%3E%3Ccircle cx=%2746%27 cy=%2724%27 r=%274%27 fill=%27%23e8302a%27/%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml","purpose":"any"}]}'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +114,8 @@
   .bgm input[type=text]{flex:1;min-width:200px;}
   .bgm input[type=range]{width:120px;}
   .bgm-note{font-size:10.5px;color:var(--text-3);margin-top:8px;line-height:1.6;}
+  .bgm-status{font-size:13px;font-weight:700;color:var(--accent);min-height:18px;margin:2px 0 4px;}
+  .bgm-row label{min-width:120px;}
   .bgm-yt{margin-top:8px;}
   .bgm-yt iframe{width:280px;height:158px;border:0;border-radius:var(--radius-sm);}
 
@@ -225,6 +228,7 @@
   #tv .tv-thumb.active{border-color:#ffd54a;box-shadow:0 0 0 2px #ffd54a;}
   #tv .tv-thumb span{flex:0 0 auto;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;background:#1a4fc4;color:#fff;font-weight:700;font-size:clamp(11px,.5vw + .5vh,15px);line-height:1.2;text-align:center;padding:3px 4px;overflow:hidden;}
   #tv .tv-thumb img{flex:1 1 0;min-height:0;width:100%;object-fit:cover;display:block;}
+  #tv .tv-thumb .np,.tile-name .np{display:inline-block;white-space:nowrap;}
   #tv .tv-bar{position:fixed;left:16px;right:16px;bottom:8px;display:flex;gap:8px;z-index:60;opacity:.55;transition:opacity .2s;align-items:center;}
   #tv .tv-bar-sep{flex:1;}
   #tv .tv-bar .grp-btn{background:rgba(255,255,255,0.18);}
@@ -338,37 +342,52 @@
         <button class="pill" id="bgmStop">■ 停止</button>
       </div>
     </div>
+    <div class="bgm-status" id="bgmNow"></div>
     <div class="bgm-row">
-      <label>ネットラジオ</label>
+      <label>① ネットラジオ</label>
       <select id="bgmPreset">
         <option value="">— 選択 —</option>
-        <option value="https://ice1.somafm.com/groovesalad-128-mp3">SomaFM Groove Salad（アンビエント）</option>
-        <option value="https://ice1.somafm.com/dronezone-128-mp3">SomaFM Drone Zone（静かな環境音楽）</option>
-        <option value="https://ice1.somafm.com/lush-128-mp3">SomaFM Lush（やわらかいボーカル）</option>
-        <option value="https://ice1.somafm.com/secretagent-128-mp3">SomaFM Secret Agent（ラウンジ）</option>
-        <option value="https://ice1.somafm.com/sonicuniverse-128-mp3">SomaFM Sonic Universe（ジャズ寄り）</option>
-        <option value="https://ice1.somafm.com/bootliquor-128-mp3">SomaFM Boot Liquor（アメリカーナ）</option>
+        <optgroup label="Radio Paradise（広告なし・リスナー支援局）">
+          <option value="rp:mellow">Mellow Mix（落ち着いたロック／ポップ・BGM向き）</option>
+          <option value="rp:main">Main Mix（幅広いロック／ポップ）</option>
+          <option value="rp:global">Global Mix（ワールド・エレクトロニカ）</option>
+          <option value="rp:rock">Rock Mix（ロック中心）</option>
+        </optgroup>
+        <optgroup label="SomaFM（環境によってはつながりません）">
+          <option value="groovesalad">Groove Salad（チルアウト・アンビエント）</option>
+          <option value="fluid">Fluid（インスト・ジャジーなビート）</option>
+          <option value="sonicuniverse">Sonic Universe（ジャズ・フュージョン寄り）</option>
+          <option value="illstreet">Illinois Street Lounge（ラウンジ・ボサノバ）</option>
+          <option value="secretagent">Secret Agent（ラウンジ）</option>
+          <option value="lush">Lush（やわらかいボーカル）</option>
+        </optgroup>
       </select>
-      <input type="text" id="bgmUrl" placeholder="または直接ストリームURL（.mp3 / .aac / .m3u8 など）を貼り付け">
-      <button class="pill" id="bgmPlayUrl">▶ 再生</button>
+      <button class="pill" id="bgmPlayPreset">▶ ①を再生</button>
     </div>
     <div class="bgm-row">
-      <label>手元の音楽</label>
+      <label>② ストリームURL</label>
+      <input type="text" id="bgmUrl" placeholder="ネットラジオ局の直接ストリームURL（.mp3 / .aac など）を貼り付け">
+      <button class="pill" id="bgmPlayUrl">▶ ②を再生</button>
+    </div>
+    <div class="bgm-row">
+      <label>③ 手元の音楽</label>
       <input type="file" id="bgmFile" accept="audio/*" multiple>
-      <label style="min-width:auto">音量</label><input type="range" id="bgmVol" min="0" max="100" value="60">
-      <span id="bgmNow" style="font-size:11px;color:var(--text-2);"></span>
+      <button class="pill" id="bgmPlayFile">▶ ③を再生</button>
     </div>
     <div class="bgm-row">
-      <label>YouTube BGM</label>
-      <input type="text" id="bgmYtUrl" placeholder="音楽ライブ配信や作業用BGM動画のURLを貼り付け（例：lo-fi、ジャズの24時間配信）">
-      <button class="pill" id="bgmYtPlay">▶ 読み込み</button>
-      <button class="pill" id="bgmYtClear">✕</button>
+      <label>④ YouTube BGM</label>
+      <input type="text" id="bgmYtUrl" placeholder="音楽の24時間配信や作業用BGM動画のURLを貼り付け">
+      <button class="pill" id="bgmYtPlay">▶ ④を再生</button>
+      <button class="pill" id="bgmYtClear">✕ ④を消す</button>
+    </div>
+    <div class="bgm-row">
+      <label>音量（①〜③）</label><input type="range" id="bgmVol" min="0" max="100" value="60">
     </div>
     <div class="bgm-yt" id="bgmYt" hidden></div>
     <audio id="bgmAudio" preload="none"></audio>
     <div class="bgm-note">
-      ネットラジオは放送局が公開している直接ストリームです（SomaFMはリスナー支援の非営利局）。手元の音楽は複数ファイルを選ぶと順に再生します。
-      YouTube BGMは埋め込み許可された動画のみ再生でき、小さなプレーヤー上で音量を操作できます。radikoは仕様上埋め込めないため別ウィンドウで開きます。
+      ①は広告のない非営利ネットラジオ局の直接ストリームです（つながらないときは自動で別サーバーを試します）。③は複数ファイルを選ぶと順に再生します。
+      ④は埋め込み許可された動画のみ再生でき、音量は表示されるプレーヤー上で操作します。radikoは仕様上埋め込めないため別ウィンドウで開きます。
     </div>
   </div>
 
@@ -378,7 +397,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v4.9 · 15 CAMERAS</div>
+    <div class="footer-badge">v5.3 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -430,7 +449,7 @@ var CONFIG = {
   homeName: '福井市',          // 天気を表示する場所の名前
   homeLat: 36.0652,            // 自宅付近の緯度（Googleマップで右クリック→座標コピー）
   homeLng: 136.2216,           // 自宅付近の経度
-  startInTv: false,            // true にすると最初からTVモードで開く（URLに ?tv=1 でも可）
+  startInTv: true,             // 既定でTVモードで開く（通常画面で開きたいときは URLに ?tv=0）
   autoSeconds: 0,              // 0=自動切替しない / 15 なら15秒ごと（URLに ?auto=15 でも可）
   startCamera: 0               // 最初に表示するカメラ（0〜7）
 };
@@ -496,6 +515,7 @@ var CONFIG = {
   function shotUrl(slug){ return 'https://files.fctv.jp/cam-img/'+slug+'.jpg?t='+Date.now(); }
   function watchUrl(id){ return 'https://www.youtube.com/watch?v='+id; }
   function mapUrl(c){ var q=c.q||(c.lat+','+c.lng); return 'https://www.google.com/maps?q='+encodeURIComponent(q)+'&z=15&hl=ja&output=embed'; }
+  function nameHtml(n){ var i=n.indexOf('（'); if(i<0) return '<span class="np">'+n+'</span>'; return '<span class="np">'+n.slice(0,i)+'</span><span class="np">'+n.slice(i)+'</span>'; }
   function extractId(input){
     input=(input||'').trim();
     var m=input.match(/[?&]v=([A-Za-z0-9_-]{6,})/)||input.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/)||input.match(/embed\/([A-Za-z0-9_-]{6,})/)||input.match(/live\/([A-Za-z0-9_-]{6,})/);
@@ -624,7 +644,7 @@ var CONFIG = {
           cam.id=nid; cam._imgs.forEach(function(im){ im.src=thumbUrl(nid); }); if(activeIndex===cam.gi) setActive(cam.gi); });
         thumb.appendChild(edit);
         var info=document.createElement('div'); info.className='tile-info';
-        var name=document.createElement('div'); name.className='tile-name'; name.textContent=cam.name;
+        var name=document.createElement('div'); name.className='tile-name'; name.innerHTML=nameHtml(cam.name);
         var area=document.createElement('div'); area.className='tile-area'; area.textContent=cam.area;
         info.appendChild(name); info.appendChild(area); tile.appendChild(thumb); tile.appendChild(info);
         tile.addEventListener('click',function(){ setActive(cam.gi); }); grid.appendChild(tile);
@@ -640,7 +660,7 @@ var CONFIG = {
     cameras.forEach(function(c){ if(c._imgs) c._imgs=c._imgs.slice(0,1); });
     g.cams.forEach(function(cam){
       var tt=document.createElement('div'); tt.className='tv-thumb'; tt.dataset.gi=cam.gi;
-      var tl=document.createElement('span'); tl.textContent=cam.name;
+      var tl=document.createElement('span'); tl.innerHTML=nameHtml(cam.name);
       var tvImg=document.createElement('img'); tvImg.src=thumbUrl(cam.id); tvImg.alt=cam.name;
       tt.appendChild(tl); tt.appendChild(tvImg); tt.addEventListener('click',function(){ setActive(cam.gi); }); tvStrip.appendChild(tt);
       cam._imgs.push(tvImg);
@@ -653,20 +673,43 @@ var CONFIG = {
   var bgmAudio=$('bgmAudio'), bgmPreset=$('bgmPreset'), bgmUrl=$('bgmUrl'), bgmFile=$('bgmFile'), bgmVol=$('bgmVol'), bgmNow=$('bgmNow'), bgmYt=$('bgmYt'), bgmYtUrl=$('bgmYtUrl');
   var playlist=[], plIndex=0;
   bgmAudio.volume=0.6;
-  function bgmPlay(src,label){ bgmAudio.src=src; bgmAudio.play().then(function(){ bgmNow.textContent='再生中: '+label; }).catch(function(){ bgmNow.textContent='再生できませんでした（URLや形式を確認）'; }); }
+  var bgmCandidates=[], bgmLabel='', bgmLastErr='', bgmGen=0;
+  function bgmTryNext(gen){
+    if(gen!==bgmGen) return;                       // 古い再生要求は無視（二重再生による中断を防ぐ）
+    if(!bgmCandidates.length){ bgmNow.textContent='再生できませんでした（'+bgmLabel+'）'+(bgmLastErr?' ─ '+bgmLastErr:''); return; }
+    var src=bgmCandidates.shift();
+    bgmNow.textContent='接続中… '+src.replace(/^https?:\/\//,'');
+    bgmAudio.src=src;
+    var p=bgmAudio.play();
+    if(p&&p.then){
+      p.then(function(){ if(gen===bgmGen) bgmNow.textContent='再生中: '+bgmLabel; })
+       .catch(function(e){
+         if(gen!==bgmGen) return;
+         if(e&&e.name==='NotAllowedError'){ bgmNow.textContent='ブラウザが自動再生を止めました。もう一度「▶」を押してください'; bgmCandidates=[]; return; }
+         if(e&&e.name==='AbortError'){ return; }     // 自分以外の操作で中断された場合は何もしない
+         bgmLastErr=(e&&e.name?e.name:'エラー')+(bgmAudio.error?' code'+bgmAudio.error.code:'');
+         setTimeout(function(){ bgmTryNext(gen); },0);
+       });
+    }
+  }
+  function bgmPlay(src,label){ bgmGen++; bgmLabel=label; bgmLastErr=''; bgmCandidates=Array.isArray(src)?src.slice():[src]; bgmTryNext(bgmGen); }
+  function somaUrls(ch){ var rp={ 'rp:mellow':['https://stream.radioparadise.com/mellow-128','https://stream.radioparadise.com/mellow-320'], 'rp:main':['https://stream.radioparadise.com/mp3-128','https://stream.radioparadise.com/aac-128'], 'rp:global':['https://stream.radioparadise.com/global-128','https://stream.radioparadise.com/global-320'], 'rp:rock':['https://stream.radioparadise.com/rock-128','https://stream.radioparadise.com/rock-320'] }; if(rp[ch]) return rp[ch]; return ['https://ice.somafm.com/'+ch,'https://ice5.somafm.com/'+ch+'-128-mp3','https://ice6.somafm.com/'+ch+'-128-mp3','https://ice2.somafm.com/'+ch+'-128-mp3','https://ice1.somafm.com/'+ch+'-128-mp3','https://ice5.somafm.com/'+ch+'-128-aac']; }
   function openRadiko(){
     var st=$('radikoSt').value, url=st?('https://radiko.jp/#!/live/'+st):'https://radiko.jp/';
     var w=window.open(url,'radiko_bgm','width=1000,height=560,left='+Math.max(0,screen.width-1020)+',top='+Math.max(0,screen.height-640)+',menubar=no,toolbar=no,location=no,status=no,resizable=yes');
     if(w) w.focus();
   }
   $('radioBtn').addEventListener('click',openRadiko); $('tvRadioBtn').addEventListener('click',openRadiko);
-  bgmPreset.addEventListener('change',function(){ if(bgmPreset.value){ playlist=[]; bgmPlay(bgmPreset.value,bgmPreset.options[bgmPreset.selectedIndex].text); } });
-  $('bgmPlayUrl').addEventListener('click',function(){ var u=bgmUrl.value.trim(); if(u){ playlist=[]; bgmPreset.value=''; bgmPlay(u,u); } });
-  bgmFile.addEventListener('change',function(){ playlist=Array.prototype.slice.call(bgmFile.files); plIndex=0; bgmPreset.value=''; if(playlist.length) bgmPlay(URL.createObjectURL(playlist[0]),playlist[0].name); });
-  bgmAudio.addEventListener('ended',function(){ if(playlist.length){ plIndex=(plIndex+1)%playlist.length; bgmPlay(URL.createObjectURL(playlist[plIndex]),playlist[plIndex].name); } });
+  function playPreset(){ if(bgmPreset.value){ playlist=[]; bgmPlay(somaUrls(bgmPreset.value),'ネットラジオ '+bgmPreset.options[bgmPreset.selectedIndex].text); } else bgmNow.textContent='局を選んでください'; }
+  $('bgmPlayPreset').addEventListener('click',playPreset);
+  $('bgmPlayUrl').addEventListener('click',function(){ var u=bgmUrl.value.trim(); if(u){ playlist=[]; bgmPreset.value=''; bgmPlay(u,'ストリームURL'); } else bgmNow.textContent='URLを入力してください'; });
+  function playFiles(){ playlist=Array.prototype.slice.call(bgmFile.files); plIndex=0; bgmPreset.value=''; if(playlist.length) bgmPlay(URL.createObjectURL(playlist[0]),'手元の音楽 '+playlist[0].name); else bgmNow.textContent='音楽ファイルを選んでください'; }
+  $('bgmPlayFile').addEventListener('click',playFiles);
+  bgmAudio.addEventListener('ended',function(){ if(playlist.length){ plIndex=(plIndex+1)%playlist.length; bgmPlay(URL.createObjectURL(playlist[plIndex]),'手元の音楽 '+playlist[plIndex].name); } });
   bgmVol.addEventListener('input',function(){ bgmAudio.volume=bgmVol.value/100; });
-  $('bgmStop').addEventListener('click',function(){ bgmAudio.pause(); bgmAudio.removeAttribute('src'); bgmAudio.load(); bgmPreset.value=''; bgmNow.textContent=''; bgmYt.hidden=true; bgmYt.innerHTML=''; });
+  $('bgmStop').addEventListener('click',function(){ bgmGen++; bgmCandidates=[]; bgmLabel=''; bgmAudio.pause(); bgmAudio.removeAttribute('src'); bgmAudio.load(); bgmPreset.value=''; bgmNow.textContent='停止しました'; bgmYt.hidden=true; bgmYt.innerHTML=''; });
   $('bgmYtPlay').addEventListener('click',function(){ var id=extractId(bgmYtUrl.value); if(!id){ alert('YouTubeのURLを認識できませんでした。'); return; }
+    bgmAudio.pause(); bgmNow.textContent='再生中: YouTube BGM（下のプレーヤーで音量操作）';
     bgmYt.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>'; bgmYt.hidden=false; });
   $('bgmYtClear').addEventListener('click',function(){ bgmYt.hidden=true; bgmYt.innerHTML=''; });
 
