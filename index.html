@@ -233,24 +233,21 @@
   #tv .tv-tr .pass{background:#eef4ff;border-radius:6px;padding:5px 8px;margin:2px 0 8px;font-size:clamp(11px,.6vw + .6vh,15px);line-height:1.5;}
   #tv .tv-tr .pass b{color:#1d5fdc;} #tv .tv-tr .pass .soon{color:#e8302a;font-weight:900;} #tv .tv-tr .pass small{color:#52659b;}
   #tv .tv-tr .tr-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;}
-  #tv .tv-tr .bd{margin:0;padding:4px 6px 6px;min-width:0;}
+  #tv .tv-tr .bd{margin:0;padding:4px 6px 6px;min-width:0;overflow:hidden;}
   #tv .tv-tr .bd-head{flex-direction:column;align-items:flex-start;gap:0;}
-  #tv .tv-tr .bd-title{font-size:clamp(12px,.6vw + .6vh,16px);} #tv .tv-tr .bd-sub{font-size:clamp(9px,.45vw + .45vh,12px);}
-  #tv .tv-tr .bd-th{display:none;}
-  #tv .tv-tr .bd-row{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"time name" "time rem";gap:0 6px;padding:3px 0;font-size:clamp(12px,.6vw + .6vh,17px);border-top:1px solid #1e2328;}
-  #tv .tv-tr .bd-time{grid-area:time;font-size:1.25em;align-self:center;}
-  #tv .tv-tr .bd-name{grid-area:name;display:inline;} 
-  #tv .tv-tr .bd-no,#tv .tv-tr .bd-dest{grid-area:name;display:inline;text-align:left;}
-  #tv .tv-tr .bd-row .bd-name,#tv .tv-tr .bd-row .bd-no,#tv .tv-tr .bd-row .bd-dest{grid-area:auto;}
-  #tv .tv-tr .bd-row{grid-template-columns:auto auto auto 1fr;grid-template-areas:"time name no dest" "time rem rem rem";}
-  #tv .tv-tr .bd-row .bd-name{grid-area:name;} #tv .tv-tr .bd-row .bd-no{grid-area:no;} #tv .tv-tr .bd-row .bd-dest{grid-area:dest;}
-  #tv .tv-tr .bd-row .bd-rem{grid-area:rem;text-align:left;font-size:.78em;}
-  #tv .tv-tr .bd-no{font-size:.9em;color:#cdd3da;}
-  #tv.compact .tv-tr .bd{padding:3px 5px 4px;}
+  #tv .tv-tr .bd-title{font-size:clamp(12px,.55vw + .55vh,15px);} #tv .tv-tr .bd-sub{font-size:clamp(9px,.4vw + .4vh,11px);}
+  #tv .tv-tr .bd-th{font-size:clamp(9px,.38vw + .38vh,10px);}
+  #tv .tv-tr .bd-row{font-size:clamp(11px,.52vw + .52vh,15px);padding:3px 0;gap:4px;grid-template-columns:4.3em 2.9em 3.5em 4.2em 1fr;}
+  #tv .tv-tr .bd-rem{font-size:.78em;}
+  #tv .tv-tr .bd-row.soon .bd-rem{font-size:.78em;}
+  #tv.compact .tv-tr .bd{padding:3px 6px 4px;}
   #tv.compact .tv-tr .bd-head{padding-bottom:2px;margin-bottom:2px;}
   #tv.compact .tv-tr .bd-title{font-size:12px;} #tv.compact .tv-tr .bd-sub{font-size:9px;}
-  #tv.compact .tv-tr .bd-row{padding:2px 0;font-size:12px;gap:0 4px;}
-  #tv.compact .tv-tr .bd-row .bd-rem{font-size:10px;}
+  #tv.compact .tv-tr .bd-th{display:none;}
+  #tv.compact .tv-tr .bd-row{padding:2px 0;font-size:12px;gap:2px 4px;grid-template-columns:4.2em 2.8em 3.4em 1fr;grid-template-areas:"name no time dest" "rem rem rem rem";}
+  #tv.compact .tv-tr .bd-row .bd-name{grid-area:name;} #tv.compact .tv-tr .bd-row .bd-no{grid-area:no;} #tv.compact .tv-tr .bd-row .bd-time{grid-area:time;} #tv.compact .tv-tr .bd-row .bd-dest{grid-area:dest;}
+  #tv.compact .tv-tr .bd-row .bd-rem{grid-area:rem;text-align:left;font-size:10px;line-height:1.1;}
+  #tv.compact .tv-tr .tr-cols{gap:4px;margin-bottom:4px;}
   #tv.compact .tv-tr .pass{padding:3px 6px;margin:0 0 4px;font-size:12px;}
   #tv.compact .tv-tr .pass .pass-row b{font-size:1.1em;}
   #tv.compact .tv-tr .tr-head{font-size:13px;margin-bottom:2px;}
@@ -516,7 +513,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v6.3 · 15 CAMERAS</div>
+    <div class="footer-badge">v6.5 · 15 CAMERAS</div>
   </div>
 </div>
 
