@@ -232,17 +232,25 @@
   #tv .tv-tr .row.soon .left{color:#e8302a;}
   #tv .tv-tr .pass{background:#eef4ff;border-radius:6px;padding:5px 8px;margin:2px 0 8px;font-size:clamp(11px,.6vw + .6vh,15px);line-height:1.5;}
   #tv .tv-tr .pass b{color:#1d5fdc;} #tv .tv-tr .pass .soon{color:#e8302a;font-weight:900;} #tv .tv-tr .pass small{color:#52659b;}
-  #tv .tv-tr .bd{margin-bottom:6px;padding:4px 8px 6px;}
+  #tv .tv-tr .tr-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px;}
+  #tv .tv-tr .bd{margin:0;padding:4px 6px 6px;min-width:0;}
+  #tv .tv-tr .bd-head{flex-direction:column;align-items:flex-start;gap:0;}
   #tv .tv-tr .bd-title{font-size:clamp(12px,.6vw + .6vh,16px);} #tv .tv-tr .bd-sub{font-size:clamp(9px,.45vw + .45vh,12px);}
-  #tv .tv-tr .bd-row{font-size:clamp(12px,.65vw + .65vh,18px);padding:3px 0;gap:5px;grid-template-columns:5em 3.2em 4em 5em 1fr;}
-  #tv .tv-tr .bd-th{font-size:clamp(9px,.4vw + .4vh,11px);}
-  #tv .tv-tr .bd-rem{font-size:clamp(10px,.5vw + .5vh,13px);}
-  #tv.compact .tv-tr .bd{padding:3px 6px 4px;margin-bottom:4px;}
-  #tv.compact .tv-tr .bd-th{display:none;}
+  #tv .tv-tr .bd-th{display:none;}
+  #tv .tv-tr .bd-row{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"time name" "time rem";gap:0 6px;padding:3px 0;font-size:clamp(12px,.6vw + .6vh,17px);border-top:1px solid #1e2328;}
+  #tv .tv-tr .bd-time{grid-area:time;font-size:1.25em;align-self:center;}
+  #tv .tv-tr .bd-name{grid-area:name;display:inline;} 
+  #tv .tv-tr .bd-no,#tv .tv-tr .bd-dest{grid-area:name;display:inline;text-align:left;}
+  #tv .tv-tr .bd-row .bd-name,#tv .tv-tr .bd-row .bd-no,#tv .tv-tr .bd-row .bd-dest{grid-area:auto;}
+  #tv .tv-tr .bd-row{grid-template-columns:auto auto auto 1fr;grid-template-areas:"time name no dest" "time rem rem rem";}
+  #tv .tv-tr .bd-row .bd-name{grid-area:name;} #tv .tv-tr .bd-row .bd-no{grid-area:no;} #tv .tv-tr .bd-row .bd-dest{grid-area:dest;}
+  #tv .tv-tr .bd-row .bd-rem{grid-area:rem;text-align:left;font-size:.78em;}
+  #tv .tv-tr .bd-no{font-size:.9em;color:#cdd3da;}
+  #tv.compact .tv-tr .bd{padding:3px 5px 4px;}
   #tv.compact .tv-tr .bd-head{padding-bottom:2px;margin-bottom:2px;}
   #tv.compact .tv-tr .bd-title{font-size:12px;} #tv.compact .tv-tr .bd-sub{font-size:9px;}
-  #tv.compact .tv-tr .bd-row{padding:2px 0;font-size:13px;gap:4px;grid-template-columns:4.6em 2.8em 3.6em 4.6em 1fr;}
-  #tv.compact .tv-tr .bd-rem{font-size:10px;}
+  #tv.compact .tv-tr .bd-row{padding:2px 0;font-size:12px;gap:0 4px;}
+  #tv.compact .tv-tr .bd-row .bd-rem{font-size:10px;}
   #tv.compact .tv-tr .pass{padding:3px 6px;margin:0 0 4px;font-size:12px;}
   #tv.compact .tv-tr .pass .pass-row b{font-size:1.1em;}
   #tv.compact .tv-tr .tr-head{font-size:13px;margin-bottom:2px;}
@@ -508,7 +516,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v6.2 · 15 CAMERAS</div>
+    <div class="footer-badge">v6.3 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -1000,7 +1008,7 @@ var CONFIG = {
     var hdn=upcoming(HAPI.down,now,3), hup=upcoming(HAPI.up,now,3);
     function rows(arr){ if(!arr.length) return '<div class="sk-row"><span class="k">本日の運転は終了</span></div>';
       return arr.map(function(x){ var left=x.m-now; return '<div class="sk-row'+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+KIND[x.k]+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
-    var html='<div class="sk-head"><span class="sk-title">🚉 福井駅 発車標</span><span class="sk-note">現在 '+fmtMin(now)+'　'+SHINKANSEN.note+'　◆=特定日・特定曜日のみ運転</span></div>'
+    var html='<div class="sk-head"><span class="sk-title">🚉 福井駅 時刻表</span><span class="sk-note">現在 '+fmtMin(now)+'　'+SHINKANSEN.note+'　◆=特定日・特定曜日のみ運転</span></div>'
       +'<div class="sk-cols">'+board('北陸新幹線 上り','金沢・富山・東京方面',up,now,'sk')+board('北陸新幹線 下り','敦賀方面',dn,now,'sk')+'</div>';
     /* 通過予想：福井駅到着＝発車の1分前。駅の北側(N)は上りが出発側、南側(S)は下りが出発側。 */
     var passHtml='';
@@ -1024,10 +1032,10 @@ var CONFIG = {
     // TVモード用（コンパクトな2段）
     function rowsTv(arr){ if(!arr.length) return '<div class="row"><span class="k">本日終了</span></div>';
       return arr.map(function(x){ var left=x.m-now; return '<div class="row'+(left<=3?' soon':'')+'"><span class="t">'+fmtMin(x.m)+'</span><span class="k">'+(KIND[x.k]||'')+' '+x.d+'行'+x.sp+'</span><span class="left">'+(left<=0?'発車':'あと'+left+'分')+'</span></div>'; }).join(''); }
-    var tv='<div class="tr-sec"><div class="tr-head">🚉 福井駅 発車標 <small>現在 '+fmtMin(now)+'</small></div>'
+    var tv='<div class="tr-sec"><div class="tr-head">🚉 福井駅 時刻表 <small>現在 '+fmtMin(now)+'</small></div>'
       +(passHtml?'<div class="pass">'+passHtml+'</div>':'')
-      +board('北陸新幹線 上り','金沢・東京方面',up.slice(0,nTv),now,'sk')+board('北陸新幹線 下り','敦賀方面',dn.slice(0,nTv),now,'sk')
-      +board('ハピライン 下り','鯖江・武生・敦賀方面',hdn.slice(0,nTv),now,'hp')+board('ハピライン 上り','芦原温泉・金沢方面',hup.slice(0,nTv),now,'hp')+'</div>';
+      +'<div class="tr-cols">'+board('北陸新幹線 上り','金沢・東京方面',up.slice(0,nTv),now,'sk')+board('北陸新幹線 下り','敦賀方面',dn.slice(0,nTv),now,'sk')+'</div>'
+      +'<div class="tr-cols">'+board('ハピライン 下り','鯖江・武生・敦賀方面',hdn.slice(0,nTv),now,'hp')+board('ハピライン 上り','芦原温泉・金沢方面',hup.slice(0,nTv),now,'hp')+'</div></div>';
     trainTv.innerHTML=tv;
   }
   /* パネル切替（天気／電車） */
