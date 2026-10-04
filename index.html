@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>福井ライブカメラ</title>
+<title>福井ケーブルテレビ ライブカメラ</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d5fdc'/%3E%3Crect x='10' y='16' width='44' height='28' rx='3' fill='%23fff'/%3E%3Ccircle cx='46' cy='24' r='4' fill='%23e8302a'/%3E%3Crect x='24' y='48' width='16' height='4' fill='%23fff'/%3E%3C/svg%3E">
-<link rel="manifest" href='data:application/manifest+json,{"name":"福井ライブカメラ","short_name":"ライブカメラ","start_url":".","display":"fullscreen","background_color":"%231d5fdc","theme_color":"%231d5fdc","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%231d5fdc%27/%3E%3Crect x=%2710%27 y=%2716%27 width=%2744%27 height=%2728%27 rx=%273%27 fill=%27%23fff%27/%3E%3Ccircle cx=%2746%27 cy=%2724%27 r=%274%27 fill=%27%23e8302a%27/%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml","purpose":"any"}]}'>
+<link rel="manifest" href='data:application/manifest+json,{"name":"福井ケーブルテレビ ライブカメラ","short_name":"ライブカメラ","start_url":".","display":"fullscreen","background_color":"%231d5fdc","theme_color":"%231d5fdc","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%231d5fdc%27/%3E%3Crect x=%2710%27 y=%2716%27 width=%2744%27 height=%2728%27 rx=%273%27 fill=%27%23fff%27/%3E%3Ccircle cx=%2746%27 cy=%2724%27 r=%274%27 fill=%27%23e8302a%27/%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml","purpose":"any"}]}'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -195,8 +195,8 @@
   /* ---------- TV mode (cable-TV style) ---------- */
   #tv{position:fixed;inset:0;z-index:50;background:linear-gradient(180deg,#1d5fdc 0%,#2a6fe6 55%,#2f7bf0 100%);font-family:var(--font-ui);color:#0d2c73;
     display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,34vw,640px);grid-template-rows:minmax(0,1fr) auto;gap:12px 14px;padding:16px 16px 62px;}
-  #tv .tv-left{grid-column:1;grid-row:1;display:flex;flex-direction:column;gap:10px;min-height:0;min-width:0;}
-  #tv .tv-mainwrap{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;}
+  #tv .tv-left{grid-column:1;grid-row:1;display:flex;flex-direction:column;gap:10px;min-height:0;min-width:0;justify-content:flex-start;}
+  #tv .tv-mainwrap{flex:0 0 auto;min-height:0;display:flex;align-items:flex-start;justify-content:flex-start;}
   #tv .tv-main{position:relative;background:#000;border:3px solid #fff;overflow:hidden;width:100%;aspect-ratio:16/9;max-height:100%;}
   #tv .tv-main iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
   #tv .tv-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
@@ -378,7 +378,7 @@
       配信元：<a href="https://www.youtube.com/@fctv_091/streams" target="_blank" rel="noopener">福井ケーブルテレビ</a> ／ <a href="https://www.youtube.com/@FBC/streams" target="_blank" rel="noopener">FBC福井放送</a> ／ <a href="https://www.youtube.com/@fukuitv8ch/streams" target="_blank" rel="noopener">福井テレビ</a>
       ／ 地図：Google マップ ／ 天気：<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（気象庁等のモデル予報を配信） ／ <a href="https://weather.yahoo.co.jp/weather/jp/18/" target="_blank" rel="noopener">Yahoo!天気（福井）</a>
     </div>
-    <div class="footer-badge">v4.5 · 15 CAMERAS</div>
+    <div class="footer-badge">v4.6 · 15 CAMERAS</div>
   </div>
 </div>
 
@@ -399,7 +399,6 @@
   </div>
   <div class="tv-side">
     <div class="tv-info">
-      <div class="tv-station" id="tvStation">--</div>
       <div class="tv-name" id="tvName">--</div>
       <div class="tv-map"><iframe id="tvMap" src="" title="現地地図"></iframe></div>
       <div class="tv-area" id="tvArea">--</div>
@@ -533,7 +532,7 @@ var CONFIG = {
     ytLaunch.href=watchUrl(cam.id); hudName.textContent=cam.name; hudId.textContent=cam.id; mainMetaArea.textContent=cam.area;
     Array.prototype.forEach.call(rack.querySelectorAll('.tile'),function(t){ t.classList.toggle('active',parseInt(t.dataset.gi,10)===activeIndex); });
     Array.prototype.forEach.call(tvStrip.children,function(t){ t.classList.toggle('active',parseInt(t.dataset.gi,10)===activeIndex); });
-    tvName.textContent=cam.name; $('tvFsName').textContent=cam.name; $('tvStation').textContent=cam.station||GROUPS.filter(function(g){return g.key===cam.group;})[0].full; tvArea.textContent=cam.area; tvMap.src=mapUrl(cam);
+    tvName.textContent=cam.name; $('tvFsName').textContent=cam.name; tvArea.textContent=cam.area; tvMap.src=mapUrl(cam);
     drawPref();
     applyMode();
     if(autoOn&&!fromAuto) restartAuto();
@@ -562,17 +561,28 @@ var CONFIG = {
   function toggleFs(el){ if(isFs()) exitFs(); else enterFs(el); }
   fsBtn.addEventListener('click',function(){ toggleFs(screenFrame); });
   tvFsBtn.addEventListener('click',function(){ toggleFs($('tvMain')); });
-  function fsChanged(){ var on=isFs(); var m=$('tvMain'); if(on){ m.style.width='100%'; m.style.height='100%'; } else setTimeout(fitTv,50); fsBtn.textContent=on?'⤡':'⛶'; tvFsBtn.textContent=on?'⤡ 全画面を戻す':'⛶ 全画面'; }
+  function fsChanged(){ var on=isFs(); var m=$('tvMain'); if(on){ m.style.width='100%'; m.style.height='100%'; m.style.aspectRatio='auto'; } else setTimeout(fitTv,50); fsBtn.textContent=on?'⤡':'⛶'; tvFsBtn.textContent=on?'⤡ 全画面を戻す':'⛶ 全画面'; }
   document.addEventListener('fullscreenchange',fsChanged); document.addEventListener('webkitfullscreenchange',fsChanged);
 
   /* ---- TVモード ---- */
   function fitTv(){
     if(!tvMode||isFs()) return;
-    var wrap=$('tvMainWrap'), main=$('tvMain');
-    var W=wrap.clientWidth, H=wrap.clientHeight; if(!W||!H) return;
-    var w=Math.min(W, H*16/9);
-    main.style.width=w+'px'; main.style.height=(w*9/16)+'px'; main.style.maxHeight='none'; main.style.aspectRatio='auto';
+    var main=$('tvMain'), strip=$('tvStrip');
+    if(isPortrait()){ tv.style.gridTemplateColumns=''; main.style.width='100%'; main.style.height='auto'; main.style.aspectRatio='16/9'; return; }
+    var cs=getComputedStyle(tv);
+    var padL=parseFloat(cs.paddingLeft)||0, padR=parseFloat(cs.paddingRight)||0, padT=parseFloat(cs.paddingTop)||0, padB=parseFloat(cs.paddingBottom)||0;
+    var gapCol=parseFloat(cs.columnGap)||14, gapRow=parseFloat(cs.rowGap)||12;
+    var compact=tv.classList.contains('compact');
+    var minSide=compact?260:320;
+    var TW=tv.clientWidth-padL-padR, TH=tv.clientHeight-padT-padB;
+    var stripH=strip.offsetHeight||0;
+    var wAvail=TW-gapCol-minSide;
+    var hAvail=TH-stripH-gapRow;
+    var w=Math.max(200, Math.min(wAvail, hAvail*16/9));
+    tv.style.gridTemplateColumns=w+'px minmax(0,1fr)';
+    main.style.width='100%'; main.style.height='auto'; main.style.maxHeight='none'; main.style.aspectRatio='16/9';
   }
+  function isPortrait(){ return window.innerHeight>window.innerWidth; }
   function updateCompact(){
     var f=qs.get('compact'); var on = (f!==null) ? (f!=='0') : (window.innerHeight<850);
     tv.classList.toggle('compact',on);
